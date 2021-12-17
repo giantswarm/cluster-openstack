@@ -1,0 +1,29 @@
+apiVersion: cluster.x-k8s.io/v1alpha4
+kind: ClusterClass
+metadata:
+  name: {{ .Values.name }}
+spec:
+  controlPlane:
+    ref:
+      apiVersion: controlplane.cluster.x-k8s.io/v1alpha4
+      kind: KubeadmControlPlaneTemplate
+      name: {{ .Values.name }}
+  workers:
+    machineDeployments:
+    - class: {{ .Values.name }}
+      template:
+        bootstrap:
+          ref:
+            apiVersion: bootstrap.cluster.x-k8s.io/v1alpha4
+            kind: KubeadmConfigTemplate
+            name: {{ .Values.name }}
+        infrastructure:
+          ref:
+            apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+            kind: OpenStackMachineTemplate
+            name: {{ .Values.name }}
+  infrastructure:
+    ref:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+      kind: OpenStackClusterTemplate
+      name: {{ .Values.name }}

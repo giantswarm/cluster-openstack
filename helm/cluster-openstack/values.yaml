@@ -1,0 +1,34 @@
+name: test1
+description: Test cluster using a shared ClusterClass.
+organization: giantswarm-2
+className: v20.0.0-alpha1
+kubernetesVersion: 1.20.9
+releaseVersion: v20.0.0-alpha1
+cloudConfig: cloud-config
+cloudName: openstack
+
+controlPlane:
+  replicas: 1
+
+nodeClasses:
+- name: default
+  machineFlavor: n1.small
+  image: ubuntu-2004-kube-v1.20.9
+  cloudName: openstack
+  cloudConfig: cloud-config
+  rootVolume:
+    sourceType: image
+    diskSize: 50
+    sourceUUID: 857c9ff3-ac41-4aa3-bfde-2bb0cc4600f1
+- name: large
+  machineFlavor: n1.large
+  image: ubuntu-2004-kube-v1.20.9
+  rootVolume:
+    sourceType: image
+    diskSize: 50
+    sourceUUID: 857c9ff3-ac41-4aa3-bfde-2bb0cc4600f1
+
+nodePools:
+- name: default
+  class: default
+  replicas: 3

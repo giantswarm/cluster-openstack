@@ -1,0 +1,20 @@
+{{- range .Values.nodeClasses }}
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+kind: OpenStackMachineTemplate
+metadata:
+  name: {{ $.Values.name }}-{{ .name }}
+spec:
+  template:
+    spec:
+      flavor: {{ .machineFlavor }}
+      image: {{ .image }}
+      cloudName: {{ $.Values.cloudName }}
+      identityRef:
+        name: {{ $.Values.cloudConfig }}
+        kind: Secret
+      rootVolume:
+        sourceType: {{ .rootVolume.sourceType }}
+        diskSize: {{ .rootVolume.diskSize }}
+        sourceUUID: {{ .rootVolume.sourceUUID }}
+{{- end }}

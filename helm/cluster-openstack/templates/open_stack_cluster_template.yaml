@@ -1,0 +1,29 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+kind: OpenStackClusterTemplate
+metadata:
+  labels:
+    release.giantswarm.io/version: {{ .Values.releaseVersion }}
+    giantswarm.io/cluster: {{ .Values.name }}
+    cluster.x-k8s.io/cluster-name: {{ .Values.name }}
+    giantswarm.io/organization: {{ .Values.organization }}
+  name: {{ .Values.name }}
+  namespace: org-{{ .Values.organization }}
+spec:
+  template:
+    spec:
+      cloudName: {{ .Values.cloudName }}
+      identityRef:
+        name: {{ .Values.cloudConfig }}
+        kind: Secret
+      managedAPIServerLoadBalancer: true
+      managedSecurityGroups: true
+      {{- if .Values.nodeCIDR }}
+      nodeCidr: {{ .Values.nodeCIDR }}
+      {{- end }}
+      externalNetworkId: {{ .Values.externalNetworkID }}
+      {{- if .dnsNameservers }}
+      dnsNameservers:
+      {{- range .dnsNameservers }}
+      - {{ . }}
+      {{- end }}
+      {{- end }}

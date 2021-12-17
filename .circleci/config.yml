@@ -7,10 +7,10 @@ workflows:
     jobs:
       - architect/push-to-app-catalog:
           context: "architect"
-          name: "package and push openstack-cluster chart"
+          name: "package and push cluster-openstack chart"
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
-          chart: "openstack-cluster"
+          chart: "cluster-openstack"
           explicit_allow_chart_name_mismatch: true
           persist_chart_archive: true
           # Trigger job on git tag.

@@ -6,6 +6,7 @@ workflows:
   package-and-push-chart-on-tag:
     jobs:
       - architect/push-to-app-catalog:
+          context: "architect"
           name: "package and push openstack-cluster chart"
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"

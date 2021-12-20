@@ -2,45 +2,30 @@ project:
   branch: "[[ .Branch ]]"
   commit: "[[ .SHA  ]]"
 
-# Cluster description used in metadata.
-clusterDescription: ""
-# Organization in which to create the cluster.
-organization: ""
-# Name of cloud-config secret in destination namespace.
-cloudConfig: cloud-config
-# Name of cloud in cloud-config secret "cloud.yaml" value.
-cloudName: openstack
+clusterDescription: "" # Cluster description used in metadata.
+organization: "" # Organization in which to create the cluster.
+cloudConfig: cloud-config # Name of cloud-config secret in destination namespace.
+cloudName: openstack # Name of cloud in cloud-config secret "cloud.yaml" value.
 
 kubernetesVersion: 1.20.9
 releaseVersion: 20.0.0-alpha1
 
-# UUID of external network (optional).
-externalNetworkID: ""
+externalNetworkID: "" # UUID of external network (optional).
 
 rootVolume:
   enabled: false
-  # UUID of root volume source image (optional).
-  sourceUUID: ""
+  sourceUUID: "" # UUID of root volume source image (optional).
 
-# Specification for classes of workload cluster nodes. The control plane and node pool
-# specifications must refer to one of these by name.
 nodeClasses:
-- # Name of class.
-  name: default
-  # Flavor of machine.
-  machineFlavor: n1.small
-  # Root volume disk size in GB.
-  diskSize: 50
+- name: default # Name of class.
+  machineFlavor: n1.small # Flavor of machine.
+  diskSize: 50 # Root volume disk size in GB.
 
-# Specification for workload cluster control plane.
 controlPlane:
-  class: default
-  # Number of replicas in control plane. Should be an odd number.
-  # See https://etcd.io/docs/v3.3/faq/#why-an-odd-number-of-cluster-members for more information.
-  replicas: 1
+  class: default # Name of node class to be used by control plane nodes.
+  replicas: 1 # Number of replicas in control plane. Should be an odd number.
 
-# Specification for workload cluster node pools.
 nodePools:
-- name: default
-  class: default
-  replicas: 3
+- name: default # Name of node pool.
+  class: default # Name of node class to be used by node pool nodes.
+  replicas: 3 # Number of replicas in node pool.

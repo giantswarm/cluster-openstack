@@ -2,12 +2,9 @@ apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: OpenStackClusterTemplate
 metadata:
   labels:
-    release.giantswarm.io/version: {{ .Values.releaseVersion }}
-    giantswarm.io/cluster: {{ .Values.name }}
-    cluster.x-k8s.io/cluster-name: {{ .Values.name }}
-    giantswarm.io/organization: {{ .Values.organization }}
-  name: {{ .Values.name }}
-  namespace: org-{{ .Values.organization }}
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template:
     spec:
@@ -20,10 +17,12 @@ spec:
       {{- if .Values.nodeCIDR }}
       nodeCidr: {{ .Values.nodeCIDR }}
       {{- end }}
+      {{- if .Values.externalNetworkID }}
       externalNetworkId: {{ .Values.externalNetworkID }}
-      {{- if .dnsNameservers }}
+      {{- end }}
+      {{- if .Values.dnsNameservers }}
       dnsNameservers:
-      {{- range .dnsNameservers }}
+      {{- range .Values.dnsNameservers }}
       - {{ . }}
       {{- end }}
       {{- end }}

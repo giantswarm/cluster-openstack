@@ -1,7 +1,10 @@
 apiVersion: bootstrap.cluster.x-k8s.io/v1alpha4
 kind: KubeadmConfigTemplate
 metadata:
-  name: {{ .Values.name }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template:
     spec:

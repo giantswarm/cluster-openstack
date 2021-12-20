@@ -1,29 +1,34 @@
 apiVersion: cluster.x-k8s.io/v1alpha4
 kind: ClusterClass
 metadata:
-  name: {{ .Values.name }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   controlPlane:
     ref:
       apiVersion: controlplane.cluster.x-k8s.io/v1alpha4
       kind: KubeadmControlPlaneTemplate
-      name: {{ .Values.name }}
+      name: {{ include "resource.default.name" . }}
   workers:
     machineDeployments:
-    - class: {{ .Values.name }}
+    {{- range .Values.nodeClasses }}
+    - class: {{ .name }}
       template:
         bootstrap:
           ref:
             apiVersion: bootstrap.cluster.x-k8s.io/v1alpha4
             kind: KubeadmConfigTemplate
-            name: {{ .Values.name }}
+            name: {{ include "resource.default.name" $ }}
         infrastructure:
           ref:
             apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
             kind: OpenStackMachineTemplate
-            name: {{ .Values.name }}
+            name: {{ include "resource.default.name" $ }}-{{ .name }}
+    {{- end }}
   infrastructure:
     ref:
       apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
       kind: OpenStackClusterTemplate
-      name: {{ .Values.name }}
+      name: {{ include "resource.default.name" . }}

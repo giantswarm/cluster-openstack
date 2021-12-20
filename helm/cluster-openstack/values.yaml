@@ -1,33 +1,45 @@
-name: test1
-description: Test cluster using a shared ClusterClass.
-organization: giantswarm-2
-className: v20.0.0-alpha1
-kubernetesVersion: 1.20.9
-releaseVersion: v20.0.0-alpha1
+project:
+  branch: "[[ .Branch ]]"
+  commit: "[[ .SHA  ]]"
+
+# Cluster description used in metadata.
+clusterDescription: ""
+# Organization in which to create the cluster.
+organization: ""
+# Name of cloud-config secret in destination namespace.
 cloudConfig: cloud-config
+# Name of cloud in cloud-config secret "cloud.yaml" value.
 cloudName: openstack
 
+kubernetesVersion: 1.20.9
+releaseVersion: 20.0.0-alpha1
+
+# UUID of external network (optional).
+externalNetworkID: ""
+
+rootVolume:
+  enabled: false
+  # UUID of root volume source image (optional).
+  sourceUUID: ""
+
+# Specification for classes of workload cluster nodes. The control plane and node pool
+# specifications must refer to one of these by name.
+nodeClasses:
+- # Name of class.
+  name: default
+  # Flavor of machine.
+  machineFlavor: n1.small
+  # Root volume disk size in GB.
+  diskSize: 50
+
+# Specification for workload cluster control plane.
 controlPlane:
+  class: default
+  # Number of replicas in control plane. Should be an odd number.
+  # See https://etcd.io/docs/v3.3/faq/#why-an-odd-number-of-cluster-members for more information.
   replicas: 1
 
-nodeClasses:
-- name: default
-  machineFlavor: n1.small
-  image: ubuntu-2004-kube-v1.20.9
-  cloudName: openstack
-  cloudConfig: cloud-config
-  rootVolume:
-    sourceType: image
-    diskSize: 50
-    sourceUUID: 857c9ff3-ac41-4aa3-bfde-2bb0cc4600f1
-- name: large
-  machineFlavor: n1.large
-  image: ubuntu-2004-kube-v1.20.9
-  rootVolume:
-    sourceType: image
-    diskSize: 50
-    sourceUUID: 857c9ff3-ac41-4aa3-bfde-2bb0cc4600f1
-
+# Specification for workload cluster node pools.
 nodePools:
 - name: default
   class: default

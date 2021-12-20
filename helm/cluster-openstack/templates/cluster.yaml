@@ -2,26 +2,20 @@ apiVersion: cluster.x-k8s.io/v1alpha4
 kind: Cluster
 metadata:
   annotations:
-    cluster.giantswarm.io/description: {{ .Values.description }}
+    cluster.giantswarm.io/description: {{ .Values.clusterDescription }}
   labels:
-    release.giantswarm.io/version: {{ .Values.releaseVersion }}
-    giantswarm.io/cluster: {{ .Values.name }}
-    cluster.x-k8s.io/cluster-name: {{ .Values.name }}
-    giantswarm.io/organization: {{ .Values.organization }}
-  name: {{ .Values.name }}
-  namespace: org-{{ .Values.organization }}
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   topology:
-    class: {{ .Values.className }}
+    class: {{ include "resource.default.name" . }}
     version: {{ .Values.kubernetesVersion }}
     controlPlane:
       replicas: {{ .Values.controlPlane.replicas }}
       metadata:
         labels:
-          cluster.x-k8s.io/cluster-name: {{ .Values.name }}
-          giantswarm.io/cluster: {{ .Values.name }}
-          giantswarm.io/organization: {{ .Values.organization }}
-          release.giantswarm.io/version: {{ .Values.releaseVersion }}
+          {{- include "labels.common" . | nindent 10 }}
     workers:
       machineDeployments:
       {{- range .Values.nodePools }}
@@ -30,8 +24,5 @@ spec:
         replicas: {{ .replicas }}
         metadata:
           labels:
-            cluster.x-k8s.io/cluster-name: {{ $.Values.name }}
-            giantswarm.io/cluster: {{ $.Values.name }}
-            giantswarm.io/organization: {{ $.Values.organization }}
-            release.giantswarm.io/version: {{ $.Values.releaseVersion }}
+            {{- include "labels.common" $ | nindent 12 }}
       {{- end }}

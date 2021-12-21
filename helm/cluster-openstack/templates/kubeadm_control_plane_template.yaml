@@ -27,7 +27,9 @@ spec:
               cloud-provider: external
             name: '{{ `{{ local_hostname }}` }}'
             taints:
-            - "node-role.kubernetes.io/controlplane=true"
+            - key: node-role.kubernetes.io/controlplane
+              value: "true"
+              effect: NoSchedule
         useExperimentalRetryJoin: true
       machineTemplate:
         infrastructureRef:

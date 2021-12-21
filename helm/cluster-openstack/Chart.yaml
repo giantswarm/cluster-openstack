@@ -2,5 +2,4 @@ apiVersion: v2
 name: cluster-openstack
 description: A helm chart for creating Cluster API clusters with the OpenStack infrastructure provider (CAPO).
 type: application
-version: "[[ .Version ]]"
-appVersion: "[[ .Version ]]"
+version: 0.0.0

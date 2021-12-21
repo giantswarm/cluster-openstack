@@ -1,1 +1,1 @@
-# releases-openstack
+# cluster-openstack

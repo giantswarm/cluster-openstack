@@ -5,7 +5,7 @@ items:
   kind: KubeadmControlPlaneTemplate
   metadata:
     labels:
-      {{- include "labels.common" . | nindent 4 }}
+      {{- include "labels.common" . | nindent 6 }}
     name: {{ include "resource.default.name" . }}
     namespace: {{ .Release.Namespace }}
   spec:
@@ -41,7 +41,7 @@ items:
   kind: KubeadmConfigTemplate
   metadata:
     labels:
-      {{- include "labels.common" $ | nindent 4 }}
+      {{- include "labels.common" $ | nindent 6 }}
     name: {{ include "resource.default.name" $ }}-{{ .name }}
     namespace: {{ $.Release.Namespace }}
   spec:
@@ -58,7 +58,7 @@ items:
   kind: OpenStackClusterTemplate
   metadata:
     labels:
-      {{- include "labels.common" . | nindent 4 }}
+      {{- include "labels.common" . | nindent 6 }}
     name: {{ include "resource.default.name" . }}
     namespace: {{ .Release.Namespace }}
   spec:
@@ -87,7 +87,7 @@ items:
   kind: OpenStackMachineTemplate
   metadata:
     labels:
-      {{- include "labels.common" $ | nindent 4 }}
+      {{- include "labels.common" $ | nindent 6 }}
     name: {{ include "resource.default.name" $ }}-{{ .name }}
     namespace: {{ $.Release.Namespace }}
   spec:
@@ -110,7 +110,7 @@ items:
   kind: ClusterClass
   metadata:
     labels:
-      {{- include "labels.common" . | nindent 4 }}
+      {{- include "labels.common" . | nindent 6 }}
     name: {{ include "resource.default.name" . }}
     namespace: {{ .Release.Namespace }}
   spec:
@@ -144,9 +144,10 @@ items:
   kind: Cluster
   metadata:
     annotations:
-      cluster.giantswarm.io/description: {{ .Values.clusterDescription }}
+      cluster.giantswarm.io/description: "{{ .Values.clusterDescription }}"
     labels:
-      {{- include "labels.common" . | nindent 4 }}
+      cluster-apps-operator.giantswarm.io/watching: ""
+      {{- include "labels.common" . | nindent 6 }}
     name: {{ include "resource.default.name" . }}
     namespace: {{ .Release.Namespace }}
   spec:
@@ -157,7 +158,7 @@ items:
         replicas: {{ .Values.controlPlane.replicas }}
         metadata:
           labels:
-            {{- include "labels.common" . | nindent 10 }}
+            {{- include "labels.common" . | nindent 12 }}
       workers:
         machineDeployments:
         {{- range .Values.nodePools }}
@@ -166,5 +167,6 @@ items:
           replicas: {{ .replicas }}
           metadata:
             labels:
-              {{- include "labels.common" $ | nindent 12 }}
+              machine-deployment.giantswarm.io/failure-domain: "{{ .failureDomain }}"
+              {{- include "labels.common" $ | nindent 14 }}
         {{- end }}

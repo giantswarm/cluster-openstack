@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: List # Using a list to ensure templates/ClusterClass are created before the cluster itself
 items:
-{{ include "cluster-class" . }}
-{{ include "openstack-cluster-template" . }}
-{{ include "kubeadm-control-plane-template" . }}
+- {{- include "cluster-class" . | indent 2 }}
+- {{- include "openstack-cluster-template" . | indent 2 }}
+- {{- include "kubeadm-control-plane-template" . | indent 2 }}
 {{- range .Values.nodeClasses }}
-{{ include "kubeadm-config-template" (set (set (set . "Values" $.Values) "Chart" $.Chart) "Release" $.Release) }}
-{{ include "openstack-machine-template" (set (set (set . "Values" $.Values) "Chart" $.Chart) "Release" $.Release) }}
+- {{- include "kubeadm-config-template" (set (set (set . "Values" $.Values) "Chart" $.Chart) "Release" $.Release) | indent 2 }}
+- {{- include "openstack-machine-template" (set (set (set . "Values" $.Values) "Chart" $.Chart) "Release" $.Release) | indent 2 }}
 {{- end }}
-{{ include "cluster" . }}
+- {{- include "cluster" . | indent 2 }}

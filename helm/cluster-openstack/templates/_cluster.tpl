@@ -17,7 +17,7 @@ spec:
       replicas: {{ .Values.controlPlane.replicas }}
       metadata:
         labels:
-          {{- include "labels.common" $ | nindent 12 }}
+          {{- include "labels.common" $ | nindent 10 }}
     workers:
       machineDeployments:
       {{- range .Values.nodePools }}

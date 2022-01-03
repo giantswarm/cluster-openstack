@@ -1,10 +1,11 @@
+{{- define "openstack-cluster-template" }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: OpenStackClusterTemplate
 metadata:
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}
-  namespace: {{ .Release.Namespace }}
+    {{- include "labels.common" $ | nindent 4 }}
+  name: {{ include "resource.default.name" $ }}
+  namespace: {{ $.Release.Namespace }}
 spec:
   template:
     spec:
@@ -26,3 +27,4 @@ spec:
       - {{ . }}
       {{- end }}
       {{- end }}
+{{- end -}}

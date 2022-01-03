@@ -1,5 +1,4 @@
-{{- range .Values.nodeClasses }}
----
+{{- define "openstack-machine-template" }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: OpenStackMachineTemplate
 metadata:
@@ -22,4 +21,4 @@ spec:
         diskSize: {{ .diskSize }}
         sourceUUID: {{ $.Values.rootVolume.sourceUUID }}
       {{- end }}
-{{- end }}
+{{- end -}}

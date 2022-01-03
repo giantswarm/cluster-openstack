@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: List # Using a list to ensure templates/ClusterClass are created before the cluster itself
+items:
+- {{- include "cluster-class" . | indent 2 }}
+- {{- include "openstack-cluster-template" . | indent 2 }}
+- {{- include "kubeadm-control-plane-template" . | indent 2 }}
+{{- $outerScope := . -}}
+{{- range .Values.nodeClasses }}
+{{- $innerScope := merge $outerScope . -}}
+- {{- include "kubeadm-config-template" $innerScope | indent 2 }}
+- {{- include "openstack-machine-template" $innerScope | indent 2 }}
+{{- end }}
+- {{- include "cluster" . | indent 2 }}

@@ -1,5 +1,5 @@
 {{- define "kubeadm-control-plane-template" }}
-apiVersion: controlplane.cluster.x-k8s.io/v1alpha4
+apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: KubeadmControlPlaneTemplate
 metadata:
   labels:

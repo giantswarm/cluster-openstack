@@ -1,5 +1,5 @@
 {{- define "cluster-class" }}
-apiVersion: cluster.x-k8s.io/v1alpha4
+apiVersion: cluster.x-k8s.io/v1beta1
 kind: ClusterClass
 metadata:
   labels:
@@ -9,7 +9,7 @@ metadata:
 spec:
   controlPlane:
     ref:
-      apiVersion: controlplane.cluster.x-k8s.io/v1alpha4
+      apiVersion: controlplane.cluster.x-k8s.io/v1beta1
       kind: KubeadmControlPlaneTemplate
       name: {{ include "resource.default.name" $ }}
   workers:
@@ -19,7 +19,7 @@ spec:
       template:
         bootstrap:
           ref:
-            apiVersion: bootstrap.cluster.x-k8s.io/v1alpha4
+            apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
             kind: KubeadmConfigTemplate
             name: {{ include "resource.default.name" $ }}-{{ .name }}
         infrastructure:

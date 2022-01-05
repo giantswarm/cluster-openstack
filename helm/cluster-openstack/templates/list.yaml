@@ -6,7 +6,7 @@ items:
 - {{- include "kubeadm-control-plane-template" . | indent 2 }}
 {{- $outerScope := . }}
 {{- range .Values.nodeClasses }}
-{{- $innerScope := merge $outerScope . }}
+{{- $innerScope := merge . $outerScope }}
 - {{- include "kubeadm-config-template" $innerScope | indent 2 }}
 - {{- include "openstack-machine-template" $innerScope | indent 2 }}
 {{- end }}

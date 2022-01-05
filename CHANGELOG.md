@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
 - Update to CAPI v1beta1.
+
+### Added
+
+- Initial implementation.
 
 
 [Unreleased]: https://github.com/giantswarm/cluster-openstack/tree/main

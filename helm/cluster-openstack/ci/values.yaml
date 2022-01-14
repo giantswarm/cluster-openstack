@@ -1,7 +1,3 @@
-project:
-  branch: main
-  commit: 78d3668c07c3319d75fa8c550cf016a75a3227c5
-
 clusterDescription: Test cluster.
 organization: giantswarm-2
 cloudConfig: cloud-config

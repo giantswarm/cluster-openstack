@@ -1,7 +1,3 @@
-project:
-  branch: "[[ .Branch ]]"
-  commit: "[[ .SHA  ]]"
-
 clusterDescription: ""  # Cluster description used in metadata.
 organization: ""  # Organization in which to create the cluster.
 cloudConfig: cloud-config  # Name of cloud-config secret in destination namespace.

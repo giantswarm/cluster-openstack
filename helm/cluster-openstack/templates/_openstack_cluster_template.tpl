@@ -32,7 +32,6 @@ spec:
         instance:
           flavor: {{ .Values.bastion.flavor }}
           image: {{ .Values.bastion.image }}
-          sshKeyName: locked
         {{- if .Values.bastion.rootVolume.sourceUUID }}
           rootVolume:
             sourceType: image

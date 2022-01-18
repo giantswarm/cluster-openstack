@@ -52,7 +52,7 @@ spec:
               AllowTcpForwarding no
               AllowAgentForwarding no
         postKubeadmCommands:
-          - service ssh restart
+          - systemctl restart sshd
         users:
           - name: giantswarm
             sudo: ALL=(ALL) NOPASSWD:ALL

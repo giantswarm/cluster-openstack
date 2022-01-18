@@ -56,10 +56,10 @@ spec:
         users:
           - name: giantswarm
             sudo: ALL=(ALL) NOPASSWD:ALL
-          machineTemplate:
-            infrastructureRef:
-              apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
-              kind: OpenStackMachineTemplate
-              name: {{ include "resource.default.name" . }}-{{ .Values.controlPlane.class }}
-          version: {{ .Values.kubernetesVersion }}
+      machineTemplate:
+        infrastructureRef:
+          apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+          kind: OpenStackMachineTemplate
+          name: {{ include "resource.default.name" . }}-{{ .Values.controlPlane.class }}
+      version: {{ .Values.kubernetesVersion }}
 {{- end -}}

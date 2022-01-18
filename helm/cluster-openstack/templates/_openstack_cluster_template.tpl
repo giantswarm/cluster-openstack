@@ -27,4 +27,16 @@ spec:
       - {{ . }}
       {{- end }}
       {{- end }}
+      bastion:
+        enabled: true
+        instance:
+          flavor: {{ .Values.bastion.flavor }}
+          image: {{ .Values.bastion.image }}
+          sshKeyName: locked
+        {{- if .Values.bastion.rootVolume.sourceUUID }}
+          rootVolume:
+            sourceType: image
+            diskSize: {{ .Values.bastion.rootVolume.diskSize }}
+            sourceUUID: {{ .Values.bastion.rootVolume.sourceUUID }}
+        {{- end }}
 {{- end -}}

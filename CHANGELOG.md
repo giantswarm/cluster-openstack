@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Add empty value for `nodeCIDR` in `values.yaml`.
+
 ### Removed
 
 - Remove extraneous commit and branch labels.

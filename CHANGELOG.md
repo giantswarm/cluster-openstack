@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add bastions, SSH users and configs.
+
 ## [0.2.1] - 2022-01-21
 
 ### Removed

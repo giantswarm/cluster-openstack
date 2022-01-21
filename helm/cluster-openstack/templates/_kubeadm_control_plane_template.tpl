@@ -28,6 +28,7 @@ spec:
               cloud-provider: external
             name: '{{ `{{ local_hostname }}` }}'
         useExperimentalRetryJoin: true
+        {{- include "sshConfig" . | nindent 8 }}
       machineTemplate:
         infrastructureRef:
           apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4

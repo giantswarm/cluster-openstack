@@ -8,6 +8,13 @@ releaseVersion: 20.0.0-alpha1
 
 externalNetworkID: ""  # UUID of external network (optional).
 
+bastion:
+  flavor: n1.tiny
+  image: ""  # Ignored if rootVolume.sourceUUID is set (optional).
+  rootVolume:
+    diskSize: 10
+    sourceUUID: ""  # UUID of the bastion image (optional).
+
 rootVolume:
   enabled: false
   sourceUUID: ""  # UUID of root volume source image (optional).

@@ -15,4 +15,5 @@ spec:
             cloud-provider: external
             node-labels: giantswarm.io/node-pool={{ .name }}
           name: '{{ `{{ local_hostname }}` }}'
+      {{- include "sshConfig" . | nindent 6 }}
 {{- end -}}

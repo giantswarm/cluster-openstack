@@ -32,10 +32,10 @@ spec:
         instance:
           flavor: {{ .Values.bastion.flavor }}
           image: {{ .Values.bastion.image }}
-        {{- if .Values.bastion.rootVolume.sourceUUID }}
+          {{- if .Values.bastion.rootVolume.sourceUUID }}
           rootVolume:
             sourceType: image
             diskSize: {{ .Values.bastion.rootVolume.diskSize }}
             sourceUUID: {{ .Values.bastion.rootVolume.sourceUUID }}
-        {{- end }}
+          {{- end }}
 {{- end -}}

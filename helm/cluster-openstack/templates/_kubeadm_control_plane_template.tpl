@@ -14,6 +14,10 @@ spec:
           apiServer:
             extraArgs:
               cloud-provider: external
+              oidc-issuer-url: https://dex.{{ .Values.baseDomain }}
+              oidc-client-id: dex-k8s-authenticator
+              oidc-username-claim: email
+              oidc-groups-claim: groups
           controllerManager:
             extraArgs:
               cloud-provider: external

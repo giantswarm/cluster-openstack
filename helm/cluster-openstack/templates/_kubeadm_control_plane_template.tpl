@@ -3,9 +3,9 @@ apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: KubeadmControlPlaneTemplate
 metadata:
   labels:
-    {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}
-  namespace: {{ $.Release.Namespace }}
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.controlPlaneTemplate.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template:
     spec:
@@ -14,10 +14,12 @@ spec:
           apiServer:
             extraArgs:
               cloud-provider: external
+              {{- if .Values.oidc.enabled }}
               oidc-issuer-url: https://dex.{{ .Values.baseDomain }}
               oidc-client-id: dex-k8s-authenticator
               oidc-username-claim: email
               oidc-groups-claim: groups
+              {{- end }}
           controllerManager:
             extraArgs:
               cloud-provider: external
@@ -36,6 +38,6 @@ spec:
         infrastructureRef:
           apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
           kind: OpenStackMachineTemplate
-          name: {{ include "resource.default.name" . }}-{{ .Values.controlPlane.class }}
+          name: {{ include "resource.controlPlaneMachineTemplate.name" . }}
       version: {{ .Values.kubernetesVersion }}
 {{- end -}}

@@ -3,30 +3,33 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.clusterDescription }}"
+    cluster.giantswarm.io/description: {{ .Values.clusterDescription | quote }}
   labels:
+    {{- include "labels.common" . | nindent 4 }}
     cluster-apps-operator.giantswarm.io/watching: ""
-    {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   topology:
-    class: {{ include "resource.default.name" $ }}
+    class: {{ include "resource.clusterClass.name" . }}
     version: {{ .Values.kubernetesVersion }}
     controlPlane:
       replicas: {{ .Values.controlPlane.replicas }}
       metadata:
         labels:
-          {{- include "labels.common" $ | nindent 10 }}
+          {{- include "labels.common" . | nindent 10 }}
     workers:
       machineDeployments:
+      {{- $outerScope := . }}
       {{- range .Values.nodePools }}
-      - class: {{ .class }}
-        name: {{ .name }}
-        replicas: {{ .replicas }}
+      {{- $innerScope := merge (deepCopy .) (deepCopy $outerScope) }}
+      {{- $nodeClass := merge (dict "name" .class) (deepCopy (get $outerScope.Values.nodeClasses .class)) (deepCopy $outerScope) }}
+      - class: {{ include "resource.nodeClass.name" $nodeClass }}
+        name: {{ $innerScope.name }}
+        replicas: {{ $innerScope.replicas }}
         metadata:
           labels:
-            machine-deployment.giantswarm.io/failure-domain: "{{ .failureDomain }}"
-            {{- include "labels.common" $ | nindent 12 }}
+            {{- include "labels.common" $innerScope | nindent 12 }}
+            machine-deployment.giantswarm.io/failure-domain: {{ .failureDomain | quote }}
       {{- end }}
 {{- end -}}

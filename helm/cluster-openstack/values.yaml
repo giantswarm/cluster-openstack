@@ -5,7 +5,6 @@ cloudName: openstack  # Name of cloud in cloud-config secret "cloud.yaml" value.
 baseDomain: "example.com"
 
 kubernetesVersion: 1.20.9
-releaseVersion: 20.0.0-alpha1
 
 externalNetworkID: ""  # UUID of external network (optional).
 
@@ -14,15 +13,16 @@ rootVolume:
   sourceUUID: ""  # UUID of root volume source image (optional).
 
 nodeClasses:
-- name: default  # Name of class.
-  machineFlavor: n1.small  # Flavor of machine.
-  diskSize: 50  # Root volume disk size in GB.
+  default:
+    machineFlavor: n1.small  # Flavor of machine.
+    diskSize: 50  # Root volume disk size in GB.
 
 controlPlane:
-  class: default  # Name of node class to be used by control plane nodes.
+  machineFlavor: n1.medium  # Flavor of machine.
+  diskSize: 50  # Root volume disk size in GB.
   replicas: 1  # Number of replicas in control plane. Should be an odd number.
 
 nodePools:
 - name: default  # Name of node pool.
-  class: default  # Name of node class to be used by node pool nodes.
+  class: worker  # Name of node class to be used by node pool nodes.
   replicas: 3  # Number of replicas in node pool.

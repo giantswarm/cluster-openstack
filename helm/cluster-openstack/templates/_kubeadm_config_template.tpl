@@ -4,8 +4,8 @@ kind: KubeadmConfigTemplate
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-{{ .name }}
-  namespace: {{ $.Release.Namespace }}
+  name: {{ include "resource.kubeadmConfigTemplate.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   template:
     spec:

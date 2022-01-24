@@ -8,7 +8,6 @@ dnsNameservers:
 - 1.1.1.1
 
 kubernetesVersion: 1.20.9
-releaseVersion: 20.0.0-alpha1
 
 externalNetworkID: 1700ba33-e871-4893-8a05-b5b564154eed
 

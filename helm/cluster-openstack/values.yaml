@@ -6,7 +6,7 @@ cloudName: openstack  # Name of cloud in cloud-config secret "cloud.yaml" value.
 kubernetesVersion: 1.20.9
 releaseVersion: 20.0.0-alpha1
 
-nodeCIDR: "" # The OpenStack Subnet to be created.
+nodeCIDR: ""  # The OpenStack Subnet to be created.
 externalNetworkID: ""  # UUID of external network (optional).
 
 rootVolume:

@@ -2,12 +2,16 @@ clusterDescription: ""  # Cluster description used in metadata.
 organization: ""  # Organization in which to create the cluster.
 cloudConfig: cloud-config  # Name of cloud-config secret in destination namespace.
 cloudName: openstack  # Name of cloud in cloud-config secret "cloud.yaml" value.
+baseDomain: "example.com"
 
 kubernetesVersion: 1.20.9
 releaseVersion: 20.0.0-alpha1
 
 nodeCIDR: ""  # The OpenStack Subnet to be created.
 externalNetworkID: ""  # UUID of external network (optional).
+
+oidc:
+  enabled: false
 
 bastion:
   flavor: n1.tiny

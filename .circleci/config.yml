@@ -9,8 +9,8 @@ workflows:
           context: "architect"
           executor: "app-build-suite"
           name: "package and push cluster-openstack chart"
-          app_catalog: "control-plane-catalog"
-          app_catalog_test: "control-plane-test-catalog"
+          app_catalog: "giantswarm-catalog"
+          app_catalog_test: "giantswarm-test-catalog"
           chart: "cluster-openstack"
           persist_chart_archive: true
           # Trigger job on git tag.

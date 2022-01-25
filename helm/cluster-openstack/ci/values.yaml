@@ -8,7 +8,6 @@ dnsNameservers:
 - 1.1.1.1
 
 kubernetesVersion: 1.20.9
-
 externalNetworkID: 1700ba33-e871-4893-8a05-b5b564154eed
 
 rootVolume:
@@ -16,12 +15,14 @@ rootVolume:
   sourceUUID: 90b7124a-c526-4477-b6b3-73996a3c85be
 
 controlPlane:
+  diskSize: 50
+  machineFlavor: n1.small  
   replicas: 1
 
 nodeClasses:
-- name: default
-  machineFlavor: n1.small
-  diskSize: 50
+  default:
+    diskSize: 50
+    machineFlavor: n1.small
 
 nodePools:
 - name: default

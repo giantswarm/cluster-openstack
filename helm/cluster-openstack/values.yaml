@@ -10,6 +10,9 @@ releaseVersion: 20.0.0-alpha1
 nodeCIDR: ""  # The OpenStack Subnet to be created.
 externalNetworkID: ""  # UUID of external network (optional).
 
+oidc:
+  enabled: true
+
 bastion:
   flavor: n1.tiny
   image: ""  # Ignored if rootVolume.sourceUUID is set (optional).

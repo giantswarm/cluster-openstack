@@ -15,7 +15,7 @@ spec:
             extraArgs:
               cloud-provider: external
               {{- if .Values.oidc.enabled }}
-              oidc-issuer-url: https://dex.{{ .Values.baseDomain }}
+              oidc-issuer-url: https://dex.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}
               oidc-client-id: dex-k8s-authenticator
               oidc-username-claim: email
               oidc-groups-claim: groups

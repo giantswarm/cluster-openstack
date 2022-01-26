@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.0] - 2022-01-26
 
+### Added
+
+- Add optional OIDC flags for the API server.
+
 ### Changed
 
 - Push to `giantswarm-catalog` instead of `control-plane-catalog`.

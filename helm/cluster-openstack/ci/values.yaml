@@ -28,12 +28,12 @@ controlPlane:
   diskSize: 50
 
 nodeClasses:
-  default:
+  worker:
     machineFlavor: n1.small
     diskSize: 50
 
 nodePools:
 - name: default
-  class: default
+  class: worker
   failureDomain: test-fd
   replicas: 2

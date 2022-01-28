@@ -24,7 +24,7 @@ rootVolume:
   sourceUUID: ""  # UUID of root volume source image (optional).
 
 nodeClasses:
-  default:
+  worker:
     machineFlavor: n1.small  # Flavor of machine.
     diskSize: 50  # Root volume disk size in GB.
 

@@ -42,7 +42,18 @@ ubuntu-2004-kube-v{{ .Values.kubernetesVersion }}
 {{- end -}}
 
 {{- define "hash" -}}
-{{- $inputs := (dict "cloudConfig" .Values.cloudConfig "cloudName" .Values.cloudName "baseDomain" .Values.baseDomain "imageName" (include "imageName" .) "externalNetworkID" .Values.externalNetworkID "rootVolume" .Values.rootVolume "nodeClasses" .Values.nodeClasses "controlPlane" (dict "machineFlavor" .Values.controlPlane.machineFlavor "diskSize" .Values.controlPlane.diskSize) "oidc" .Values.oidc) }}
+{{- $inputs := (dict
+  "cloudConfig" .Values.cloudConfig
+  "cloudName" .Values.cloudName
+  "baseDomain" .Values.baseDomain
+  "imageName" (include "imageName" .)
+  "externalNetworkID" .Values.externalNetworkID
+  "rootVolume" .Values.rootVolume
+  "nodeClasses" .Values.nodeClasses
+  "controlPlane" (dict
+    "machineFlavor" .Values.controlPlane.machineFlavor
+    "diskSize" .Values.controlPlane.diskSize)
+  "oidc" .Values.oidc) }}
 {{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 

@@ -1,30 +1,39 @@
-clusterDescription: Test cluster.
+clusterName: name
+clusterDescription: description
 organization: giantswarm-2
 cloudConfig: cloud-config
 cloudName: openstack
 nodeCIDR: 10.6.0.0/24
-dnsNameservers:
-- 8.8.8.8
-- 1.1.1.1
 
-kubernetesVersion: 1.20.9
-externalNetworkID: 1700ba33-e871-4893-8a05-b5b564154eed
+kubernetesVersion: 1.20.10
+
+externalNetworkID: network-id
+
+oidc:
+  enabled: true
+
+bastion:
+  flavor: n1.tiny
+  rootVolume:
+    diskSize: 10
+    sourceUUID: bastion-source-uuid
 
 rootVolume:
   enabled: true
-  sourceUUID: 90b7124a-c526-4477-b6b3-73996a3c85be
+  sourceUUID: node-source-uuid
 
 controlPlane:
-  diskSize: 50
-  machineFlavor: n1.small  
   replicas: 1
+  machineFlavor: n1.small
+  diskSize: 50
 
 nodeClasses:
   default:
-    diskSize: 50
     machineFlavor: n1.small
+    diskSize: 50
 
 nodePools:
 - name: default
   class: default
-  replicas: 3
+  failureDomain: test-fd
+  replicas: 2

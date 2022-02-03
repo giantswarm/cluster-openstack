@@ -74,5 +74,5 @@ ubuntu-2004-kube-v{{ .Values.kubernetesVersion }}
 {{- end -}}
 
 {{- define "kubeProxyPreKubeadmCommands" -}}
-- /run/kubeadm/gs-kube-proxy-patch.sh
+- bash /run/kubeadm/gs-kube-proxy-patch.sh
 {{- end -}}

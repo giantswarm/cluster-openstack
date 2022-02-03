@@ -21,8 +21,8 @@ spec:
       {{- if .Values.externalNetworkID }}
       externalNetworkId: {{ .Values.externalNetworkID }}
       {{- end }}
-      {{- if .Values.dnsNameservers }}
       allowAllInClusterTraffic: true
+      {{- if .Values.dnsNameservers }}
       dnsNameservers:
       {{- range .Values.dnsNameservers }}
       - {{ . }}

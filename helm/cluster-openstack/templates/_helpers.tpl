@@ -46,7 +46,8 @@ ubuntu-2004-kube-v{{ .Values.kubernetesVersion }}
 - path: /etc/ssh/trusted-user-ca-keys.pem
   permissions: "0600"
   # Taken from https://vault.operations.giantswarm.io/v1/ssh/public_key
-  content: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
+  content: |
+    {{- .Files.Get "files/etc/ssh/trusted-user-ca-keys.pem" | nindent 4 }}
 - path: /etc/ssh/sshd_config
   permissions: "0600"
   content: |

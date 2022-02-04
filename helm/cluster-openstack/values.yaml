@@ -32,6 +32,9 @@ nodeClasses:
 controlPlane:
   class: default  # Name of node class to be used by control plane nodes.
   replicas: 1  # Number of replicas in control plane. Should be an odd number.
+  # availabilityZones:
+  # - gb-lon-1
+  # - gb-lon-2
 
 nodePools:
 - name: default  # Name of node pool.

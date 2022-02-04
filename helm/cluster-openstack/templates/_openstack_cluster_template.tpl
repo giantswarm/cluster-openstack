@@ -10,6 +10,9 @@ spec:
   template:
     spec:
       cloudName: {{ .Values.cloudName }}
+      {{- if .Values.controlPlane.availabilityZones }}
+      controlPlaneAvailabilityZones: {{ join "," .Values.controlPlane.availabilityZones }}
+      {{- end }}
       identityRef:
         name: {{ .Values.cloudConfig }}
         kind: Secret

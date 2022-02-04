@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+#
+# (PK) I couldn't find a better/simpler way to conifgure it. See:
+# https://github.com/kubernetes-sigs/cluster-api/issues/4512
+#
+
 set -o errexit
 set -o nounset
 set -o pipefail

@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add optional configuration for `controlPlaneAvailabilityZones`.
+
 ### Changed
 
 - Allow traffic between pod and host network.

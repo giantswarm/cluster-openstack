@@ -15,5 +15,10 @@ spec:
             cloud-provider: external
             node-labels: giantswarm.io/node-pool={{ .name }}
           name: '{{ `{{ local_hostname }}` }}'
-      {{- include "sshConfig" . | nindent 6 }}
+      files:
+        {{- include "sshFiles" . | nindent 8 }}
+      postKubeadmCommands:
+        {{- include "sshPostKubeadmCommands" . | nindent 8 }}
+      users:
+        {{- include "sshUsers" . | nindent 8 }}
 {{- end -}}

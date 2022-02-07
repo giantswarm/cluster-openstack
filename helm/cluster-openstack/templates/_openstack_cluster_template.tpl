@@ -11,7 +11,10 @@ spec:
     spec:
       cloudName: {{ .Values.cloudName }}
       {{- if .Values.controlPlane.availabilityZones }}
-      controlPlaneAvailabilityZones: {{ join "," .Values.controlPlane.availabilityZones }}
+      controlPlaneAvailabilityZones:
+      {{- range .Values.controlPlane.availabilityZones }}
+      - {{ . }}
+      {{- end }}
       {{- end }}
       identityRef:
         name: {{ .Values.cloudConfig }}

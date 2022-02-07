@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add kube-proxy configuration to enable metrics.
+
 ### Changed
 
 - Allow traffic between pod and host network.

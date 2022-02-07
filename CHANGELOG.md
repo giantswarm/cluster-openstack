@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add optional configuration for `controlPlaneAvailabilityZones`.
 - Add kube-proxy configuration to enable metrics.
 
 ### Changed

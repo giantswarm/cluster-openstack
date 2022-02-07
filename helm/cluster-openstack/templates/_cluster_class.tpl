@@ -12,6 +12,11 @@ spec:
       apiVersion: controlplane.cluster.x-k8s.io/v1beta1
       kind: KubeadmControlPlaneTemplate
       name: {{ include "resource.default.name" $ }}
+    machineInfrastructure:
+      ref:
+        apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+        kind: OpenStackMachineTemplate
+        name: {{ include "resource.default.name" . }}-{{ .Values.controlPlane.class }}
   workers:
     machineDeployments:
     {{- range .Values.nodeClasses }}

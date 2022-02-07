@@ -34,11 +34,13 @@ spec:
               cloud-provider: external
             name: '{{ `{{ local_hostname }}` }}'
         useExperimentalRetryJoin: true
-        {{- include "sshConfig" . | nindent 8 }}
-      machineTemplate:
-        infrastructureRef:
-          apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
-          kind: OpenStackMachineTemplate
-          name: {{ include "resource.default.name" . }}-{{ .Values.controlPlane.class }}
-      version: {{ .Values.kubernetesVersion }}
+        files:
+          {{- include "sshFiles" . | nindent 10 }}
+          {{- include "kubeProxyFiles" . | nindent 10 }}
+        preKubeadmCommands:
+          {{- include "kubeProxyPreKubeadmCommands" . | nindent 10 }}
+        postKubeadmCommands:
+          {{- include "sshPostKubeadmCommands" . | nindent 10 }}
+        users:
+          {{- include "sshUsers" . | nindent 10 }}
 {{- end -}}

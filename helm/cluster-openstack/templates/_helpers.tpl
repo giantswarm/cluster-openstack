@@ -42,33 +42,38 @@ room for such suffix.
 ubuntu-2004-kube-v{{ .Values.kubernetesVersion }}
 {{- end -}}
 
-{{- define "sshConfig" -}}
-files:
-  - path: /etc/ssh/trusted-user-ca-keys.pem
-    permissions: "0600"
-    # Taken from https://vault.operations.giantswarm.io/v1/ssh/public_key
-    content: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
-  - path: /etc/ssh/sshd_config
-    permissions: "0600"
-    content: |
-      # Use most defaults for sshd configuration.
-      Subsystem sftp internal-sftp
-      ClientAliveInterval 180
-      UseDNS no
-      UsePAM yes
-      PrintLastLog no # handled by PAM
-      PrintMotd no # handled by PAM
-      # Non defaults (#100)
-      ClientAliveCountMax 2
-      PasswordAuthentication no
-      TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem
-      MaxAuthTries 5
-      LoginGraceTime 60
-      AllowTcpForwarding no
-      AllowAgentForwarding no
-postKubeadmCommands:
-  - systemctl restart sshd
-users:
-  - name: giantswarm
-    sudo: ALL=(ALL) NOPASSWD:ALL
+{{- define "sshFiles" -}}
+- path: /etc/ssh/trusted-user-ca-keys.pem
+  permissions: "0600"
+  # Taken from https://vault.operations.giantswarm.io/v1/ssh/public_key
+  content: |
+    {{- .Files.Get "files/etc/ssh/trusted-user-ca-keys.pem" | nindent 4 }}
+- path: /etc/ssh/sshd_config
+  permissions: "0600"
+  content: |
+    {{- .Files.Get "files/etc/ssh/sshd_config" | nindent 4 }}
+{{- end -}}
+
+{{- define "sshPostKubeadmCommands" -}}
+- systemctl restart sshd
+{{- end -}}
+
+{{- define "sshUsers" -}}
+- name: giantswarm
+  sudo: ALL=(ALL) NOPASSWD:ALL
+{{- end -}}
+
+{{- define "kubeProxyFiles" }}
+- path: /run/kubeadm/gs-kube-proxy-config.yaml
+  permissions: "0600"
+  content: |
+    {{- .Files.Get "files/run/kubeadm/gs-kube-proxy-config.yaml" | nindent 4 }}
+- path: /run/kubeadm/gs-kube-proxy-patch.sh
+  permissions: "0700"
+  content: |
+    {{- .Files.Get "files/run/kubeadm/gs-kube-proxy-patch.sh" | nindent 4 }}
+{{- end -}}
+
+{{- define "kubeProxyPreKubeadmCommands" -}}
+- bash /run/kubeadm/gs-kube-proxy-patch.sh
 {{- end -}}

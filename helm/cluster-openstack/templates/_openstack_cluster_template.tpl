@@ -27,6 +27,10 @@ spec:
       {{- if .Values.externalNetworkID }}
       externalNetworkId: {{ .Values.externalNetworkID }}
       {{- end }}
+      network:
+        name: net-0
+      subnet:
+        name: subnet-1
       allowAllInClusterTraffic: true
       {{- if .Values.dnsNameservers }}
       dnsNameservers:
@@ -37,6 +41,12 @@ spec:
       bastion:
         enabled: true
         instance:
+          networks:
+          - filter:
+              name: net-0
+            subnets:
+            - filter:
+                name: subnet-1
           flavor: {{ .Values.bastion.flavor }}
           image: {{ .Values.bastion.image }}
           {{- if .Values.bastion.rootVolume.sourceUUID }}

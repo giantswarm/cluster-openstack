@@ -9,6 +9,12 @@ metadata:
 spec:
   template:
     spec:
+      networks:
+      - filter:
+          name: net-0
+        subnets:
+        - filter:
+            name: subnet-1
       cloudName: {{ $.Values.cloudName }}
       flavor: {{ .machineFlavor }}
       identityRef:

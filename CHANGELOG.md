@@ -9,11 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.1] - 2022-02-07
+## [0.4.0] - 2022-02-08
 
 ### Added
 
 - Add optional configuration for `controlPlaneAvailabilityZones`.
+
+## [0.3.1] - 2022-02-07
+
+### Added
+
 - Add kube-proxy configuration to enable metrics.
 
 ### Changed
@@ -63,7 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial implementation.
 
 
-[Unreleased]: https://github.com/giantswarm/giantswarm/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/giantswarm/giantswarm/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/giantswarm/giantswarm/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/giantswarm/giantswarm/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/giantswarm/cluster-openstack/compare/v0.2.1...v0.2.2

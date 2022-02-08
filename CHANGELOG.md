@@ -11,11 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.0] - 2022-02-08
 
+### Added
+
+- Add optional configuration for `controlPlaneAvailabilityZones`.
+
 ## [0.3.1] - 2022-02-07
 
 ### Added
 
-- Add optional configuration for `controlPlaneAvailabilityZones`.
 - Add kube-proxy configuration to enable metrics.
 
 ### Changed

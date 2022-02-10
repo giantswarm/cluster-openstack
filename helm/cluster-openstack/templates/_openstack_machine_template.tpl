@@ -14,7 +14,7 @@ spec:
       identityRef:
         name: {{ $.Values.cloudConfig }}
         kind: Secret
-      image: {{ include "imageName" $ }}
+      image: "" # This is ignored when rootVolume.sourceUUID is specified.
       {{- if $.Values.rootVolume.enabled }}
       rootVolume:
         sourceType: image

@@ -38,10 +38,6 @@ room for such suffix.
 {{- .Release.Name | replace "." "-" | trunc 47 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "imageName" -}}
-ubuntu-2004-kube-v{{ .Values.kubernetesVersion }}
-{{- end -}}
-
 {{- define "sshFiles" -}}
 - path: /etc/ssh/trusted-user-ca-keys.pem
   permissions: "0600"

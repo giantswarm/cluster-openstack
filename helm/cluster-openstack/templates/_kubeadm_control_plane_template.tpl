@@ -22,7 +22,11 @@ spec:
               {{- end }}
           controllerManager:
             extraArgs:
+              bind-address: 0.0.0.0
               cloud-provider: external
+          scheduler:
+            extraArgs:
+              bind-address: 0.0.0.0
         initConfiguration:
           nodeRegistration:
             kubeletExtraArgs:

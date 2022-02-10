@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bind controller-manager to 0.0.0.0 to expose metrics endpoint.
+- Bind scheduler to 0.0.0.0 to expose metrics endpoint.
+
 ## [0.3.1] - 2022-02-07
 
 ### Added

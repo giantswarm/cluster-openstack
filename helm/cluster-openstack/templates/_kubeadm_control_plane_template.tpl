@@ -18,7 +18,7 @@ spec:
               cloud-provider: external
               {{- if .Values.oidc.issuerUrl }}
               oidc-issuer-url: {{ .Values.issuerUrl }}
-              oidc-client-id: {{ .Values. clientId }}
+              oidc-client-id: {{ .Values.clientId }}
               oidc-username-claim: {{ .Values.usernameClaim }}
               oidc-groups-claim: {{ .Values.groupsClaim }}
               {{- if .Values.oidc.caFile }}

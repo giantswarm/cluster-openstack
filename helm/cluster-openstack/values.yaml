@@ -3,6 +3,7 @@ organization: ""  # Organization in which to create the cluster.
 cloudConfig: cloud-config  # Name of cloud-config secret in destination namespace.
 cloudName: openstack  # Name of cloud in cloud-config secret "cloud.yaml" value.
 baseDomain: "example.com"
+managementCluster: ""
 
 kubernetesVersion: 1.20.9
 releaseVersion: 20.0.0-alpha1

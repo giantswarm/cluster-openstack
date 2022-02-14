@@ -11,7 +11,11 @@ nodeCIDR: ""  # The OpenStack Subnet to be created.
 externalNetworkID: ""  # UUID of external network (optional).
 
 oidc:
-  enabled: false
+  issuer-url: ""
+  ca-file: ""
+  client-id: ""
+  username-claim: ""
+  groups-claim: ""
 
 bastion:
   flavor: n1.tiny

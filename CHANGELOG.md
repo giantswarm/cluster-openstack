@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add API server`certSANs` property to generate a certificate for the API FQDN.
+- Add OIDC flags in the configuration values for `KubeadmControlPlaneTemplate`.
 
 ### Changed
 

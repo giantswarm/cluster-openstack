@@ -12,6 +12,8 @@ spec:
       kubeadmConfigSpec:
         clusterConfiguration:
           apiServer:
+            certSANs:
+              - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
             extraArgs:
               cloud-provider: external
               {{- if .Values.oidc.enabled }}

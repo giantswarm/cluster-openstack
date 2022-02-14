@@ -16,13 +16,13 @@ spec:
               - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
             extraArgs:
               cloud-provider: external
-              {{- if .Values.oidc.issuer-url }}
-              oidc-issuer-url: {{ .Values.issuer-url }}
-              oidc-client-id: {{ .Values. client-id }}
-              oidc-username-claim: {{ .Values.username-claim }}
-              oidc-groups-claim: {{ .Values.groups-claim }}
-              {{- if .Values.oidc.ca-file }}
-              oidc-ca-file: {{ .Values.ca-file }}
+              {{- if .Values.oidc.issuerUrl }}
+              oidc-issuer-url: {{ .Values.issuerUrl }}
+              oidc-client-id: {{ .Values. clientId }}
+              oidc-username-claim: {{ .Values.usernameClaim }}
+              oidc-groups-claim: {{ .Values.groupsClaim }}
+              {{- if .Values.oidc.caFile }}
+              oidc-ca-file: {{ .Values.caFile }}
               {{- end }}
               {{- end }}
           controllerManager:

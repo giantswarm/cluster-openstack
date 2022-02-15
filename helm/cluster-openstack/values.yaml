@@ -27,6 +27,6 @@ controlPlane:
   replicas: 0  # Number of replicas in control plane. Should be an odd number.
   useRootVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
 
-nodeClasses: [] # Class definitions for worker node pools. In additiona to a required "name", may include "diskSize", "flavor", "image", and "useRootVolume" as defined for control plane and bastion above.
+nodeClasses: []  # Class definitions for worker node pools. In additiona to a required "name", may include "diskSize", "flavor", "image", and "useRootVolume" as defined for control plane and bastion above.
 
 nodePools: []  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above.

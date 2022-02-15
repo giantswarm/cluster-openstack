@@ -9,16 +9,18 @@ metadata:
 spec:
   template:
     spec:
-      cloudName: {{ $.Values.cloudName }}
-      flavor: {{ .machineFlavor }}
+      cloudName: {{ $.Values.cloudName | quote }}
+      flavor: {{ .flavor | quote }}
       identityRef:
         name: {{ $.Values.cloudConfig }}
         kind: Secret
-      image: "" # This is ignored when rootVolume.sourceUUID is specified.
-      {{- if $.Values.rootVolume.enabled }}
+      {{- if .useRootVolume }}
+      image: ""
       rootVolume:
         sourceType: image
         diskSize: {{ .diskSize }}
-        sourceUUID: {{ $.Values.rootVolume.sourceUUID }}
+        sourceUUID: {{ .image | quote }}
+      {{- else }}
+      image: {{ .image | quote }}
       {{- end }}
 {{- end -}}

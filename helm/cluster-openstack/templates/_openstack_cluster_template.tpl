@@ -9,6 +9,10 @@ metadata:
 spec:
   template:
     spec:
+      {{- if .Values.managementCluster }}
+      tags:
+      - giant_swarm_cluster_{{ .Values.managementCluster }}_{{ include "resource.default.name" $ }}
+      {{- end }}
       cloudName: {{ .Values.cloudName }}
       {{- if .Values.controlPlane.availabilityZones }}
       controlPlaneAvailabilityZones:

@@ -14,7 +14,7 @@ spec:
       identityRef:
         name: {{ $.Values.cloudConfig }}
         kind: Secret
-      {{- if .useRootVolume }}
+      {{- if .bootFromVolume }}
       image: ""
       rootVolume:
         sourceType: image

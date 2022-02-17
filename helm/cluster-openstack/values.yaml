@@ -14,19 +14,19 @@ oidc:
   enabled: false  # If true, flags will be configured on the control plane for OIDC-based SSO authentication.
 
 bastion:
-  diskSize: 0  # Root volume disk size in GB. Ignored if useRootVolume is false. Should be at least as large as the source image.
+  diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
   flavor: ""  # Project-dependent flavor of bastion machine.
-  image: ""  # Image name or root volume source UUID if useRootVolume is true.
-  useRootVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
+  image: ""  # Image name or root volume source UUID if bootFromVolume is true.
+  bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
 
 controlPlane:
   availabilityZones: []  # Unique availability zones for control plane nodes. If specified, should have one item or one for each replica (optional).
-  diskSize: 0  # Root volume disk size in GB. Ignored if useRootVolume is false. Should be at least as large as the source image.
+  diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
   flavor: ""  # Project-dependent flavor of control plane machines.
-  image: ""  # Image name or root volume source UUID if useRootVolume is true.
+  image: ""  # Image name or root volume source UUID if bootFromVolume is true.
   replicas: 0  # Number of replicas in control plane. Should be an odd number.
-  useRootVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
+  bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
 
-nodeClasses: []  # Class definitions for worker node pools. In additiona to a required "name", may include "diskSize", "flavor", "image", and "useRootVolume" as defined for control plane and bastion above.
+nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
 
 nodePools: []  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above.

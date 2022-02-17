@@ -19,7 +19,7 @@ bastion:
   diskSize: 10
   flavor: bastion-flavor
   image: bastion-image
-  useRootVolume: true
+  bootFromVolume: true
 
 controlPlane:
   availabilityZones:
@@ -30,14 +30,14 @@ controlPlane:
   flavor: control-plane-flavor
   image: control-plane-image
   replicas: 3
-  useRootVolume: true
+  bootFromVolume: true
 
 nodeClasses:
 - diskSize: 30
   image: worker-image
   flavor: worker-flavor
   name: worker
-  useRootVolume: true
+  bootFromVolume: true
 
 nodePools:
 - class: worker

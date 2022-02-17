@@ -42,7 +42,7 @@ spec:
         enabled: true
         instance:
           flavor: {{ .Values.bastion.flavor | quote }}
-          {{- if .Values.bastion.useRootVolume }}
+          {{- if .Values.bastion.bootFromVolume }}
           image: ""
           rootVolume:
             sourceType: image

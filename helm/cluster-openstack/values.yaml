@@ -8,8 +8,10 @@ managementCluster: ""
 kubernetesVersion: 1.20.9
 releaseVersion: 20.0.0-alpha1
 
-networkName: ""  # existing network name, used when nodeCIDR is empty
-subnetName: ""  # existing subnet name, used when nodeCIDR is empty
+nodeCIDR: ""  # The OpenStack Subnet to be created.
+externalNetworkID: ""  # UUID of external network (optional).
+networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
+subnetName: ""  # Existing subnet name. Ignored when nodeCIDR is set.
 
 oidc:
   enabled: false

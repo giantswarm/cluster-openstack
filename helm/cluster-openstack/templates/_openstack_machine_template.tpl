@@ -15,6 +15,14 @@ spec:
         name: {{ $.Values.cloudConfig }}
         kind: Secret
       image: "" # This is ignored when rootVolume.sourceUUID is specified.
+      {{- if not .Values.nodeCIDR }}
+      networks:
+      - filter:
+          name: {{ .Values.networkName }}
+        subnets:
+        - filter:
+            name: {{ .Values.subnetName }} 
+      {{- end }}
       {{- if $.Values.rootVolume.enabled }}
       rootVolume:
         sourceType: image

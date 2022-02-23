@@ -9,6 +9,10 @@ metadata:
 spec:
   template:
     spec:
+      {{- if .Values.managementCluster }}
+      tags:
+      - giant_swarm_cluster_{{ .Values.managementCluster }}_{{ include "resource.default.name" $ }}
+      {{- end }}
       cloudName: {{ .Values.cloudName }}
       {{- if .Values.controlPlane.availabilityZones }}
       controlPlaneAvailabilityZones:
@@ -23,6 +27,11 @@ spec:
       managedSecurityGroups: true
       {{- if .Values.nodeCIDR }}
       nodeCidr: {{ .Values.nodeCIDR }}
+      {{- else }}
+      network:
+        name: {{ .Values.networkName }}
+      subnet:
+        name: {{ .Values.subnetName }}
       {{- end }}
       {{- if .Values.externalNetworkID }}
       externalNetworkId: {{ .Values.externalNetworkID }}
@@ -39,6 +48,14 @@ spec:
         instance:
           flavor: {{ .Values.bastion.flavor }}
           image: {{ .Values.bastion.image }}
+          {{- if not .Values.nodeCIDR }}
+          networks:
+          - filter:
+              name: {{ .Values.networkName }}
+            subnets:
+            - filter:
+                name: {{ .Values.subnetName }} 
+          {{- end }}
           {{- if .Values.bastion.rootVolume.sourceUUID }}
           rootVolume:
             sourceType: image

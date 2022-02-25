@@ -4,13 +4,12 @@ cloudName: ""  # Name of cloud in cloud-config secret "cloud.yaml" value.
 clusterDescription: ""  # Cluster description used in metadata.
 clusterName: ""  # Name of cluster. Used as base name for all cluster resources in the management cluster.
 dnsNameservers: []  # IPs of DNS nameservers to be used by the cluster machines (optional, will use OS defaults if not specified).
-externalNetworkID: ""  # UUID of external network (optional unless there are multiple external networks).
 kubernetesVersion: ""  # Version of Kubernetes. If machine images are specified, this will only be used for metadata.
 managementCluster: ""  # Name of cluster which owns this workload cluster.
 organization: ""  # Organization which owns the cluster.
 
 nodeCIDR: ""  # The OpenStack Subnet to be created.
-externalNetworkID: ""  # UUID of external network (optional).
+externalNetworkID: ""  # UUID of external network (optional unless there are multiple external networks).
 networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
 subnetName: ""  # Existing subnet name. Ignored when nodeCIDR is set.
 

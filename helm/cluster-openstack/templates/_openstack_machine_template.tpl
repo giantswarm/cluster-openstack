@@ -14,6 +14,14 @@ spec:
       identityRef:
         name: {{ $.Values.cloudConfig }}
         kind: Secret
+      {{- if not .Values.nodeCIDR }}
+      networks:
+      - filter:
+          name: {{ .Values.networkName }}
+        subnets:
+        - filter:
+            name: {{ .Values.subnetName }} 
+      {{- end }}
       {{- if .bootFromVolume }}
       image: ""
       rootVolume:

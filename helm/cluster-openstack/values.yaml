@@ -7,8 +7,12 @@ dnsNameservers: []  # IPs of DNS nameservers to be used by the cluster machines 
 externalNetworkID: ""  # UUID of external network (optional unless there are multiple external networks).
 kubernetesVersion: ""  # Version of Kubernetes. If machine images are specified, this will only be used for metadata.
 managementCluster: ""  # Name of cluster which owns this workload cluster.
-nodeCIDR: ""  # The CIDR of the OpenStack subnet to be created for cluster machines.
 organization: ""  # Organization which owns the cluster.
+
+nodeCIDR: ""  # The OpenStack Subnet to be created.
+externalNetworkID: ""  # UUID of external network (optional).
+networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
+subnetName: ""  # Existing subnet name. Ignored when nodeCIDR is set.
 
 oidc:
   enabled: false  # If true, flags will be configured on the control plane for OIDC-based SSO authentication.

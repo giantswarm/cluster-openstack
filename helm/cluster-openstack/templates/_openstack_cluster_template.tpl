@@ -27,6 +27,11 @@ spec:
       managedSecurityGroups: true
       {{- if .Values.nodeCIDR }}
       nodeCidr: {{ .Values.nodeCIDR | quote }}
+      {{- else }}
+      network:
+        name: {{ .Values.networkName }}
+      subnet:
+        name: {{ .Values.subnetName }}
       {{- end }}
       {{- if .Values.externalNetworkID }}
       externalNetworkId: {{ .Values.externalNetworkID | quote }}
@@ -42,6 +47,14 @@ spec:
         enabled: true
         instance:
           flavor: {{ .Values.bastion.flavor | quote }}
+          {{- if not .Values.nodeCIDR }}
+          networks:
+          - filter:
+              name: {{ .Values.networkName }}
+            subnets:
+            - filter:
+                name: {{ .Values.subnetName }} 
+          {{- end }}
           {{- if .Values.bastion.bootFromVolume }}
           image: ""
           rootVolume:

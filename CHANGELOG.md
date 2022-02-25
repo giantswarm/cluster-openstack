@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Create separate `OpenStackMachineTemplate` for control plane machines.
 - Improve documentation for values in `values.yaml`.
-- Add `useRootVolume` option on bastion, control plane, and worker machine definitions to explicitly use non-ephemeral volumes.
+- Add `bootFromVolume` option on bastion, control plane, and worker machine definitions to explicitly use non-ephemeral volumes.
 
 ## [0.5.0] - 2022-02-23
 

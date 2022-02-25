@@ -13,7 +13,7 @@ spec:
         nodeRegistration:
           kubeletExtraArgs:
             cloud-provider: external
-            node-labels: giantswarm.io/node-pool={{ .name }}
+            node-labels: "giantswarm.io/node-pool={{ .name }}"
           name: '{{ `{{ local_hostname }}` }}'
       files:
         {{- include "sshFiles" . | nindent 8 }}

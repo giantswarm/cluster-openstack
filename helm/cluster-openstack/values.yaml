@@ -1,43 +1,35 @@
+baseDomain: ""  # Customer base domain, generally of the form "<customer codename>.gigantic.io".
+cloudConfig: ""  # Name of existing cloud-config secret in management cluster namespace.
+cloudName: ""  # Name of cloud in cloud-config secret "cloud.yaml" value.
 clusterDescription: ""  # Cluster description used in metadata.
-organization: ""  # Organization in which to create the cluster.
-cloudConfig: cloud-config  # Name of cloud-config secret in destination namespace.
-cloudName: openstack  # Name of cloud in cloud-config secret "cloud.yaml" value.
-baseDomain: "example.com"
-managementCluster: ""
-
-kubernetesVersion: 1.20.9
-releaseVersion: 20.0.0-alpha1
+clusterName: ""  # Name of cluster. Used as base name for all cluster resources in the management cluster.
+dnsNameservers: []  # IPs of DNS nameservers to be used by the cluster machines (optional, will use OS defaults if not specified).
+kubernetesVersion: ""  # Version of Kubernetes. If machine images are specified, this will only be used for metadata.
+managementCluster: ""  # Name of cluster which owns this workload cluster.
+organization: ""  # Organization which owns the cluster.
 
 nodeCIDR: ""  # The OpenStack Subnet to be created.
-externalNetworkID: ""  # UUID of external network (optional).
+externalNetworkID: ""  # UUID of external network (optional unless there are multiple external networks).
 networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
 subnetName: ""  # Existing subnet name. Ignored when nodeCIDR is set.
 
 oidc:
-  enabled: false
+  enabled: false  # If true, flags will be configured on the control plane for OIDC-based SSO authentication.
 
 bastion:
-  flavor: n1.tiny
-  image: ""  # Ignored if rootVolume.sourceUUID is set (optional).
-  rootVolume:
-    diskSize: 10
-    sourceUUID: ""  # UUID of the bastion image (optional).
-
-rootVolume:
-  enabled: false
-  sourceUUID: ""  # UUID of root volume source image (optional).
-
-nodeClasses:
-- name: default  # Name of class.
-  machineFlavor: n1.small  # Flavor of machine.
-  diskSize: 50  # Root volume disk size in GB.
+  diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
+  flavor: ""  # Project-dependent flavor of bastion machine.
+  image: ""  # Image name or root volume source UUID if bootFromVolume is true.
+  bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
 
 controlPlane:
-  class: default  # Name of node class to be used by control plane nodes.
-  replicas: 1  # Number of replicas in control plane. Should be an odd number.
-  availabilityZones: []
+  availabilityZones: []  # Unique availability zones for control plane nodes. If specified, should have one item or one for each replica (optional).
+  diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
+  flavor: ""  # Project-dependent flavor of control plane machines.
+  image: ""  # Image name or root volume source UUID if bootFromVolume is true.
+  replicas: 0  # Number of replicas in control plane. Should be an odd number.
+  bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
 
-nodePools:
-- name: default  # Name of node pool.
-  class: default  # Name of node class to be used by node pool nodes.
-  replicas: 3  # Number of replicas in node pool.
+nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
+
+nodePools: []  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above.

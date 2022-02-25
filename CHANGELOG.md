@@ -13,16 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve documentation for values in `values.yaml`.
 - Add `bootFromVolume` option on bastion, control plane, and worker machine definitions to explicitly use non-ephemeral volumes.
 
-## [0.5.0] - 2022-02-23
-
-### Added
-
-- Add API server `certSANs` property to generate a certificate for the API FQDN.
-- Convert nodeCIDR to switch to use existing network+subnet.
- 
 ### Changed
 
-- Restrict provider to `openstack`.
 - Set machine deployment `failureDomain` directly instead of using label and kyverno policy workaround (new in CAPI v1.1).
 - Fix quoting of values that could be accidentally interpreted as numbers.
 - Use `.Chart.Version` instead of `.Chart.AppVersion` to get correct `app.kubernetes.io/version` label on resources.
@@ -33,6 +25,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Remove extraneous `release.giantswarm.io/version` label and `releaseVersion` value.
 - Remove default node pools and node classes in `values.yaml` to ensure they are defined appropriately by the helm release creator.
+
+## [0.5.0] - 2022-02-23
+
+### Added
+
+- Add API server `certSANs` property to generate a certificate for the API FQDN.
+- Convert nodeCIDR to switch to use existing network+subnet.
+ 
+### Changed
+
+- Restrict provider to `openstack`.
 
 ## [0.4.0] - 2022-02-08
 

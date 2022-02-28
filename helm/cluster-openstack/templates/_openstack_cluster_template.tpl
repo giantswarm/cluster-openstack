@@ -13,11 +13,11 @@ spec:
       tags:
       - giant_swarm_cluster_{{ .Values.managementCluster }}_{{ include "resource.default.name" $ }}
       {{- end }}
-      cloudName: {{ .Values.cloudName }}
+      cloudName: {{ .Values.cloudName | quote }}
       {{- if .Values.controlPlane.availabilityZones }}
       controlPlaneAvailabilityZones:
       {{- range .Values.controlPlane.availabilityZones }}
-      - {{ . }}
+      - {{ . | quote }}
       {{- end }}
       {{- end }}
       identityRef:
@@ -26,7 +26,7 @@ spec:
       managedAPIServerLoadBalancer: true
       managedSecurityGroups: true
       {{- if .Values.nodeCIDR }}
-      nodeCidr: {{ .Values.nodeCIDR }}
+      nodeCidr: {{ .Values.nodeCIDR | quote }}
       {{- else }}
       network:
         name: {{ .Values.networkName }}
@@ -34,20 +34,19 @@ spec:
         name: {{ .Values.subnetName }}
       {{- end }}
       {{- if .Values.externalNetworkID }}
-      externalNetworkId: {{ .Values.externalNetworkID }}
+      externalNetworkId: {{ .Values.externalNetworkID | quote }}
       {{- end }}
       allowAllInClusterTraffic: true
       {{- if .Values.dnsNameservers }}
       dnsNameservers:
       {{- range .Values.dnsNameservers }}
-      - {{ . }}
+      - {{ . | quote }}
       {{- end }}
       {{- end }}
       bastion:
         enabled: true
         instance:
-          flavor: {{ .Values.bastion.flavor }}
-          image: {{ .Values.bastion.image }}
+          flavor: {{ .Values.bastion.flavor | quote }}
           {{- if not .Values.nodeCIDR }}
           networks:
           - filter:
@@ -56,10 +55,13 @@ spec:
             - filter:
                 name: {{ .Values.subnetName }} 
           {{- end }}
-          {{- if .Values.bastion.rootVolume.sourceUUID }}
+          {{- if .Values.bastion.bootFromVolume }}
+          image: ""
           rootVolume:
             sourceType: image
-            diskSize: {{ .Values.bastion.rootVolume.diskSize }}
-            sourceUUID: {{ .Values.bastion.rootVolume.sourceUUID }}
+            diskSize: {{ .Values.bastion.diskSize }}
+            sourceUUID: {{ .Values.bastion.image | quote }}
+          {{- else }}
+          image: {{ .Values.bastion.image | quote }}
           {{- end }}
 {{- end -}}

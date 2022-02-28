@@ -20,12 +20,11 @@ Common labels
 {{- define "labels.common" -}}
 app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . }}
-giantswarm.io/cluster: {{ include "resource.default.name" . }}
-giantswarm.io/organization: {{ .Values.organization }}
+app.kubernetes.io/version: {{ .Chart.Version | quote }}
+cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
+giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
+giantswarm.io/organization: {{ .Values.organization | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
-release.giantswarm.io/version: {{ .Values.releaseVersion }}
 {{- end -}}
 
 {{/*
@@ -35,7 +34,7 @@ Given that Kubernetes allows 63 characters for resource names, the stem is trunc
 room for such suffix.
 */}}
 {{- define "resource.default.name" -}}
-{{- .Release.Name | replace "." "-" | trunc 47 | trimSuffix "-" -}}
+{{ .Values.clusterName }}
 {{- end -}}
 
 {{- define "sshFiles" -}}

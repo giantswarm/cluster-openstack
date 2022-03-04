@@ -17,12 +17,14 @@ spec:
             extraArgs:
               cloud-provider: external
               {{- if .Values.oidc.issuerUrl }}
-              oidc-issuer-url: {{ .Values.issuerUrl }}
-              oidc-client-id: {{ .Values.clientId }}
-              oidc-username-claim: {{ .Values.usernameClaim }}
-              oidc-groups-claim: {{ .Values.groupsClaim }}
-              {{- if .Values.oidc.caFile }}
-              oidc-ca-file: {{ .Values.caFile }}
+              {{- with .Values.oidc }}
+              oidc-issuer-url: {{ .issuerUrl }}
+              oidc-client-id: {{ .clientId }}
+              oidc-username-claim: {{ .usernameClaim }}
+              oidc-groups-claim: {{ .groupsClaim }}
+              {{- if .caFile }}
+              oidc-ca-file: {{ .caFile }}
+              {{- end }}
               {{- end }}
               {{- end }}
           controllerManager:

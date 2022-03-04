@@ -16,11 +16,16 @@ spec:
               - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
             extraArgs:
               cloud-provider: external
-              {{- if .Values.oidc.enabled }}
-              oidc-issuer-url: https://dex.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}
-              oidc-client-id: dex-k8s-authenticator
-              oidc-username-claim: email
-              oidc-groups-claim: groups
+              {{- if .Values.oidc.issuerUrl }}
+              {{- with .Values.oidc }}
+              oidc-issuer-url: {{ .issuerUrl }}
+              oidc-client-id: {{ .clientId }}
+              oidc-username-claim: {{ .usernameClaim }}
+              oidc-groups-claim: {{ .groupsClaim }}
+              {{- if .caFile }}
+              oidc-ca-file: {{ .caFile }}
+              {{- end }}
+              {{- end }}
               {{- end }}
           controllerManager:
             extraArgs:

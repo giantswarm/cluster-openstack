@@ -14,7 +14,11 @@ networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
 subnetName: ""  # Existing subnet name. Ignored when nodeCIDR is set.
 
 oidc:
-  enabled: false  # If true, flags will be configured on the control plane for OIDC-based SSO authentication.
+  issuerUrl: ""
+  caFile: ""
+  clientId: ""
+  usernameClaim: ""
+  groupsClaim: ""
 
 bastion:
   diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.

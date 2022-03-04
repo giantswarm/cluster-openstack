@@ -7,11 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add OIDC flags in the configuration values for `KubeadmControlPlaneTemplate`.
+
 ## [0.6.0] - 2022-02-28
 
 ### Added
 
-- Add OIDC flags in the configuration values for `KubeadmControlPlaneTemplate`.
 - Create separate `OpenStackMachineTemplate` for control plane machines.
 - Improve documentation for values in `values.yaml`.
 - Add `bootFromVolume` option on bastion, control plane, and worker machine definitions to explicitly use non-ephemeral volumes.

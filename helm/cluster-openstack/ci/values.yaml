@@ -1,30 +1,46 @@
-clusterDescription: Test cluster.
-organization: giantswarm-2
+baseDomain: test.gigantic.io
 cloudConfig: cloud-config
 cloudName: openstack
-nodeCIDR: 10.6.0.0/24
+clusterDescription: description
+clusterName: testwc
 dnsNameservers:
-- 8.8.8.8
 - 1.1.1.1
-
+- 8.8.8.8
+externalNetworkID: external-network-id
 kubernetesVersion: 1.20.9
-releaseVersion: 20.0.0-alpha1
+managementCluster: testmc
+nodeCIDR: 10.6.0.0/24
+organization: testorg
 
-externalNetworkID: 1700ba33-e871-4893-8a05-b5b564154eed
-
-rootVolume:
+oidc:
   enabled: true
-  sourceUUID: 90b7124a-c526-4477-b6b3-73996a3c85be
+
+bastion:
+  diskSize: 10
+  flavor: bastion-flavor
+  image: bastion-image
+  bootFromVolume: true
 
 controlPlane:
-  replicas: 1
+  availabilityZones:
+  - az1
+  - az2
+  - az3
+  diskSize: 20
+  flavor: control-plane-flavor
+  image: control-plane-image
+  replicas: 3
+  bootFromVolume: true
 
 nodeClasses:
-- name: default
-  machineFlavor: n1.small
-  diskSize: 50
+- diskSize: 30
+  image: worker-image
+  flavor: worker-flavor
+  name: worker
+  bootFromVolume: true
 
 nodePools:
-- name: default
-  class: default
-  replicas: 3
+- class: worker
+  failureDomain: az1
+  name: worker
+  replicas: 5

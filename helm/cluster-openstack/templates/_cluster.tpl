@@ -24,9 +24,9 @@ spec:
       - class: {{ .class }}
         name: {{ .name }}
         replicas: {{ .replicas }}
+        failureDomain: {{ .failureDomain | quote }}
         metadata:
           labels:
-            machine-deployment.giantswarm.io/failure-domain: "{{ .failureDomain }}"
             {{- include "labels.common" $ | nindent 12 }}
       {{- end }}
 {{- end -}}

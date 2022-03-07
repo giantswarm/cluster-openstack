@@ -16,7 +16,7 @@ spec:
       ref:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
         kind: OpenStackMachineTemplate
-        name: {{ include "resource.default.name" . }}-{{ .Values.controlPlane.class }}
+        name: {{ include "resource.default.name" . }}-control-plane
   workers:
     machineDeployments:
     {{- range .Values.nodeClasses }}

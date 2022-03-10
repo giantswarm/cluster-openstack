@@ -12,3 +12,4 @@ items:
 - {{- include "openstack-machine-template" $innerScope | indent 2 }}
 {{- end }}
 - {{- include "cluster" . | indent 2 }}
+- {{- include "machine-health-check" . | indent 2 }}

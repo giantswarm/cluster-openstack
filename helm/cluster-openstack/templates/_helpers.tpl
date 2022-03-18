@@ -72,3 +72,38 @@ room for such suffix.
 {{- define "kubeProxyPreKubeadmCommands" -}}
 - bash /run/kubeadm/gs-kube-proxy-patch.sh
 {{- end -}}
+
+{{/*
+OpenStackMachineTemplate is immutable. We need to create new versions during upgrades.
+Here we are generating a hash suffix to trigger upgrade when only it is necessary by
+using only the parameters used in _openstack_machine_template.tpl.
+*/}}
+{{- define "osmtRevision" -}}
+{{- $inputs := (dict
+  "cloudName" .Values.cloudName
+  "cloudConfig" .Values.cloudConfig
+  "nodeCIDR" .Values.nodeCIDR
+  "networkName" .Values.networkName
+  "subnetName" .Values.subnetName
+  "bootFromVolume" .bootFromVolume
+  "diskSize" .diskSize
+  "flavor" .flavor
+  "image" .image
+  "name" .name ) }}
+{{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
+{{- end -}}
+
+{{- define "osmtRevisionByClass" -}}
+{{- $outerScope := . }}
+{{- range .Values.nodeClasses }}
+{{- if eq .name $outerScope.class }}
+{{- include "osmtRevision" . }}
+{{- end }}
+{{- end }}
+{{- end -}}
+
+
+{{- define "osmtRevisionOfControlPlane" -}}
+{{- $outerScope := . }}
+{{- include "osmtRevision" (set (merge $outerScope .Values.controlPlane) "name" "control-plane") }}
+{{- end -}}

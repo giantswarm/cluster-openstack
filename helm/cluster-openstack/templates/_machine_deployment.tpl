@@ -26,6 +26,6 @@ spec:
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
         kind: OpenStackMachineTemplate
-        name: {{ include "resource.default.name" $ }}-{{ .class }}
-      version: v1.20.9
+        name: {{ include "resource.default.name" $ }}-{{ .class }}-{{ include "osmtRevisionByClass" $ }}
+      version: {{ .Values.kubernetesVersion }}
 {{- end -}}

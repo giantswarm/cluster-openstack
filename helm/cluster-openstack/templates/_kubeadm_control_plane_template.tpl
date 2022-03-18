@@ -52,7 +52,7 @@ spec:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
       kind: OpenStackMachineTemplate
-      name: {{ include "resource.default.name" . }}-control-plane
+      name: {{ include "resource.default.name" . }}-control-plane-{{ include "osmtRevisionOfControlPlane" $ }}
   version: {{ .Values.kubernetesVersion }}
   replicas: {{ .Values.controlPlane.replicas }}
 {{- end -}}

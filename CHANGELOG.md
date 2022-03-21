@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Remove `ClusterClass` and refactor templates in an backward incompatible way.
+- ⚠️ **Breaking:** Remove `ClusterClass` and refactor templates in an backward incompatible way.
 
 ## [0.7.0] - 2022-03-04
 

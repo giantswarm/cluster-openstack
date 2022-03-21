@@ -7,11 +7,11 @@ items:
 - {{- include "openstack-machine-template" (set (merge .Values.controlPlane $outerScope) "name" "control-plane") | indent 2 }}
 {{- range .Values.nodeClasses }}
 {{- $innerScope := merge . $outerScope }}
-- {{- include "kubeadm-config-template" $innerScope | indent 2 }}
 - {{- include "openstack-machine-template" $innerScope | indent 2 }}
 {{- end }}
 {{- range .Values.nodePools }}
 {{- $innerScope := merge . $outerScope }}
+- {{- include "kubeadm-config-template" $innerScope | indent 2 }}
 - {{- include "machine-deployment" $innerScope | indent 2 }}
 {{- end }}
 - {{- include "cluster" . | indent 2 }}

@@ -20,7 +20,7 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: {{ include "resource.default.name" $ }}-{{ .class }}
+          name: {{ include "resource.default.name" $ }}-{{ .name }}
       clusterName: {{ include "resource.default.name" $ }}
       failureDomain: {{ .failureDomain | quote }}
       infrastructureRef:

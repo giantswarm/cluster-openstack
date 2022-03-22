@@ -9,8 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bind controller-manager to 0.0.0.0 to expose metrics endpoint.
-- Bind scheduler to 0.0.0.0 to expose metrics endpoint.
+- Add /metrics endpoint to `--authorization-always-allow-paths` for
+  `kube-controller-manager`.
+- Add /metrics endpoint to `--authorization-always-allow-paths` for
+  `kube-scheduler`.
+- Bind `kube-controller-manager` to 0.0.0.0 to expose /metrics endpoint.
+- Bind `kube-scheduler` to 0.0.0.0 to expose /metrics endpoint.
+
+## [0.8.0] - 2022-03-22
+
+### Changed
+
+- Move from `giantswarm-catalog` to `cluster-catalog`.
+- Add `MachineHealthCheck` for all nodes.
+- Switch chart ownership to Team Rocket.
+
+### Removed
+
+- ⚠️ **Breaking:** Remove `ClusterClass` and refactor templates in an backward incompatible way.
 
 ## [0.7.0] - 2022-03-04
 
@@ -109,7 +125,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial implementation.
 
 
-[Unreleased]: https://github.com/giantswarm/cluster-openstack/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-openstack/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.4.0...v0.5.0

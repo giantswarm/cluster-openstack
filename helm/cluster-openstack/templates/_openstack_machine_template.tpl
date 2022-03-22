@@ -2,9 +2,13 @@
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: OpenStackMachineTemplate
 metadata:
+  # we should not delete existing templates during upgrades
+  # since capi needs old templates to be able to rollout machines.
+  finalizers:
+  - cluster-api-cleaner-openstack.finalizers.giantswarm.io
   labels:
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}
+  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "osmtRevision" $ }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:

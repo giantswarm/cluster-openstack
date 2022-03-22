@@ -10,23 +10,12 @@ metadata:
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
-  topology:
-    class: {{ include "resource.default.name" $ }}
-    version: {{ .Values.kubernetesVersion }}
-    controlPlane:
-      replicas: {{ .Values.controlPlane.replicas }}
-      metadata:
-        labels:
-          {{- include "labels.common" $ | nindent 10 }}
-    workers:
-      machineDeployments:
-      {{- range .Values.nodePools }}
-      - class: {{ .class }}
-        name: {{ .name }}
-        replicas: {{ .replicas }}
-        failureDomain: {{ .failureDomain | quote }}
-        metadata:
-          labels:
-            {{- include "labels.common" $ | nindent 12 }}
-      {{- end }}
+  controlPlaneRef:
+    apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+    kind: KubeadmControlPlane
+    name: {{ include "resource.default.name" $ }}
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+    kind: OpenStackCluster
+    name: {{ include "resource.default.name" $ }}
 {{- end -}}

@@ -27,10 +27,12 @@ spec:
           {{- end }}
       controllerManager:
         extraArgs:
+          authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
           bind-address: "0.0.0.0"
           cloud-provider: external
       scheduler:
         extraArgs:
+          authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
           bind-address: "0.0.0.0"
     initConfiguration:
       nodeRegistration:

@@ -12,7 +12,7 @@
                     "type": "boolean"
                 },
                 "diskSize": {
-                    "minimum": 1,
+                    "minimum": 0,
                     "type": "integer"
                 },
                 "flavor": {
@@ -43,7 +43,7 @@
             "type": "object",
             "properties": {
                 "availabilityZones": {
-                    "minItems": 1,
+                    "minItems": 0,
                     "type": "array"
                 },
                 "bootFromVolume": {
@@ -60,7 +60,7 @@
                     "type": "string"
                 },
                 "replicas": {
-                    "minimum": 1,
+                    "minimum": 0,
                     "maximum": 7,
                     "type": "integer"
                 }
@@ -98,7 +98,7 @@
                         "type": "boolean"
                     },
                     "diskSize": {
-                        "minimum": 1,
+                        "minimum": 0,
                         "type": "integer"
                     },
                     "flavor": {
@@ -113,7 +113,6 @@
                     "image"
                 ]
             },
-            "minItems": 1,
             "type": "array"
         },
         "nodePools": {
@@ -126,7 +125,7 @@
                         "type": "string"
                     },
                     "replicas": {
-                        "minimum": 1,
+                        "minimum": 0,
                         "type": "integer"
                     }
                 },
@@ -136,7 +135,6 @@
                     "replicas"
                 ]
             },
-            "minItems": 1,
             "type": "array"
         },
         "oidc": {

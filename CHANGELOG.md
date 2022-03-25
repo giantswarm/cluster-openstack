@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add /metrics endpoint to `--authorization-always-allow-paths` for
+  `kube-controller-manager`.
+- Add /metrics endpoint to `--authorization-always-allow-paths` for
+  `kube-scheduler`.
+- Bind `kube-controller-manager` to 0.0.0.0 to expose /metrics endpoint.
+- Bind `kube-scheduler` to 0.0.0.0 to expose /metrics endpoint.
+
 ### Removed
 
 - Remove redundant `list.yaml` after removing `ClusterClass`.
@@ -56,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add API server `certSANs` property to generate a certificate for the API FQDN.
 - Convert nodeCIDR to switch to use existing network+subnet.
- 
+
 ### Changed
 
 - Restrict provider to `openstack`.

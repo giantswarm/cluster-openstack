@@ -76,7 +76,7 @@ room for such suffix.
 {{/*
 OpenStackMachineTemplate is immutable. We need to create new versions during upgrades.
 Here we are generating a hash suffix to trigger upgrade when only it is necessary by
-using only the parameters used in _openstack_machine_template.tpl.
+using only the parameters used in openstack_machine_template.yaml.
 */}}
 {{- define "osmtRevision" -}}
 {{- $inputs := (dict

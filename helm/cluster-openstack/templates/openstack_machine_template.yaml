@@ -1,4 +1,5 @@
-{{- define "openstack-machine-template" }}
+{{- range (append .Values.nodeClasses ((merge (dict "name" "control-plane") .Values.controlPlane))) }}
+---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: OpenStackMachineTemplate
 metadata:
@@ -8,7 +9,7 @@ metadata:
   - cluster-api-cleaner-openstack.finalizers.giantswarm.io
   labels:
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "osmtRevision" $ }}
+  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "osmtRevision" (merge . $) }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
@@ -18,13 +19,13 @@ spec:
       identityRef:
         name: {{ $.Values.cloudConfig }}
         kind: Secret
-      {{- if not .Values.nodeCIDR }}
+      {{- if not $.Values.nodeCIDR }}
       networks:
       - filter:
-          name: {{ .Values.networkName }}
+          name: {{ $.Values.networkName }}
         subnets:
         - filter:
-            name: {{ .Values.subnetName }} 
+            name: {{ $.Values.subnetName }}
       {{- end }}
       {{- if .bootFromVolume }}
       image: ""
@@ -35,4 +36,4 @@ spec:
       {{- else }}
       image: {{ .image | quote }}
       {{- end }}
-{{- end -}}
+{{- end }}

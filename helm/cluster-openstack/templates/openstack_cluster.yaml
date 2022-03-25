@@ -1,4 +1,3 @@
-{{- define "openstack-cluster-template" }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: OpenStackCluster
 metadata:
@@ -62,4 +61,3 @@ spec:
       {{- else }}
       image: {{ .Values.bastion.image | quote }}
       {{- end }}
-{{- end -}}

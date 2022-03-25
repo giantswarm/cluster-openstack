@@ -1,4 +1,3 @@
-{{- define "cluster" }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
@@ -18,4 +17,3 @@ spec:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
     kind: OpenStackCluster
     name: {{ include "resource.default.name" $ }}
-{{- end -}}

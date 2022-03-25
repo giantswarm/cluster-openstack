@@ -1,4 +1,3 @@
-{{- define "machine-health-check" }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineHealthCheck
 metadata:
@@ -20,4 +19,3 @@ spec:
   - type: Ready
     status: "False"
     timeout: 10m0s
-{{- end -}}

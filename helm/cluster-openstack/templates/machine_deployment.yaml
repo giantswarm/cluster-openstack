@@ -1,4 +1,5 @@
-{{- define "machine-deployment" }}
+{{- range .Values.nodePools }}
+---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
@@ -26,6 +27,6 @@ spec:
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
         kind: OpenStackMachineTemplate
-        name: {{ include "resource.default.name" $ }}-{{ .class }}-{{ include "osmtRevisionByClass" $ }}
+        name: {{ include "resource.default.name" $ }}-{{ .class }}-{{ include "osmtRevisionByClass" (merge . $) }}
       version: {{ .Values.kubernetesVersion }}
-{{- end -}}
+{{- end }}

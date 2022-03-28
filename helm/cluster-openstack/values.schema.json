@@ -182,11 +182,9 @@
         "controlPlane",
         "kubernetesVersion",
         "managementCluster",
-        "networkName",
         "nodeCIDR",
         "nodeClasses",
         "nodePools",
-        "organization",
-        "subnetName"   
+        "organization"
     ]
 }

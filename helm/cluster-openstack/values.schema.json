@@ -1,0 +1,190 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "baseDomain": {
+            "type": "string"
+        },
+        "bastion": {
+            "type": "object",
+            "properties": {
+                "bootFromVolume": {
+                    "type": "boolean"
+                },
+                "diskSize": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "flavor": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "flavor",
+                "image"
+            ]
+        },
+        "cloudConfig": {
+            "type": "string"
+        },
+        "cloudName": {
+            "type": "string"
+        },
+        "clusterDescription": {
+            "type": "string"
+        },
+        "clusterName": {
+            "type": "string"
+        },
+        "controlPlane": {
+            "type": "object",
+            "properties": {
+                "availabilityZones": {
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "bootFromVolume": {
+                    "type": "boolean"
+                },
+                "diskSize": {
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "flavor": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "replicas": {
+                    "minimum": 1,
+                    "maximum": 7,
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "flavor",
+                "image"
+            ]
+        },
+        "dnsNameservers": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "externalNetworkID": {
+            "type": "string"
+        },
+        "kubernetesVersion": {
+            "type": "string"
+        },
+        "managementCluster": {
+            "type": "string"
+        },
+        "networkName": {
+            "type": "string"
+        },
+        "nodeCIDR": {
+            "type": "string"
+        },
+        "nodeClasses": {
+            "items": {
+                "properties": {
+                    "bootFromVolume": {
+                        "type": "boolean"
+                    },
+                    "diskSize": {
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "flavor": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "flavor",
+                    "image"
+                ]
+            },
+            "minItems": 1,
+            "type": "array"
+        },
+        "nodePools": {
+            "items": {
+                "properties": {
+                    "class": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "replicas": {
+                        "minimum": 1,
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "class",
+                    "name",
+                    "replicas"
+                ]
+            },
+            "minItems": 1,
+            "type": "array"
+        },
+        "oidc": {
+            "type": "object",
+            "properties": {
+                "caFile": {
+                    "type": "string"
+                },
+                "clientId": {
+                    "type": "string"
+                },
+                "groupsClaim": {
+                    "type": "string"
+                },
+                "issuerUrl": {
+                    "type": "string"
+                },
+                "usernameClaim": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "clientId",
+                "groupsClaim",
+                "issuerUrl",
+                "usernameClaim"
+            ]
+        },
+        "organization": {
+            "type": "string"
+        },
+        "subnetName": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "baseDomain",
+        "bastion",
+        "cloudConfig",
+        "cloudName",
+        "clusterDescription",
+        "clusterName",
+        "controlPlane",
+        "kubernetesVersion",
+        "managementCluster",
+        "nodeCIDR",
+        "nodeClasses",
+        "nodePools",
+        "organization"
+    ]
+}

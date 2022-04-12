@@ -29,6 +29,10 @@ spec:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
           bind-address: "0.0.0.0"
           cloud-provider: external
+      etcd:
+        local:
+          extraArgs:
+            listen-metrics-urls: "0.0.0.0:2381"
       scheduler:
         extraArgs:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"

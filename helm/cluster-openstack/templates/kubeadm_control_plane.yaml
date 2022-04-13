@@ -32,7 +32,7 @@ spec:
       etcd:
         local:
           extraArgs:
-            listen-metrics-urls: "0.0.0.0:2381"
+            listen-metrics-urls: "http://0.0.0.0:2381"
       scheduler:
         extraArgs:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"

@@ -57,7 +57,7 @@ spec:
     useExperimentalRetryJoin: true
     files:
       {{- include "sshFiles" . | nindent 6 }}
-      {{- include "kubeProxyFiles" . | nindenl 6 }}
+      {{- include "kubeProxyFiles" . | nindent 6 }}
       - path: /etc/kubernetes/encryption/config.yaml
         permissions: "0600"
         contentFrom:

@@ -13,6 +13,7 @@ spec:
           - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
         extraArgs:
           cloud-provider: external
+          encryption-provider-config: /etc/kubernetes/encryption/config.yaml
           {{- if .Values.oidc.issuerUrl }}
           {{- with .Values.oidc }}
           oidc-issuer-url: {{ .issuerUrl }}
@@ -24,6 +25,12 @@ spec:
           {{- end }}
           {{- end }}
           {{- end }}
+        extraVolumes:
+          - name: encryption
+            hostPath: /etc/kubernetes/encryption
+            mountPath: /etc/kubernetes/encryption
+            readOnly: false
+            pathType: DirectoryOrCreate
       controllerManager:
         extraArgs:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
@@ -49,14 +56,20 @@ spec:
         name: '{{ `{{ local_hostname }}` }}'
     useExperimentalRetryJoin: true
     files:
-      {{- include "sshFiles" . | nindent 10 }}
-      {{- include "kubeProxyFiles" . | nindent 10 }}
+      {{- include "sshFiles" . | nindent 6 }}
+      {{- include "kubeProxyFiles" . | nindent 6 }}
+      - path: /etc/kubernetes/encryption/config.yaml
+        permissions: "0600"
+        contentFrom:
+          secret:
+            name: {{ include "resource.default.name" $ }}-encryption-provider-config
+            key: encryption
     preKubeadmCommands:
-      {{- include "kubeProxyPreKubeadmCommands" . | nindent 10 }}
+      {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
     postKubeadmCommands:
-      {{- include "sshPostKubeadmCommands" . | nindent 10 }}
+      {{- include "sshPostKubeadmCommands" . | nindent 6 }}
     users:
-      {{- include "sshUsers" . | nindent 10 }}
+      {{- include "sshUsers" . | nindent 6 }}
   machineTemplate:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Adapt control-plane configuration by comparing other providers and vintage clusters.
+
+
 ## [0.13.0] - 2022-06-14
 
 ### Changed

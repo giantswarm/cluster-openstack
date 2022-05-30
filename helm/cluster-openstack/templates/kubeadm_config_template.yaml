@@ -13,7 +13,7 @@ spec:
       joinConfiguration:
         nodeRegistration:
           kubeletExtraArgs:
-            cloud-provider: external
+            {{- include "kubeletExtraArgs" . | nindent  12}}
             node-labels: "giantswarm.io/node-pool={{ .name }}"
           name: '{{ `{{ local_hostname }}` }}'
       files:

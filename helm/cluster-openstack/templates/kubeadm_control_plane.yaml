@@ -64,7 +64,7 @@ spec:
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
-          cloud-provider: external
+          {{- include "kubeletExtraArgs" . | nindent  10}}
         name: '{{ `{{ local_hostname }}` }}'
     useExperimentalRetryJoin: true
     files:

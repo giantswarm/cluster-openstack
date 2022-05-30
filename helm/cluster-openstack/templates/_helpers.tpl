@@ -63,6 +63,10 @@ room for such suffix.
   sudo: ALL=(ALL) NOPASSWD:ALL
 {{- end -}}
 
+{{- define "kubeletExtraArgs" -}}
+{{- .Files.Get "files/kubelet-args" -}}
+{{- end -}}
+
 {{- define "kubeProxyFiles" }}
 - path: /run/kubeadm/gs-kube-proxy-config.yaml
   permissions: "0600"

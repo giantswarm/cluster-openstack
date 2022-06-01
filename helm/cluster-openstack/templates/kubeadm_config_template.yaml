@@ -3,9 +3,11 @@
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
+  finalizers:
+  - cluster-api-cleaner-openstack.finalizers.giantswarm.io
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-{{ .name }}
+  name: {{ include "resource.default.name" . }}-{{ .name }}-{{- include "kubeAdmConfigTemplateRevision" $ }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:

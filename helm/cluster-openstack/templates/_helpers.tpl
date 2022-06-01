@@ -83,6 +83,21 @@ room for such suffix.
 {{- end -}}
 
 {{/*
+Updates in KubeadmConfigTemplate will not trigger any rollout for worker nodes.
+It is necessary to create a new template with a new name to trigger an upgrade.
+See https://github.com/kubernetes-sigs/cluster-api/issues/4910
+See https://github.com/kubernetes-sigs/cluster-api/pull/5027/files
+*/}}
+{{- define "kubeAdmConfigTemplateRevision" -}}
+{{- $inputs := (dict
+  "kubeletExtraArgs" (include "kubeletExtraArgs" .) 
+  "sshFiles" (include "sshFiles" .) 
+  "sshPostKubeadmCommands" (include "sshPostKubeadmCommands" .) 
+  "sshUsers" (include "sshUsers" .) ) }}
+{{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
+{{- end -}}
+
+{{/*
 OpenStackMachineTemplate is immutable. We need to create new versions during upgrades.
 Here we are generating a hash suffix to trigger upgrade when only it is necessary by
 using only the parameters used in openstack_machine_template.yaml.

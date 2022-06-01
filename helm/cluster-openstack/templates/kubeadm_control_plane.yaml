@@ -13,9 +13,9 @@ spec:
           - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
         extraArgs:
           cloud-provider: external
-          enable-admission-plugins: "NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,PersistentVolumeClaimResize,DefaultStorageClass,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook"
+          enable-admission-plugins: {{ .Values.apiServer.enableAdmissionPlugins }}
           encryption-provider-config: /etc/kubernetes/encryption/config.yaml
-          feature-gates: "TTLAfterFinished=true"
+          feature-gates: {{ .Values.apiServer.featureGates }}
           insecure-port: "0"
           kubelet-preferred-address-types: "InternalIP"
           logtostderr: "true"
@@ -45,7 +45,7 @@ spec:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
           bind-address: "0.0.0.0"
           cloud-provider: external
-          feature-gates: "ExpandPersistentVolumes=true,TTLAfterFinished=true"
+          feature-gates: {{ .Values.controllerManager.featureGates }}
           logtostderr: "true"
           profiling: "false"
       etcd:

@@ -30,7 +30,6 @@ spec:
       {{- if .bootFromVolume }}
       rootVolume:
         diskSize: {{ .diskSize }}
-      {{- else }}
-      image: {{ .image | quote }}
       {{- end }}
+      image: {{ .image | quote }}
 {{- end }}

@@ -56,6 +56,5 @@ spec:
       {{- if .Values.bastion.bootFromVolume }}
       rootVolume:
         diskSize: {{ .Values.bastion.diskSize }}
-      {{- else }}
-      image: {{ .Values.bastion.image | quote }}
       {{- end }}
+      image: {{ .Values.bastion.image | quote }}

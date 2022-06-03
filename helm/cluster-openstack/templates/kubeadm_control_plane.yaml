@@ -9,6 +9,8 @@ spec:
   kubeadmConfigSpec:
     format: ignition
     clusterConfiguration:
+      featureGates:
+        KubeadmBootstrapFormatIgnition: true
       apiServer:
         certSANs:
           - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"

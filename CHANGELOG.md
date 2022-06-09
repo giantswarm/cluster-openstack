@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Support for CAPO `v0.6.x` added (supports now CAPO api version `v1beta5`)
+
 ## [0.11.0] - 2022-05-23
 
 - ⚠️ **Breaking:** Configure encryption at REST. This requires `{{ include "resource.default.name" $ }}-encryption-provider-config` secret with `encyrption` key to be present in the cluster (can be provisioned with [encryption-provider-operator](https://github.com/giantswarm/encryption-provider-operator)).
@@ -145,7 +147,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial implementation.
-
 
 [Unreleased]: https://github.com/giantswarm/cluster-openstack/compare/v0.11.0...HEAD
 [0.11.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.10.1...v0.11.0

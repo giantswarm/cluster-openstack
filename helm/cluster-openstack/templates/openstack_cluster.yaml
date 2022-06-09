@@ -1,4 +1,4 @@
-apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha5
 kind: OpenStackCluster
 metadata:
   labels:
@@ -20,7 +20,8 @@ spec:
   identityRef:
     name: {{ .Values.cloudConfig }}
     kind: Secret
-  managedAPIServerLoadBalancer: true
+  apiServerLoadBalancer:
+    enabled: true
   managedSecurityGroups: true
   {{- if .Values.nodeCIDR }}
   nodeCidr: {{ .Values.nodeCIDR | quote }}
@@ -53,11 +54,7 @@ spec:
             name: {{ .Values.subnetName }} 
       {{- end }}
       {{- if .Values.bastion.bootFromVolume }}
-      image: ""
       rootVolume:
-        sourceType: image
         diskSize: {{ .Values.bastion.diskSize }}
-        sourceUUID: {{ .Values.bastion.image | quote }}
-      {{- else }}
-      image: {{ .Values.bastion.image | quote }}
       {{- end }}
+      image: {{ .Values.bastion.image | quote }}

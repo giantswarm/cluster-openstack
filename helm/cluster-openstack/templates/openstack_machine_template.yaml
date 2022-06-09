@@ -1,6 +1,6 @@
 {{- range (append .Values.nodeClasses ((merge (dict "name" "control-plane") .Values.controlPlane))) }}
 ---
-apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha5
 kind: OpenStackMachineTemplate
 metadata:
   # we should not delete existing templates during upgrades
@@ -28,12 +28,8 @@ spec:
             name: {{ $.Values.subnetName }}
       {{- end }}
       {{- if .bootFromVolume }}
-      image: ""
       rootVolume:
-        sourceType: image
         diskSize: {{ .diskSize }}
-        sourceUUID: {{ .image | quote }}
-      {{- else }}
-      image: {{ .image | quote }}
       {{- end }}
+      image: {{ .image | quote }}
 {{- end }}

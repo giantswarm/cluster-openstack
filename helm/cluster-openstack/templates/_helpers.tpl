@@ -7,7 +7,7 @@ Expand the name of the chart.
 {{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "openStackMachineTemplateApiVersion" - }}
+{{- define "openStackMachineTemplateApiVersion" -}}
 infrastructure.cluster.x-k8s.io/v1alpha5
 {{- end -}}
 

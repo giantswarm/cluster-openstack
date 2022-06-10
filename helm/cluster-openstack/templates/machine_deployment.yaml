@@ -25,7 +25,7 @@ spec:
       clusterName: {{ include "resource.default.name" $ }}
       failureDomain: {{ .failureDomain | quote }}
       infrastructureRef:
-        apiVersion: {{ include "openStackMachineTemplateApiVersion" . }}
+        apiVersion: {{ include "infrastructureApiVersion" . }}
         kind: OpenStackMachineTemplate
         name: {{ include "resource.default.name" $ }}-{{ .class }}-{{ include "osmtRevisionByClass" (merge . $) }}
       version: {{ .Values.kubernetesVersion }}

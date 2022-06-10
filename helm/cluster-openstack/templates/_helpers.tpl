@@ -7,7 +7,7 @@ Expand the name of the chart.
 {{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "openStackMachineTemplateApiVersion" -}}
+{{- define "infrastructureApiVersion" -}}
 infrastructure.cluster.x-k8s.io/v1alpha5
 {{- end -}}
 
@@ -90,7 +90,7 @@ using only the parameters used in openstack_machine_template.yaml.
   "nodeCIDR" .Values.nodeCIDR
   "networkName" .Values.networkName
   "subnetName" .Values.subnetName
-  "openStackMachineTemplateApiVersion" ( include "openStackMachineTemplateApiVersion" . )
+  "infrastructureApiVersion" ( include "infrastructureApiVersion" . )
   "bootFromVolume" .bootFromVolume
   "diskSize" .diskSize
   "flavor" .flavor

@@ -1,6 +1,6 @@
 {{- range (append .Values.nodeClasses ((merge (dict "name" "control-plane") .Values.controlPlane))) }}
 ---
-apiVersion: {{ include "openStackMachineTemplateApiVersion" . }}
+apiVersion: {{ include "infrastructureApiVersion" . }}
 kind: OpenStackMachineTemplate
 metadata:
   # we should not delete existing templates during upgrades

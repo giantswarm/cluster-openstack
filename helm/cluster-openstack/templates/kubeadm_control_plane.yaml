@@ -72,7 +72,7 @@ spec:
       {{- include "sshUsers" . | nindent 6 }}
   machineTemplate:
     infrastructureRef:
-      apiVersion: {{ include "openStackMachineTemplateApiVersion" . }}
+      apiVersion: {{ include "infrastructureApiVersion" . }}
       kind: OpenStackMachineTemplate
       name: {{ include "resource.default.name" . }}-control-plane-{{ include "osmtRevisionOfControlPlane" $ }}
   version: {{ .Values.kubernetesVersion }}

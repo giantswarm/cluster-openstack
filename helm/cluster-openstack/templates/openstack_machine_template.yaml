@@ -1,7 +1,6 @@
 {{- range (append .Values.nodeClasses ((merge (dict "name" "control-plane") .Values.controlPlane))) }}
 ---
-# If apiversion changes please also change in name field below
-apiVersion: infrastructure.cluster.x-k8s.io/v1alpha5
+apiVersion: {{ include "openStackMachineTemplateApiVersion" . }}
 kind: OpenStackMachineTemplate
 metadata:
   # we should not delete existing templates during upgrades
@@ -10,9 +9,7 @@ metadata:
   - cluster-api-cleaner-openstack.finalizers.giantswarm.io
   labels:
     {{- include "labels.common" $ | nindent 4 }}
-  # api version upgrades need to change the name below to create a new resource  
-  # since OpenStackMachineTemplate are immutable
-  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "osmtRevision" (merge . $) }}-v1alpha5
+  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "osmtRevision" (merge . $) }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:

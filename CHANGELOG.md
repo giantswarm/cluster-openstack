@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.12.1] - 2022-06-10
 
+### Fixed
+
+- Fix api version upgrade issue.
+
 ## [0.12.0] - 2022-06-09
 
 - Support for CAPO `v0.6.x` added (supports now CAPO api version `v1beta5`)

@@ -90,7 +90,7 @@ using only the parameters used in openstack_machine_template.yaml.
   "nodeCIDR" .Values.nodeCIDR
   "networkName" .Values.networkName
   "subnetName" .Values.subnetName
-  "OpenStackMachineTemplateApiVersion" ( include "openStackMachineTemplateApiVersion" . )
+  "openStackMachineTemplateApiVersion" ( include "openStackMachineTemplateApiVersion" . )
   "bootFromVolume" .bootFromVolume
   "diskSize" .diskSize
   "flavor" .flavor

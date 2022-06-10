@@ -90,7 +90,8 @@ using only the parameters used in openstack_machine_template.yaml.
   "diskSize" .diskSize
   "flavor" .flavor
   "image" .image
-  "name" .name ) }}
+  "name" .name
+  "apiVersion" "v1alpha5" ) }}
 {{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 

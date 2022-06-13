@@ -20,6 +20,9 @@ oidc:
   usernameClaim: ""
   groupsClaim: ""
 
+ignition:
+  enable: true
+
 bastion:
   diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
   flavor: ""  # Project-dependent flavor of bastion machine.

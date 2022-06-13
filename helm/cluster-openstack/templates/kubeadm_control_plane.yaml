@@ -7,10 +7,10 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   kubeadmConfigSpec:
+    {{- if .Values.ignition.enable }}
     format: ignition
+    {{- end }}
     clusterConfiguration:
-      featureGates:
-        KubeadmBootstrapFormatIgnition: true
       apiServer:
         certSANs:
           - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
@@ -51,12 +51,12 @@ spec:
       nodeRegistration:
         kubeletExtraArgs:
           cloud-provider: external
-        name: '{{ `{{ local_hostname }}` }}'
+        name: __REPLACE_NODE_NAME__
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
           cloud-provider: external
-        name: '{{ `{{ local_hostname }}` }}'
+        name: __REPLACE_NODE_NAME__
     files:
       {{- include "sshFiles" . | nindent 6 }}
       {{- include "kubeProxyFiles" . | nindent 6 }}
@@ -67,6 +67,7 @@ spec:
             name: {{ include "resource.default.name" $ }}-encryption-provider-config
             key: encryption
     preKubeadmCommands:
+      - bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
     postKubeadmCommands:
       {{- include "sshPostKubeadmCommands" . | nindent 6 }}

@@ -10,18 +10,19 @@ metadata:
 spec:
   template:
     spec:
-      clusterConfiguration:
-        featureGates:
-          KubeadmBootstrapFormatIgnition: true
+      {{- if .Values.ignition.enable }}
       format: ignition
+      {{- end }}
       joinConfiguration:
         nodeRegistration:
           kubeletExtraArgs:
             cloud-provider: external
             node-labels: "giantswarm.io/node-pool={{ .name }}"
-          name: '{{ `{{ local_hostname }}` }}'
+          name: __REPLACE_NODE_NAME__
       files:
         {{- include "sshFiles" . | nindent 8 }}
+      preKubeadmCommands:
+        - bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
       postKubeadmCommands:
         {{- include "sshPostKubeadmCommands" . | nindent 8 }}
       users:

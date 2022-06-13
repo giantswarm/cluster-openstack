@@ -9,6 +9,19 @@ spec:
   kubeadmConfigSpec:
     {{- if .Values.ignition.enable }}
     format: ignition
+    ignition:
+      containerLinuxConfig:
+        additionalConfig: |
+          systemd:
+            units:
+            - name: kubeadm.service
+              enabled: true
+              dropins:
+              - name: 10-flatcar.conf
+                contents: |
+                  [Unit]
+                  Requires=containerd.service
+                  After=containerd.service
     {{- end }}
     clusterConfiguration:
       apiServer:

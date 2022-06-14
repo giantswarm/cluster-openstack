@@ -42,7 +42,7 @@ spec:
   {{- end }}
   {{- end }}
   bastion:
-    enabled: true
+    enabled: false
     instance:
       flavor: {{ .Values.bastion.flavor | quote }}
       {{- if not .Values.nodeCIDR }}

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2022-06-14
+
+### Changed
+
+- Disable bastion to fix unblock upgrades from old versions.
+
+## [0.12.1] - 2022-06-10
+
+### Fixed
+
+- Fix api version upgrade issue.
+
+## [0.12.0] - 2022-06-09
+
+- Support for CAPO `v0.6.x` added (supports now CAPO api version `v1beta5`)
+
 ## [0.11.0] - 2022-05-23
 
 - ⚠️ **Breaking:** Configure encryption at REST. This requires `{{ include "resource.default.name" $ }}-encryption-provider-config` secret with `encyrption` key to be present in the cluster (can be provisioned with [encryption-provider-operator](https://github.com/giantswarm/encryption-provider-operator)).
@@ -146,8 +162,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial implementation.
 
-
-[Unreleased]: https://github.com/giantswarm/cluster-openstack/compare/v0.11.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-openstack/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.12.1...v0.13.0
+[0.12.1]: https://github.com/giantswarm/cluster-openstack/compare/v0.12.0...v0.12.1
+[0.12.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.10.1...v0.11.0
 [0.10.1]: https://github.com/giantswarm/cluster-openstack/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.9.0...v0.10.0

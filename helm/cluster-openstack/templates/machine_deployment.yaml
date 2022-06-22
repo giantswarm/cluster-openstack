@@ -9,6 +9,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
+  revisionHistoryLimit: 0
   replicas: {{ .replicas }}
   selector:
     matchLabels: null

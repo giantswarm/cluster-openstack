@@ -9,6 +9,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
+  revisionHistoryLimit: 0
   replicas: {{ .replicas }}
   selector:
     matchLabels: null
@@ -21,7 +22,7 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: {{ include "resource.default.name" $ }}-{{ .name }}
+          name: {{ include "resource.default.name" $ }}-{{ .name }}-{{- include "kubeAdmConfigTemplateRevision" $ }}
       clusterName: {{ include "resource.default.name" $ }}
       failureDomain: {{ .failureDomain | quote }}
       infrastructureRef:

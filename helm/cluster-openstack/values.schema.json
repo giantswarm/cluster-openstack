@@ -2,6 +2,21 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "apiServer": {
+            "type": "object",
+            "properties": {
+                "enableAdmissionPlugins": {
+                    "type": "string"
+                },
+                "featureGates": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "enableAdmissionPlugins",
+                "featureGates"
+            ]
+        },
         "baseDomain": {
             "type": "string"
         },
@@ -38,6 +53,17 @@
         },
         "clusterName": {
             "type": "string"
+        },
+        "controllerManager": {
+            "type": "object",
+            "properties": {
+                "featureGates": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "featureGates"
+            ]
         },
         "controlPlane": {
             "type": "object",
@@ -173,12 +199,14 @@
         }
     },
     "required": [
+        "apiServer",
         "baseDomain",
         "bastion",
         "cloudConfig",
         "cloudName",
         "clusterDescription",
         "clusterName",
+        "controllerManager",
         "controlPlane",
         "kubernetesVersion",
         "managementCluster",

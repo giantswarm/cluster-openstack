@@ -63,6 +63,10 @@ room for such suffix.
   sudo: ALL=(ALL) NOPASSWD:ALL
 {{- end -}}
 
+{{- define "kubeletExtraArgs" -}}
+{{- .Files.Get "files/kubelet-args" -}}
+{{- end -}}
+
 {{- define "kubeProxyFiles" }}
 - path: /run/kubeadm/gs-kube-proxy-config.yaml
   permissions: "0600"
@@ -76,6 +80,21 @@ room for such suffix.
 
 {{- define "kubeProxyPreKubeadmCommands" -}}
 - bash /run/kubeadm/gs-kube-proxy-patch.sh
+{{- end -}}
+
+{{/*
+Updates in KubeadmConfigTemplate will not trigger any rollout for worker nodes.
+It is necessary to create a new template with a new name to trigger an upgrade.
+See https://github.com/kubernetes-sigs/cluster-api/issues/4910
+See https://github.com/kubernetes-sigs/cluster-api/pull/5027/files
+*/}}
+{{- define "kubeAdmConfigTemplateRevision" -}}
+{{- $inputs := (dict
+  "kubeletExtraArgs" (include "kubeletExtraArgs" .) 
+  "sshFiles" (include "sshFiles" .) 
+  "sshPostKubeadmCommands" (include "sshPostKubeadmCommands" .) 
+  "sshUsers" (include "sshUsers" .) ) }}
+{{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 
 {{/*

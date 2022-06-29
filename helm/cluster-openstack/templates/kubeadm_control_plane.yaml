@@ -26,6 +26,8 @@ spec:
     clusterConfiguration:
       apiServer:
         certSANs:
+          - 127.0.0.1
+          - localhost
           - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
         extraArgs:
           cloud-provider: external

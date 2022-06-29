@@ -35,7 +35,7 @@ spec:
       files:
         {{- include "sshFiles" . | nindent 8 }}
       preKubeadmCommands:
-        - bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
+        {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 8 }}
       postKubeadmCommands:
         {{- include "sshPostKubeadmCommands" . | nindent 8 }}
       users:

@@ -78,6 +78,16 @@ room for such suffix.
 - bash /etc/gs-kube-proxy-patch.sh
 {{- end -}}
 
+# In Flatcar kubeadm configuration is in different directory because /run
+# can't be provisioned with ignition.
+{{- define "nodeNameReplacePreKubeadmCommands" -}}
+{{- if .Values.ignition.enable }}
+- bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
+{{- else }}
+- bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /run/kubeadm/kubeadm.yaml"
+{{- end }}
+{{- end -}}
+
 {{/*
 OpenStackMachineTemplate is immutable. We need to create new versions during upgrades.
 Here we are generating a hash suffix to trigger upgrade when only it is necessary by

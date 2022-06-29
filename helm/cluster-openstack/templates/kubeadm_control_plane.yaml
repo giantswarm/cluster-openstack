@@ -82,13 +82,7 @@ spec:
             name: {{ include "resource.default.name" $ }}-encryption-provider-config
             key: encryption
     preKubeadmCommands:
-      # In Flatcar kubeadm configuration is in different directory because /run
-      # can't be provisioned with ignition.
-      {{- if .Values.ignition.enable }}
-      - bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
-      {{- else }}
-      - bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /run/kubeadm/kubeadm.yaml"
-      {{- end }}
+      {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 6 }}
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
     postKubeadmCommands:
       {{- include "sshPostKubeadmCommands" . | nindent 6 }}

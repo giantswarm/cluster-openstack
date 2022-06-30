@@ -31,7 +31,7 @@ spec:
           kubeletExtraArgs:
             cloud-provider: external
             node-labels: "giantswarm.io/node-pool={{ .name }}"
-          name: __REPLACE_NODE_NAME__
+          name: {{ include "nodeName" . }}
       files:
         {{- include "sshFiles" . | nindent 8 }}
       preKubeadmCommands:

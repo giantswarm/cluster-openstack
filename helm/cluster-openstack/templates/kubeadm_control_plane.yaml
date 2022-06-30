@@ -66,12 +66,12 @@ spec:
       nodeRegistration:
         kubeletExtraArgs:
           cloud-provider: external
-        name: __REPLACE_NODE_NAME__
+        name: {{ include "nodeName" . }}
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
           cloud-provider: external
-        name: __REPLACE_NODE_NAME__
+        name: {{ include "nodeName" . }}
     files:
       {{- include "sshFiles" . | nindent 6 }}
       {{- include "kubeProxyFiles" . | nindent 6 }}

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add cert SANs for 127.0.0.1 and localhost to api-server.
+
 ### Changed
 
 - Adapt control-plane configuration by comparing other providers and vintage clusters.

@@ -5,7 +5,7 @@ kind: KubeadmConfigTemplate
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-{{ .name }}
+  name: {{ include "resource.default.name" . }}-{{ .name }}-{{- include "kubeAdmConfigTemplateRevision" $ }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
@@ -29,7 +29,7 @@ spec:
       joinConfiguration:
         nodeRegistration:
           kubeletExtraArgs:
-            cloud-provider: external
+            {{- include "kubeletExtraArgs" . | nindent  12}}
             node-labels: "giantswarm.io/node-pool={{ .name }}"
           name: {{ include "nodeName" . }}
       files:

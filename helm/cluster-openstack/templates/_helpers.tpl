@@ -22,14 +22,21 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "labels.common" -}}
+{{- include "labels.commonWithoutVersion" . }}
+app.kubernetes.io/version: {{ .Chart.Version | quote }}
+helm.sh/chart: {{ include "chart" . | quote }}
+{{- end -}}
+
+{{/*
+Common labels without version
+*/}}
+{{- define "labels.commonWithoutVersion" -}}
 app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-app.kubernetes.io/version: {{ .Chart.Version | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
 giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
 giantswarm.io/organization: {{ .Values.organization | quote }}
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
-helm.sh/chart: {{ include "chart" . | quote }}
 {{- end -}}
 
 {{/*
@@ -63,6 +70,10 @@ room for such suffix.
   sudo: ALL=(ALL) NOPASSWD:ALL
 {{- end -}}
 
+{{- define "kubeletExtraArgs" -}}
+{{- .Files.Get "files/kubelet-args" -}}
+{{- end -}}
+
 {{- define "kubeProxyFiles" }}
 - path: /etc/gs-kube-proxy-config.yaml
   permissions: "0600"
@@ -92,6 +103,21 @@ __REPLACE_NODE_NAME__
 {{- if .Values.ignition.enable }}
 - bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
 {{- end }}
+{{- end -}}
+
+{{/*
+Updates in KubeadmConfigTemplate will not trigger any rollout for worker nodes.
+It is necessary to create a new template with a new name to trigger an upgrade.
+See https://github.com/kubernetes-sigs/cluster-api/issues/4910
+See https://github.com/kubernetes-sigs/cluster-api/pull/5027/files
+*/}}
+{{- define "kubeAdmConfigTemplateRevision" -}}
+{{- $inputs := (dict
+  "kubeletExtraArgs" (include "kubeletExtraArgs" .) 
+  "sshFiles" (include "sshFiles" .) 
+  "sshPostKubeadmCommands" (include "sshPostKubeadmCommands" .) 
+  "sshUsers" (include "sshUsers" .) ) }}
+{{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 
 {{/*

@@ -84,7 +84,7 @@ spec:
         kubeletExtraArgs:
           {{- include "kubeletExtraArgs" . | nindent  10}}
         name: {{ include "nodeName" . }}
-    {{- if .Values.ignition.enable }}
+    {{- if not .Values.ignition.enable }}
     useExperimentalRetryJoin: true
     {{- end }}
     files:

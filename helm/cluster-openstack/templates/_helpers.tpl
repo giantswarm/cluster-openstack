@@ -75,18 +75,34 @@ room for such suffix.
 {{- end -}}
 
 {{- define "kubeProxyFiles" }}
-- path: /run/kubeadm/gs-kube-proxy-config.yaml
+- path: /etc/gs-kube-proxy-config.yaml
   permissions: "0600"
   content: |
-    {{- .Files.Get "files/run/kubeadm/gs-kube-proxy-config.yaml" | nindent 4 }}
-- path: /run/kubeadm/gs-kube-proxy-patch.sh
+    {{- .Files.Get "files/etc/gs-kube-proxy-config.yaml" | nindent 4 }}
+- path: /etc/gs-kube-proxy-patch.sh
   permissions: "0700"
   content: |
-    {{- .Files.Get "files/run/kubeadm/gs-kube-proxy-patch.sh" | nindent 4 }}
+    {{- .Files.Get "files/etc/gs-kube-proxy-patch.sh" | nindent 4 }}
 {{- end -}}
 
 {{- define "kubeProxyPreKubeadmCommands" -}}
-- bash /run/kubeadm/gs-kube-proxy-patch.sh
+- bash /etc/gs-kube-proxy-patch.sh
+{{- end -}}
+
+{{- define "nodeName" -}}
+{{- if .Values.ignition.enable -}}
+__REPLACE_NODE_NAME__
+{{- else -}}
+'{{ `{{ local_hostname }}` }}'
+{{- end -}}
+{{- end -}}
+
+# In Flatcar kubeadm configuration is in different directory because /run
+# can't be provisioned with ignition.
+{{- define "nodeNameReplacePreKubeadmCommands" -}}
+{{- if .Values.ignition.enable }}
+- bash -c "sed -i 's/__REPLACE_NODE_NAME__/$(hostname -s)/g' /etc/kubeadm.yml"
+{{- end }}
 {{- end -}}
 
 {{/*

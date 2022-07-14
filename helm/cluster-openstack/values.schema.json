@@ -191,6 +191,17 @@
                 "usernameClaim"
             ]
         },
+        "ignition": {
+            "type": "object",
+            "properties": {
+                "enable": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "enable"
+            ]
+        },
         "organization": {
             "type": "string"
         },

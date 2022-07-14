@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add cert SANs for 127.0.0.1 and localhost to api-server.
+- Add ignition support.
+- Add cert SANs for 127.0.0.1 and localhost to api-server to support Giant
+  Swarm App Platform bootstrap mode.
 
 ### Changed
 

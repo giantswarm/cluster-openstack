@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add ignition support.
 - Add cert SANs for 127.0.0.1 and localhost to api-server to support Giant
   Swarm App Platform bootstrap mode.
+- Allow setting etcd image repository and tag.
+- Set the default etcd version to 3.5.4 (kubeadm default is 3.5.0 which is not
+  recommended in production).
+- Set the default etcd image to retagged Giant Swarm one.
 
 ### Changed
 

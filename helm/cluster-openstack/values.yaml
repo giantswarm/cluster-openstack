@@ -41,6 +41,9 @@ controlPlane:
   image: ""  # Image name or root volume source UUID if bootFromVolume is true.
   replicas: 0  # Number of replicas in control plane. Should be an odd number.
   bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
+  etcd:
+    imageRepository: "docker.io/giantswarm-k8s"
+    imageTag: 3.4.5-0
 
 nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
 

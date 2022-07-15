@@ -9,3 +9,4 @@ annotations:
 restrictions:
   compatibleProviders:
     - openstack
+icon: https://s.giantswarm.io/app-icons/openstack/1/light.svg

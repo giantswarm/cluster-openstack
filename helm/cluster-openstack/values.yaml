@@ -43,7 +43,7 @@ controlPlane:
   bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
   etcd:
     imageRepository: "docker.io/giantswarm-k8s"
-    imageTag: 3.4.5-0
+    imageTag: 3.5.4-0
 
 nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
 

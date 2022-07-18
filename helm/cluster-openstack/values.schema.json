@@ -79,6 +79,17 @@
                     "minimum": 1,
                     "type": "integer"
                 },
+                "etcd": {
+                    "type": "object",
+                    "properties": {
+                        "imageRepository": {
+                            "type": "string"
+                        },
+                        "imageTag": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "flavor": {
                     "type": "string"
                 },

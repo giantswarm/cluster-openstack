@@ -70,6 +70,8 @@ spec:
         local:
           extraArgs:
             listen-metrics-urls: "http://0.0.0.0:2381"
+          imageRepository: {{ .Values.controlPlane.etcd.imageRepository }}
+          imageTag: {{ .Values.controlPlane.etcd.imageTag }}
       scheduler:
         extraArgs:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"

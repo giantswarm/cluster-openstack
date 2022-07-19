@@ -34,7 +34,6 @@ spec:
           enable-admission-plugins: {{ .Values.apiServer.enableAdmissionPlugins }}
           encryption-provider-config: /etc/kubernetes/encryption/config.yaml
           feature-gates: {{ .Values.apiServer.featureGates }}
-          insecure-port: "0"
           kubelet-preferred-address-types: "InternalIP"
           logtostderr: "true"
           {{- if .Values.oidc.issuerUrl }}

@@ -10,34 +10,12 @@ metadata:
 spec:
   template:
     spec:
-      {{- if .Values.ignition.enable }}
-      format: ignition
-      ignition:
-        containerLinuxConfig:
-          additionalConfig: |
-            systemd:
-              units:
-              - name: kubeadm.service
-                enabled: true
-                dropins:
-                - name: 10-flatcar.conf
-                  contents: |
-                    [Unit]
-                    Requires=containerd.service
-                    After=containerd.service
-      {{- end }}
       joinConfiguration:
         nodeRegistration:
           kubeletExtraArgs:
             {{- include "kubeletExtraArgs" . | nindent  12}}
-            node-labels: "giantswarm.io/node-pool={{ .name }}"
+            node-labels: "eschercloud.ai/node-pool={{ .name }}"
           name: {{ include "nodeName" . }}
-      files:
-        {{- include "sshFiles" . | nindent 8 }}
       preKubeadmCommands:
         {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 8 }}
-      postKubeadmCommands:
-        {{- include "sshPostKubeadmCommands" . | nindent 8 }}
-      users:
-        {{- include "sshUsers" . | nindent 8 }}
 {{- end }}

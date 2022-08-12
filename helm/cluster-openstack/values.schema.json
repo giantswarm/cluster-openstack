@@ -20,28 +20,6 @@
         "baseDomain": {
             "type": "string"
         },
-        "bastion": {
-            "type": "object",
-            "properties": {
-                "bootFromVolume": {
-                    "type": "boolean"
-                },
-                "diskSize": {
-                    "minimum": 1,
-                    "type": "integer"
-                },
-                "flavor": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "flavor",
-                "image"
-            ]
-        },
         "cloudConfig": {
             "type": "string"
         },
@@ -223,7 +201,6 @@
     "required": [
         "apiServer",
         "baseDomain",
-        "bastion",
         "cloudConfig",
         "cloudName",
         "clusterDescription",

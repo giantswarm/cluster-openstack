@@ -6,10 +6,6 @@ metadata:
   name: {{ include "resource.default.name" $ }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  {{- if .Values.managementCluster }}
-  tags:
-  - giant_swarm_cluster_{{ .Values.managementCluster }}_{{ include "resource.default.name" $ }}
-  {{- end }}
   cloudName: {{ .Values.cloudName | quote }}
   {{- if .Values.controlPlane.availabilityZones }}
   controlPlaneAvailabilityZones:
@@ -41,20 +37,3 @@ spec:
   - {{ . | quote }}
   {{- end }}
   {{- end }}
-  bastion:
-    enabled: false
-    instance:
-      flavor: {{ .Values.bastion.flavor | quote }}
-      {{- if not .Values.nodeCIDR }}
-      networks:
-      - filter:
-          name: {{ .Values.networkName }}
-        subnets:
-        - filter:
-            name: {{ .Values.subnetName }} 
-      {{- end }}
-      {{- if .Values.bastion.bootFromVolume }}
-      rootVolume:
-        diskSize: {{ .Values.bastion.diskSize }}
-      {{- end }}
-      image: {{ .Values.bastion.image | quote }}

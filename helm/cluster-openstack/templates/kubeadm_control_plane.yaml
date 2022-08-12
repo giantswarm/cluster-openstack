@@ -25,14 +25,9 @@ spec:
     {{- end }}
     clusterConfiguration:
       apiServer:
-        certSANs:
-          - 127.0.0.1
-          - localhost
-          - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
         extraArgs:
           cloud-provider: external
           enable-admission-plugins: {{ .Values.apiServer.enableAdmissionPlugins }}
-          encryption-provider-config: /etc/kubernetes/encryption/config.yaml
           feature-gates: {{ .Values.apiServer.featureGates }}
           kubelet-preferred-address-types: "InternalIP"
           logtostderr: "true"
@@ -48,15 +43,8 @@ spec:
           {{- end }}
           {{- end }}
           profiling: "false"
-          requestheader-allowed-names: "aggregator,api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }},worker.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
           runtime-config: "api/all=true"
           tls-cipher-suites: "TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384"
-        extraVolumes:
-          - name: encryption
-            hostPath: /etc/kubernetes/encryption
-            mountPath: /etc/kubernetes/encryption
-            readOnly: false
-            pathType: DirectoryOrCreate
       controllerManager:
         extraArgs:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
@@ -69,8 +57,6 @@ spec:
         local:
           extraArgs:
             listen-metrics-urls: "http://0.0.0.0:2381"
-          imageRepository: {{ .Values.controlPlane.etcd.imageRepository }}
-          imageTag: {{ .Values.controlPlane.etcd.imageTag }}
       scheduler:
         extraArgs:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
@@ -89,21 +75,10 @@ spec:
     useExperimentalRetryJoin: true
     {{- end }}
     files:
-      {{- include "sshFiles" . | nindent 6 }}
       {{- include "kubeProxyFiles" . | nindent 6 }}
-      - path: /etc/kubernetes/encryption/config.yaml
-        permissions: "0600"
-        contentFrom:
-          secret:
-            name: {{ include "resource.default.name" $ }}-encryption-provider-config
-            key: encryption
     preKubeadmCommands:
       {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 6 }}
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
-    postKubeadmCommands:
-      {{- include "sshPostKubeadmCommands" . | nindent 6 }}
-    users:
-      {{- include "sshUsers" . | nindent 6 }}
   machineTemplate:
     infrastructureRef:
       apiVersion: {{ include "infrastructureApiVersion" . }}

@@ -34,9 +34,8 @@ Common labels without version
 app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
-giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
-giantswarm.io/organization: {{ .Values.organization | quote }}
-application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
+eschercloud.io/cluster: {{ include "resource.default.name" . | quote }}
+eschercloud.io/organization: {{ .Values.organization | quote }}
 {{- end -}}
 
 {{/*
@@ -47,27 +46,6 @@ room for such suffix.
 */}}
 {{- define "resource.default.name" -}}
 {{ .Values.clusterName }}
-{{- end -}}
-
-{{- define "sshFiles" -}}
-- path: /etc/ssh/trusted-user-ca-keys.pem
-  permissions: "0600"
-  # Taken from https://vault.operations.giantswarm.io/v1/ssh/public_key
-  content: |
-    {{- .Files.Get "files/etc/ssh/trusted-user-ca-keys.pem" | nindent 4 }}
-- path: /etc/ssh/sshd_config
-  permissions: "0600"
-  content: |
-    {{- .Files.Get "files/etc/ssh/sshd_config" | nindent 4 }}
-{{- end -}}
-
-{{- define "sshPostKubeadmCommands" -}}
-- systemctl restart sshd
-{{- end -}}
-
-{{- define "sshUsers" -}}
-- name: giantswarm
-  sudo: ALL=(ALL) NOPASSWD:ALL
 {{- end -}}
 
 {{- define "kubeletExtraArgs" -}}
@@ -112,11 +90,7 @@ See https://github.com/kubernetes-sigs/cluster-api/issues/4910
 See https://github.com/kubernetes-sigs/cluster-api/pull/5027/files
 */}}
 {{- define "kubeAdmConfigTemplateRevision" -}}
-{{- $inputs := (dict
-  "kubeletExtraArgs" (include "kubeletExtraArgs" .) 
-  "sshFiles" (include "sshFiles" .) 
-  "sshPostKubeadmCommands" (include "sshPostKubeadmCommands" .) 
-  "sshUsers" (include "sshUsers" .) ) }}
+{{- $inputs := (dict "kubeletExtraArgs" (include "kubeletExtraArgs" .)) }}
 {{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 

@@ -28,12 +28,6 @@ oidc:
 ignition:
   enable: false
 
-bastion:
-  diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
-  flavor: ""  # Project-dependent flavor of bastion machine.
-  image: ""  # Image name or root volume source UUID if bootFromVolume is true.
-  bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
-
 controlPlane:
   availabilityZones: []  # Unique availability zones for control plane nodes. If specified, should have one item or one for each replica (optional).
   diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
@@ -41,9 +35,6 @@ controlPlane:
   image: ""  # Image name or root volume source UUID if bootFromVolume is true.
   replicas: 0  # Number of replicas in control plane. Should be an odd number.
   bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
-  etcd:
-    imageRepository: "giantswarm"
-    imageTag: 3.5.4-0-k8s
 
 nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
 

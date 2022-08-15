@@ -193,6 +193,9 @@
                 },
                 "usernameClaim": {
                     "type": "string"
+                },
+                "usernamePrefix": {
+                    "type": "string"
                 }
             },
             "required": [

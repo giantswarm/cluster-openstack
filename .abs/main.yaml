@@ -1,4 +1,0 @@
-replace-chart-version-with-git: true
-generate-metadata: true
-chart-dir: ./helm/cluster-openstack
-destination: ./build

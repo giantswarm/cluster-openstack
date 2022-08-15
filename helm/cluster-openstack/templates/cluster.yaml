@@ -5,6 +5,9 @@ metadata:
     cluster.eschercloud.ai/description: "{{ .Values.clusterDescription }}"
   labels:
     {{- include "labels.common" $ | nindent 4 }}
+    {{- range $k, $v := .Values.clusterLabels }}
+    {{ $k }}: {{ $v }}
+    {{- end }}
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:

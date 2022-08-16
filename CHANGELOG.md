@@ -7,15 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow setting `--oidc-username-prefix` in api-server flags.
+
 ## [0.14.1] - 2022-07-19
 
 ### Changed
 
 - Remove deprecated `--insecure-port` from api-server flags.
-
-### Added
-
-- Allow setting `--oidc-username-prefix` in api-server flags.
 
 ## [0.14.0] - 2022-07-19
 

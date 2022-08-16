@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Add quotes for `--oidc-username-prefix` flag.
+- Set `requestheader-allowed-names` as `front-proxy-client` to solve authentication issues in `metrics-server`.
 
 ## [0.15.0] - 2022-08-16
 

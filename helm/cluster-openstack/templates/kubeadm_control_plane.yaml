@@ -43,7 +43,7 @@ spec:
           oidc-username-claim: {{ .usernameClaim }}
           oidc-groups-claim: {{ .groupsClaim }}
           {{- if .usernamePrefix }}
-          oidc-username-prefix: {{ .usernamePrefix }}
+          oidc-username-prefix: {{ .usernamePrefix | quote }}
           {{- end }}
           {{- if .caFile }}
           oidc-ca-file: {{ .caFile }}

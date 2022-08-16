@@ -42,6 +42,9 @@ spec:
           oidc-client-id: {{ .clientId }}
           oidc-username-claim: {{ .usernameClaim }}
           oidc-groups-claim: {{ .groupsClaim }}
+          {{- if .usernamePrefix }}
+          oidc-username-prefix: {{ .usernamePrefix }}
+          {{- end }}
           {{- if .caFile }}
           oidc-ca-file: {{ .caFile }}
           {{- end }}

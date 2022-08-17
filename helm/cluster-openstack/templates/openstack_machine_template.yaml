@@ -28,4 +28,7 @@ spec:
         diskSize: {{ .diskSize }}
       {{- end }}
       image: {{ .image | quote }}
+      {{- if .sshKeyName }}
+      sshKeyName: {{ .sshKeyName }}
+      {{- end }}
 {{- end }}

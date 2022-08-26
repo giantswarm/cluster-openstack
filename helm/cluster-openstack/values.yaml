@@ -49,3 +49,8 @@ controlPlane:
 nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
 
 nodePools: []  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above.
+
+# cluster-shared configuration
+includeClusterResourceSet: "true"  # must be a string
+# let's use the kubectl image defaults
+kubectlImage: {}

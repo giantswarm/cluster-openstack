@@ -5,6 +5,8 @@
 
 ##@ App
 
+APPLICATION=cluster-openstack
+
 .PHONY: lint-chart
 lint-chart: IMAGE := giantswarm/helm-chart-testing:v3.0.0-rc.1
 lint-chart: ## Runs ct against the default chart.

@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Allow core-component configuration via `kubeadm --patches`
+- import the `cluster-shared` chart to apply additional resources in a Workload Cluster via `ClusterResourceSets`
+- renamed `labels.commonWithoutVersion` to `labels.selector` (to align with other providers)
 
 ## [0.15.2] - 2022-08-17
 

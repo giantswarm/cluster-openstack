@@ -7,6 +7,12 @@ metadata:
     {{- include "labels.common" $ | nindent 4 }}
   name: {{ include "resource.default.name" $ }}-{{ .name }}
   namespace: {{ $.Release.Namespace }}
+  {{- if .annotations }} 
+  annotations:
+    {{- range $k, $v := .annotations }}
+    {{ $k }}: {{ $v }}
+    {{- end }}
+  {{- end }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
   revisionHistoryLimit: 0

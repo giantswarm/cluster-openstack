@@ -235,7 +235,6 @@
         "controlPlane",
         "kubernetesVersion",
         "managementCluster",
-        "nodeCIDR",
         "nodeClasses",
         "nodePools",
         "organization"

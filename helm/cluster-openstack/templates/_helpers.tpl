@@ -111,12 +111,42 @@ It is necessary to create a new template with a new name to trigger an upgrade.
 See https://github.com/kubernetes-sigs/cluster-api/issues/4910
 See https://github.com/kubernetes-sigs/cluster-api/pull/5027/files
 */}}
+{{- define "kubeAdmConfigTemplateSpec" -}}
+{{- if .Values.ignition.enable -}}
+format: ignition
+ignition:
+  containerLinuxConfig:
+    additionalConfig: |
+      systemd:
+        units:
+        - name: kubeadm.service
+          enabled: true
+          dropins:
+          - name: 10-flatcar.conf
+            contents: |
+              [Unit]
+              Requires=containerd.service
+              After=containerd.service
+{{- end -}}
+joinConfiguration:
+  nodeRegistration:
+    kubeletExtraArgs:
+      {{- include "kubeletExtraArgs" . | nindent  6 -}}
+      node-labels: "giantswarm.io/node-pool={{ .pool.name }}"
+    name: {{ include "nodeName" . }}
+files:
+  {{- include "sshFiles" . | nindent 2 }}
+preKubeadmCommands:
+  {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 2 }}
+postKubeadmCommands:
+  {{- include "sshPostKubeadmCommands" . | nindent 2 }}
+users:
+  {{- include "sshUsers" . | nindent 2 }}
+{{- end -}}
+
 {{- define "kubeAdmConfigTemplateRevision" -}}
 {{- $inputs := (dict
-  "kubeletExtraArgs" (include "kubeletExtraArgs" .) 
-  "sshFiles" (include "sshFiles" .) 
-  "sshPostKubeadmCommands" (include "sshPostKubeadmCommands" .) 
-  "sshUsers" (include "sshUsers" .) ) }}
+  "data" (include "kubeAdmConfigTemplateSpec" .) ) }}
 {{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 
@@ -125,19 +155,31 @@ OpenStackMachineTemplate is immutable. We need to create new versions during upg
 Here we are generating a hash suffix to trigger upgrade when only it is necessary by
 using only the parameters used in openstack_machine_template.yaml.
 */}}
+{{- define "osmtSpec" -}}
+cloudName: {{ $.Values.cloudName | quote }}
+flavor: {{ .flavor | quote }}
+identityRef:
+  name: {{ $.Values.cloudConfig }}
+  kind: Secret
+{{- if not $.Values.nodeCIDR }}
+networks:
+- filter:
+    name: {{ $.Values.networkName }}
+  subnets:
+  - filter:
+      name: {{ $.Values.subnetName }}
+{{- end }}
+{{- if .bootFromVolume }}
+rootVolume:
+  diskSize: {{ .diskSize }}
+{{- end }}
+image: {{ .image | quote }}
+{{- end -}}
+
 {{- define "osmtRevision" -}}
 {{- $inputs := (dict
-  "cloudName" .Values.cloudName
-  "cloudConfig" .Values.cloudConfig
-  "nodeCIDR" .Values.nodeCIDR
-  "networkName" .Values.networkName
-  "subnetName" .Values.subnetName
-  "infrastructureApiVersion" ( include "infrastructureApiVersion" . )
-  "bootFromVolume" .bootFromVolume
-  "diskSize" .diskSize
-  "flavor" .flavor
-  "image" .image
-  "name" .name ) }}
+  "spec" (include "osmtSpec" .)
+  "infrastructureApiVersion" ( include "infrastructureApiVersion" . ) ) }}
 {{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 

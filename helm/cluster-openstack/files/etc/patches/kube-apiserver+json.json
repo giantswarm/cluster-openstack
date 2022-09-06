@@ -1,0 +1,7 @@
+[
+    {
+        "op": "add",
+        "path": "/spec/dnsPolicy",
+        "value": "ClusterFirstWithHostNet"
+    }
+]

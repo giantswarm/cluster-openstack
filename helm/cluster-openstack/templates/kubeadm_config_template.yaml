@@ -5,10 +5,10 @@ kind: KubeadmConfigTemplate
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-{{ .name }}-{{- include "kubeAdmConfigTemplateRevision" (merge (dict "pool" .) $) }}
+  name: {{ include "resource.default.name" . }}-{{ .name }}-{{- include "kubeadmConfigTemplateRevision" (merge (dict "pool" .) $) }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
     spec:
-      {{- include "kubeAdmConfigTemplateSpec" (merge (dict "pool" .) $) | nindent 6 -}}
+      {{- include "kubeadmConfigTemplateSpec" (merge (dict "pool" .) $) | nindent 6 -}}
 {{- end }}

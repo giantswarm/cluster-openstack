@@ -79,11 +79,15 @@ spec:
           authorization-always-allow-paths: "/healthz,/readyz,/livez,/metrics"
           bind-address: "0.0.0.0"
     initConfiguration:
+      patches:
+        directory: "/tmp/kubeadm/patches"
       nodeRegistration:
         kubeletExtraArgs:
           cloud-provider: external
         name: {{ include "nodeName" . }}
     joinConfiguration:
+      patches:
+        directory: "/tmp/kubeadm/patches"
       nodeRegistration:
         kubeletExtraArgs:
           {{- include "kubeletExtraArgs" . | nindent  10}}
@@ -100,6 +104,11 @@ spec:
           secret:
             name: {{ include "resource.default.name" $ }}-encryption-provider-config
             key: encryption
+      {{- range $kubeadmPatch, $_ :=  .Files.Glob  "files/etc/patches/**" }}
+      - path: {{ (printf "/tmp/kubeadm/patches/%s" (base $kubeadmPatch)) }}
+        content: |-
+          {{- $.Files.Get $kubeadmPatch | nindent 10 }}
+      {{- end }}
     preKubeadmCommands:
       {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 6 }}
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}

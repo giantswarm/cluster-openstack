@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Move specs of immutable templates to helpers.tpl to make maintenance easier.
+
 ## [0.15.2] - 2022-08-17
 
 ### Fixed

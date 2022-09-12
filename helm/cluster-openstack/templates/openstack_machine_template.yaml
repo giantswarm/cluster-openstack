@@ -10,22 +10,5 @@ metadata:
 spec:
   template:
     spec:
-      cloudName: {{ $.Values.cloudName | quote }}
-      flavor: {{ .flavor | quote }}
-      identityRef:
-        name: {{ $.Values.cloudConfig }}
-        kind: Secret
-      {{- if not $.Values.nodeCIDR }}
-      networks:
-      - filter:
-          name: {{ $.Values.networkName }}
-        subnets:
-        - filter:
-            name: {{ $.Values.subnetName }}
-      {{- end }}
-      {{- if .bootFromVolume }}
-      rootVolume:
-        diskSize: {{ .diskSize }}
-      {{- end }}
-      image: {{ .image | quote }}
+      {{- include "osmtSpec" (merge . $) | nindent 6 -}}
 {{- end }}

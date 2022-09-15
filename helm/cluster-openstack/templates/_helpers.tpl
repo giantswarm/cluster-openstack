@@ -111,7 +111,7 @@ It is necessary to create a new template with a new name to trigger an upgrade.
 See https://github.com/kubernetes-sigs/cluster-api/issues/4910
 See https://github.com/kubernetes-sigs/cluster-api/pull/5027/files
 */}}
-{{- define "kubeAdmConfigTemplateSpec" -}}
+{{- define "kubeadmConfigTemplateSpec" -}}
 {{- if .Values.ignition.enable -}}
 format: ignition
 ignition:
@@ -144,9 +144,9 @@ users:
   {{- include "sshUsers" . | nindent 2 }}
 {{- end -}}
 
-{{- define "kubeAdmConfigTemplateRevision" -}}
+{{- define "kubeadmConfigTemplateRevision" -}}
 {{- $inputs := (dict
-  "data" (include "kubeAdmConfigTemplateSpec" .) ) }}
+  "data" (include "kubeadmConfigTemplateSpec" .) ) }}
 {{- mustToJson $inputs | toString | quote | sha1sum | trunc 8 }}
 {{- end -}}
 

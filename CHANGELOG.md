@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Move specs of immutable templates to helpers.tpl to make maintenance easier.
 
+### Added
+
+- Allow core-component configuration via `kubeadm --patches`
+
 ## [0.15.2] - 2022-08-17
 
 ### Fixed

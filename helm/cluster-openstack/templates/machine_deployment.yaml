@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "labels.commonWithoutVersion" $ | nindent 8 }}
+        {{- include "labels.selector" $ | nindent 8 }}
     spec:
       bootstrap:
         configRef:

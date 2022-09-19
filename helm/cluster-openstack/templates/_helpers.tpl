@@ -22,7 +22,7 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "labels.common" -}}
-{{- include "labels.commonWithoutVersion" . }}
+{{- include "labels.selector" . }}
 app.kubernetes.io/version: {{ .Chart.Version | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
 {{- end -}}
@@ -30,7 +30,7 @@ helm.sh/chart: {{ include "chart" . | quote }}
 {{/*
 Common labels without version
 */}}
-{{- define "labels.commonWithoutVersion" -}}
+{{- define "labels.selector" -}}
 app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
@@ -191,7 +191,6 @@ image: {{ .image | quote }}
 {{- end }}
 {{- end }}
 {{- end -}}
-
 
 {{- define "osmtRevisionOfControlPlane" -}}
 {{- $outerScope := . }}

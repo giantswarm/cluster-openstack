@@ -1,0 +1,2 @@
+# use the `_coredns.tpl` from `cluster-shared`
+{{- include "coredns" .}}

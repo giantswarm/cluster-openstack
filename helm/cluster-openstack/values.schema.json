@@ -116,6 +116,23 @@
         "externalNetworkID": {
             "type": "string"
         },
+        "ignition": {
+            "type": "object",
+            "properties": {
+                "enable": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "enable"
+            ]
+        },
+        "includeClusterResourceSet": {
+            "type": "string"
+        },
+        "kubectlImage": {
+            "type": "object"
+        },
         "kubernetesVersion": {
             "type": "string"
         },
@@ -203,17 +220,6 @@
                 "groupsClaim",
                 "issuerUrl",
                 "usernameClaim"
-            ]
-        },
-        "ignition": {
-            "type": "object",
-            "properties": {
-                "enable": {
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "enable"
             ]
         },
         "organization": {

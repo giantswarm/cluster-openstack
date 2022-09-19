@@ -11,7 +11,11 @@
                 "featureGates": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "enableAdmissionPlugins",
+                "featureGates"
+            ]
         },
         "baseDomain": {
             "type": "string"
@@ -23,6 +27,7 @@
                     "type": "boolean"
                 },
                 "diskSize": {
+                    "minimum": 1,
                     "type": "integer"
                 },
                 "flavor": {
@@ -31,7 +36,11 @@
                 "image": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "flavor",
+                "image"
+            ]
         },
         "cloudConfig": {
             "type": "string"
@@ -45,16 +54,29 @@
         "clusterName": {
             "type": "string"
         },
+        "controllerManager": {
+            "type": "object",
+            "properties": {
+                "featureGates": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "featureGates"
+            ]
+        },
         "controlPlane": {
             "type": "object",
             "properties": {
                 "availabilityZones": {
+                    "minItems": 1,
                     "type": "array"
                 },
                 "bootFromVolume": {
                     "type": "boolean"
                 },
                 "diskSize": {
+                    "minimum": 1,
                     "type": "integer"
                 },
                 "etcd": {
@@ -75,19 +97,20 @@
                     "type": "string"
                 },
                 "replicas": {
+                    "minimum": 1,
+                    "maximum": 7,
                     "type": "integer"
                 }
-            }
-        },
-        "controllerManager": {
-            "type": "object",
-            "properties": {
-                "featureGates": {
-                    "type": "string"
-                }
-            }
+            },
+            "required": [
+                "flavor",
+                "image"
+            ]
         },
         "dnsNameservers": {
+            "items": {
+                "type": "string"
+            },
             "type": "array"
         },
         "externalNetworkID": {
@@ -99,7 +122,10 @@
                 "enable": {
                     "type": "boolean"
                 }
-            }
+            },
+            "required": [
+                "enable"
+            ]
         },
         "includeClusterResourceSet": {
             "type": "string"
@@ -120,9 +146,51 @@
             "type": "string"
         },
         "nodeClasses": {
+            "items": {
+                "properties": {
+                    "bootFromVolume": {
+                        "type": "boolean"
+                    },
+                    "diskSize": {
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "flavor": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "flavor",
+                    "image"
+                ]
+            },
+            "minItems": 1,
             "type": "array"
         },
         "nodePools": {
+            "items": {
+                "properties": {
+                    "class": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "replicas": {
+                        "minimum": 1,
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "class",
+                    "name",
+                    "replicas"
+                ]
+            },
+            "minItems": 1,
             "type": "array"
         },
         "oidc": {
@@ -146,7 +214,13 @@
                 "usernamePrefix": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "clientId",
+                "groupsClaim",
+                "issuerUrl",
+                "usernameClaim"
+            ]
         },
         "organization": {
             "type": "string"
@@ -154,5 +228,22 @@
         "subnetName": {
             "type": "string"
         }
-    }
+    },
+    "required": [
+        "apiServer",
+        "baseDomain",
+        "bastion",
+        "cloudConfig",
+        "cloudName",
+        "clusterDescription",
+        "clusterName",
+        "controllerManager",
+        "controlPlane",
+        "kubernetesVersion",
+        "managementCluster",
+        "nodeCIDR",
+        "nodeClasses",
+        "nodePools",
+        "organization"
+    ]
 }

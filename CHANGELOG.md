@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.1] - 2022-09-22
+
 ### Fixed
 
 * `kube-dns` service is not getting deleted to keep the cluster compatible to components which didn't migrated yet to `coredns` service.
@@ -218,7 +220,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial implementation.
 
-[Unreleased]: https://github.com/giantswarm/cluster-openstack/compare/v0.16.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-openstack/compare/v0.16.1...HEAD
+[0.16.1]: https://github.com/giantswarm/cluster-openstack/compare/v0.16.0...v0.16.1
 [0.16.0]: https://github.com/giantswarm/cluster-openstack/compare/v0.15.2...v0.16.0
 [0.15.2]: https://github.com/giantswarm/cluster-openstack/compare/v0.15.1...v0.15.2
 [0.15.1]: https://github.com/giantswarm/cluster-openstack/compare/v0.15.0...v0.15.1

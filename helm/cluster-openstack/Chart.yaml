@@ -3,7 +3,7 @@ name: cluster-openstack
 description: A helm chart for creating Cluster API clusters with the OpenStack infrastructure provider (CAPO).
 home: https://github.com/giantswarm/cluster-openstack
 type: application
-version: 0.16.0
+version: 0.16.1
 annotations:
   application.giantswarm.io/team: "rocket"
 restrictions:

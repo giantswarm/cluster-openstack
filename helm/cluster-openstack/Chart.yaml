@@ -12,5 +12,5 @@ restrictions:
 icon: https://s.giantswarm.io/app-icons/openstack/1/light.svg
 dependencies:
   - name: cluster-shared
-    version: "0.6.1"
+    version: "0.6.2"
     repository: "https://giantswarm.github.io/cluster-catalog"

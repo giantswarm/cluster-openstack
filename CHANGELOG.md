@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+* `kube-dns` service is not getting deleted to keep the cluster compatible to components which didn't migrated yet to `coredns` service.
+
 ## [0.16.0] - 2022-09-19
 
 ### Changed

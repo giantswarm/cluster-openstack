@@ -33,14 +33,16 @@ controlPlane:
   bootFromVolume: true
 
 nodeClasses:
-- diskSize: 30
-  image: worker-image
-  flavor: worker-flavor
-  name: worker
-  bootFromVolume: true
+  default:
+    diskSize: 30
+    image: worker-image
+    flavor: worker-flavor
+    name: default
+    bootFromVolume: true
 
 nodePools:
-- class: worker
-  failureDomain: az1
-  name: worker
-  replicas: 5
+  eu-central:
+    class: worker
+    failureDomain: az1
+    name: eu-central
+    replicas: 5

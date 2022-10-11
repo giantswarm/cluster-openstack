@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Make values properties easy to overwrite in GitOps style.
+- Improve the README in the project.
 
 ## [0.16.1] - 2022-09-22
 

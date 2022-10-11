@@ -156,18 +156,18 @@ Here we are generating a hash suffix to trigger upgrade when only it is necessar
 using only the parameters used in openstack_machine_template.yaml.
 */}}
 {{- define "osmtSpec" -}}
-cloudName: {{ $.Values.cloudName | quote }}
+cloudName: {{ $.cloudName | quote }}
 flavor: {{ .flavor | quote }}
 identityRef:
-  name: {{ $.Values.cloudConfig }}
+  name: {{ $.cloudConfig }}
   kind: Secret
-{{- if not $.Values.nodeCIDR }}
+{{- if not $.nodeCIDR }}
 networks:
 - filter:
-    name: {{ $.Values.networkName }}
+    name: {{ $.networkName }}
   subnets:
   - filter:
-      name: {{ $.Values.subnetName }}
+      name: {{ $.subnetName }}
 {{- end }}
 {{- if .bootFromVolume }}
 rootVolume:
@@ -185,9 +185,9 @@ image: {{ .image | quote }}
 
 {{- define "osmtRevisionByClass" -}}
 {{- $outerScope := . }}
-{{- range .Values.nodeClasses }}
-{{- if eq .name $outerScope.class }}
-{{- include "osmtRevision" . }}
+{{- range $name, $value := .nodeClasses }}
+{{- if eq $name $outerScope.class }}
+{{- include "osmtRevision" $ }}
 {{- end }}
 {{- end }}
 {{- end -}}

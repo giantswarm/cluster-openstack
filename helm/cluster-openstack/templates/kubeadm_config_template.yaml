@@ -1,14 +1,14 @@
-{{- range .Values.nodePools }}
+{{- range $name, $value := .Values.nodePools }}
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
   labels:
-    {{- include "labels.common" . | nindent 4 }}
-  name: {{ include "resource.default.name" . }}-{{ .name }}-{{- include "kubeadmConfigTemplateRevision" (merge (dict "pool" .) $) }}
+    {{- include "labels.common" $ | nindent 4 }}
+  name: {{ include "resource.default.name" $ }}-{{ $name }}-{{- include "kubeadmConfigTemplateRevision" (merge (dict "pool" $value) $) }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
     spec:
-      {{- include "kubeadmConfigTemplateSpec" (merge (dict "pool" .) $) | nindent 6 -}}
+      {{- include "kubeadmConfigTemplateSpec" (merge (dict "pool" $value) $) | nindent 6 -}}
 {{- end }}

@@ -1,16 +1,16 @@
-{{- range .Values.nodePools }}
+{{- range $name, $value := .Values.nodePools }}
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
   labels:
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}
+  name: {{ include "resource.default.name" $ }}-{{ $name }}
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
   revisionHistoryLimit: 0
-  replicas: {{ .replicas }}
+  replicas: {{ $value.replicas }}
   selector:
     matchLabels: null
   template:
@@ -22,12 +22,12 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: {{ include "resource.default.name" $ }}-{{ .name }}-{{- include "kubeadmConfigTemplateRevision" (merge (dict "pool" .) $) }}
+          name: {{ include "resource.default.name" $ }}-{{ $name }}-{{- include "kubeadmConfigTemplateRevision" (merge (dict "pool" $value) $) }}
       clusterName: {{ include "resource.default.name" $ }}
-      failureDomain: {{ .failureDomain | quote }}
+      failureDomain: {{ $value.failureDomain | quote }}
       infrastructureRef:
         apiVersion: {{ include "infrastructureApiVersion" . }}
         kind: OpenStackMachineTemplate
-        name: {{ include "resource.default.name" $ }}-{{ .class }}-{{ include "osmtRevisionByClass" (merge . $) }}
-      version: {{ .Values.kubernetesVersion }}
+        name: {{ include "resource.default.name" $ }}-{{ $value.class }}-{{ include "osmtRevisionByClass" (merge $.Values $value) }}
+      version: {{ $.Values.kubernetesVersion }}
 {{- end }}

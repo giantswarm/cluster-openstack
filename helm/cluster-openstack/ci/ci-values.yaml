@@ -41,8 +41,8 @@ nodeClasses:
     bootFromVolume: true
 
 nodePools:
-  eu-central:
+  default:
     class: worker
     failureDomain: az1
-    name: eu-central
+    name: default
     replicas: 5

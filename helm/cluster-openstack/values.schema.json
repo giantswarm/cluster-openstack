@@ -156,20 +156,20 @@
         }
     },
     "required": [
-              "apiServer",
-              "baseDomain",
-              "bastion",
-              "cloudConfig",
-              "cloudName",
-              "clusterDescription",
-              "clusterName",
-              "controllerManager",
-              "controlPlane",
-              "kubernetesVersion",
-              "managementCluster",
-              "nodeCIDR",
-              "nodeClasses",
-              "nodePools",
-              "organization"
-          ]
+      "apiServer",
+      "baseDomain",
+      "bastion",
+      "cloudConfig",
+      "cloudName",
+      "clusterDescription",
+      "clusterName",
+      "controllerManager",
+      "controlPlane",
+      "kubernetesVersion",
+      "managementCluster",
+      "nodeCIDR",
+      "nodeClasses",
+      "nodePools",
+      "organization"
+    ]
 }

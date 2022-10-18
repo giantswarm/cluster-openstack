@@ -1,5 +1,4 @@
 {{- range $name, $value := .Values.nodePools }}
-{{- $c := (merge (dict "currentClass"  $value) $.Values) -}}
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
@@ -29,6 +28,6 @@ spec:
       infrastructureRef:
         apiVersion: {{ include "infrastructureApiVersion" . }}
         kind: OpenStackMachineTemplate
-        name: {{ include "resource.default.name" $ }}-{{ $value.class }}-{{ include "osmtRevisionByClass" $c }}
+        name: {{ include "resource.default.name" $ }}-{{ $value.class }}-{{ include "osmtRevisionByClass" (merge (dict "currentValues" $.Values) $value) }}
       version: {{ $.Values.kubernetesVersion }}
 {{- end }}

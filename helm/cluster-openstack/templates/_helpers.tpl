@@ -185,9 +185,9 @@ image: {{ .currentClass.image | quote }}
 
 {{- define "osmtRevisionByClass" -}}
 {{- $outerScope := . }}
-{{- range $name, $value := .nodeClasses }}
-{{- if eq $name $outerScope.currentClass.class }}
-{{- include "osmtRevision" $ }}
+{{- range $name, $value := .currentValues.nodeClasses }}
+{{- if eq $name $outerScope.class }}
+{{- include "osmtRevision" (merge (dict "currentClass" $value) $outerScope.currentValues) }}
 {{- end }}
 {{- end }}
 {{- end -}}

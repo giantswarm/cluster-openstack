@@ -1,4 +1,4 @@
-{{- range $name, $value := (merge .Values.nodeClasses (dict "controlPlane" .Values.controlPlane)) }}
+{{- range $name, $value := (merge .Values.nodeClasses (dict "control-plane" .Values.controlPlane)) }}
 ---
 apiVersion: {{ include "infrastructureApiVersion" . }}
 kind: OpenStackMachineTemplate

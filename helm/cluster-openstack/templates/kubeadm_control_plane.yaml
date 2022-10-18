@@ -120,6 +120,6 @@ spec:
     infrastructureRef:
       apiVersion: {{ include "infrastructureApiVersion" . }}
       kind: OpenStackMachineTemplate
-      name: {{ include "resource.default.name" . }}-control-plane-{{ include "osmtRevisionOfControlPlane" $ }}
+      name: {{ include "resource.default.name" . }}-control-plane-{{ include "osmtRevisionOfControlPlane" $.Values }}
   version: {{ .Values.kubernetesVersion }}
   replicas: {{ .Values.controlPlane.replicas }}

@@ -194,5 +194,5 @@ image: {{ .image | quote }}
 
 {{- define "osmtRevisionOfControlPlane" -}}
 {{- $outerScope := . }}
-{{- include "osmtRevision" (set (merge $outerScope .Values.controlPlane) "name" "control-plane") }}
+{{- include "osmtRevision" (set (merge $outerScope .controlPlane) "name" "control-plane") }}
 {{- end -}}

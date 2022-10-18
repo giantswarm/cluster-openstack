@@ -1,14 +1,15 @@
 {{- range $name, $value := (merge .Values.nodeClasses (dict "control-plane" .Values.controlPlane)) }}
+{{- $c := (merge (dict "currentClass"  $value) $.Values) -}}
 ---
 apiVersion: {{ include "infrastructureApiVersion" . }}
 kind: OpenStackMachineTemplate
 metadata:
   labels:
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ $name }}-{{ include "osmtRevision" (merge $.Values $value) }}
+  name: {{ include "resource.default.name" $ }}-{{ $name }}-{{ include "osmtRevision" $c }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
     spec:
-      {{- include "osmtSpec" (merge $.Values $value) | nindent 6 -}}
+      {{- include "osmtSpec" $c | nindent 6 -}}
 {{- end }}

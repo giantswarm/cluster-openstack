@@ -157,7 +157,7 @@ using only the parameters used in openstack_machine_template.yaml.
 */}}
 {{- define "osmtSpec" -}}
 cloudName: {{ $.cloudName | quote }}
-flavor: {{ .flavor | quote }}
+flavor: {{ .currentClass.flavor | quote }}
 identityRef:
   name: {{ $.cloudConfig }}
   kind: Secret
@@ -169,11 +169,11 @@ networks:
   - filter:
       name: {{ $.subnetName }}
 {{- end }}
-{{- if .bootFromVolume }}
+{{- if .currentClass.bootFromVolume }}
 rootVolume:
-  diskSize: {{ .diskSize }}
+  diskSize: {{ .currentClass.diskSize }}
 {{- end }}
-image: {{ .image | quote }}
+image: {{ .currentClass.image | quote }}
 {{- end -}}
 
 {{- define "osmtRevision" -}}
@@ -186,13 +186,13 @@ image: {{ .image | quote }}
 {{- define "osmtRevisionByClass" -}}
 {{- $outerScope := . }}
 {{- range $name, $value := .nodeClasses }}
-{{- if eq $name $outerScope.class }}
+{{- if eq $name $outerScope.currentClass.class }}
 {{- include "osmtRevision" $ }}
 {{- end }}
 {{- end }}
 {{- end -}}
 
-{{- define "osmtRevisionOfControlPlane" -}}
+{{- define "osmtRevisionByControlPlane" -}}
 {{- $outerScope := . }}
-{{- include "osmtRevision" (set (merge $outerScope .Values.controlPlane) "name" "control-plane") }}
+{{- include "osmtRevision" (merge (dict "currentClass" .Values.controlPlane) $outerScope.Values) }}
 {{- end -}}

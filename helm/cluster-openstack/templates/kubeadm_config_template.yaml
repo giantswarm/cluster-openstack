@@ -10,5 +10,5 @@ metadata:
 spec:
   template:
     spec:
-      {{- include "kubeadmConfigTemplateSpec" (merge (dict "pool" $value) $) | nindent 6 -}}
+      {{- include "kubeadmConfigTemplateSpec" (merge (dict "pool" (set $value "name" $name)) $) | nindent 6 -}}
 {{- end }}

@@ -112,6 +112,7 @@ spec:
     preKubeadmCommands:
       {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 6 }}
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
+      {{- include "apiServerPreKubeadmCommands" . | nindent 6 }}
     postKubeadmCommands:
       {{- include "sshPostKubeadmCommands" . | nindent 6 }}
     users:

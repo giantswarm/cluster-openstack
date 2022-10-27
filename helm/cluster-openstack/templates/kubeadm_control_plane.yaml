@@ -28,7 +28,9 @@ spec:
         extraArgs:
           cloud-provider: external
           enable-admission-plugins: {{ .Values.apiServer.enableAdmissionPlugins }}
+          {{- if .Values.apiServer.featureGates }}
           feature-gates: {{ .Values.apiServer.featureGates }}
+          {{- end }}
           kubelet-preferred-address-types: "InternalIP"
           logtostderr: "true"
           {{- if .Values.oidc.issuerUrl }}

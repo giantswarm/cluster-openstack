@@ -3,7 +3,7 @@ name: cluster-openstack
 description: A helm chart for creating Cluster API clusters with the OpenStack infrastructure provider (CAPO).
 home: https://github.com/eschercloudai/cluster-openstack
 type: application
-version: 0.4.4
+version: 0.4.5
 restrictions:
   compatibleProviders:
     - openstack

@@ -13,8 +13,7 @@
                 }
             },
             "required": [
-                "enableAdmissionPlugins",
-                "featureGates"
+                "enableAdmissionPlugins"
             ]
         },
         "baseDomain": {

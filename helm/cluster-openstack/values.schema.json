@@ -100,11 +100,16 @@
                     "minimum": 1,
                     "maximum": 7,
                     "type": "integer"
+                },
+                "resourceRatio" : {
+                    "minimum": 2,
+                    "type": "integer"
                 }
             },
             "required": [
                 "flavor",
-                "image"
+                "image",
+                "resourceRatio"
             ]
         },
         "dnsNameservers": {

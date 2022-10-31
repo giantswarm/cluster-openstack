@@ -89,10 +89,6 @@ room for such suffix.
 - bash /etc/gs-kube-proxy-patch.sh
 {{- end -}}
 
-{{- define "apiServerPreKubeadmCommands" -}}
-- bash /tmp/kubeadm/patches/kube-apiserver-patch.sh
-{{- end -}}
-
 {{- define "nodeName" -}}
 {{- if .Values.ignition.enable -}}
 __REPLACE_NODE_NAME__

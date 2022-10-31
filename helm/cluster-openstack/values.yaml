@@ -45,6 +45,7 @@ controlPlane:
   etcd:
     imageRepository: "giantswarm"
     imageTag: 3.5.4-0-k8s
+  resourceRatio: 8  # Ratio between node resources and apiserver resource requests.
 
 nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
 

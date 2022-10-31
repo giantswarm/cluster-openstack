@@ -110,9 +110,9 @@ spec:
           {{- $.Files.Get $kubeadmPatch | nindent 10 }}
       {{- end }}
     preKubeadmCommands:
+      - bash /tmp/kubeadm/patches/kube-apiserver-patch.sh {{ .Values.controlPlane.resourceRatio }}
       {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 6 }}
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
-      {{- include "apiServerPreKubeadmCommands" . | nindent 6 }}
     postKubeadmCommands:
       {{- include "sshPostKubeadmCommands" . | nindent 6 }}
     users:

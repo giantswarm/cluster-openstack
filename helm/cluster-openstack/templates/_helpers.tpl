@@ -70,6 +70,30 @@ room for such suffix.
   sudo: ALL=(ALL) NOPASSWD:ALL
 {{- end -}}
 
+{{- define "registryFiles" -}}
+{{- if .Values.registry.configure -}}
+- path: /etc/containerd/conf.d/registry-config.toml
+  permissions: "0600"
+  contentFrom:
+    secret:
+      name: {{ include "resource.default.name" $ }}-registry-configuration
+      key: registry-config.toml
+{{- end -}}
+{{- end -}}
+
+{{- define "registrySecretContent" -}}
+[plugins."io.containerd.grpc.v1.cri".registry]
+
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+endpoint = ["https://registry-1.docker.io", "giantswarm.azurecr.io"]
+
+[plugins."io.containerd.grpc.v1.cri".registry.configs]
+[plugins."io.containerd.grpc.v1.cri".registry.configs."registry-1.docker.io".auth]
+username = "{{ .Values.registry.username }}"
+password = "{{ .Values.registry.password }}"
+{{- end -}}
+
 {{- define "kubeletExtraArgs" -}}
 {{- .Files.Get "files/kubelet-args" -}}
 {{- end -}}
@@ -136,6 +160,7 @@ joinConfiguration:
     name: {{ include "nodeName" . }}
 files:
   {{- include "sshFiles" . | nindent 2 }}
+  {{- include "registryFiles" . | nindent 2 }}
 preKubeadmCommands:
   {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 2 }}
 postKubeadmCommands:

@@ -97,6 +97,7 @@ spec:
     {{- end }}
     files:
       {{- include "sshFiles" . | nindent 6 }}
+      {{- include "registryFiles" . | nindent 6 }}
       {{- include "kubeProxyFiles" . | nindent 6 }}
       - path: /etc/kubernetes/encryption/config.yaml
         permissions: "0600"

@@ -37,7 +37,6 @@ nodeClasses:
     diskSize: 30
     image: worker-image
     flavor: worker-flavor
-    name: default
     bootFromVolume: true
 
 nodePools:

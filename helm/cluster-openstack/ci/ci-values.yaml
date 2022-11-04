@@ -41,7 +41,7 @@ nodeClasses:
 
 nodePools:
   default:
-    class: worker
+    class: default
     failureDomain: az1
     name: default
     replicas: 5

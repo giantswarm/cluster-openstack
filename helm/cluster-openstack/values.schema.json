@@ -97,6 +97,7 @@
                 "flavor",
                 "image",
                 "resourceRatio"
+            ]
         },
         "dnsNameservers": {
             "type": "array"

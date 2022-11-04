@@ -45,6 +45,17 @@
         "clusterName": {
             "type": "string"
         },
+        "controllerManager": {
+            "type": "object",
+            "properties": {
+                "featureGates": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "featureGates"
+            ]
+        },
         "controlPlane": {
             "type": "object",
             "properties": {
@@ -76,16 +87,16 @@
                 },
                 "replicas": {
                     "type": "integer"
+                },
+                "resourceRatio" : {
+                    "minimum": 2,
+                    "type": "integer"
                 }
-            }
-        },
-        "controllerManager": {
-            "type": "object",
-            "properties": {
-                "featureGates": {
-                    "type": "string"
-                }
-            }
+            },
+            "required": [
+                "flavor",
+                "image",
+                "resourceRatio"
         },
         "dnsNameservers": {
             "type": "array"

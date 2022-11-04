@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Make values properties easy to overwrite in GitOps style.
 - Improve the README in the project.
+- Configure API priority and fairness flags based on node resources.
 
 ## [0.16.1] - 2022-09-22
 

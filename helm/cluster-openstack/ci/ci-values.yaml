@@ -40,7 +40,7 @@ nodeClasses:
     bootFromVolume: true
 
 nodePools:
-  default:
+  worker:
     class: default
     failureDomain: az1
     name: default

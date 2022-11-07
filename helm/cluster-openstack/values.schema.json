@@ -11,7 +11,11 @@
                 "featureGates": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "flavor",
+                "image"
+            ]
         },
         "baseDomain": {
             "type": "string"
@@ -23,6 +27,7 @@
                     "type": "boolean"
                 },
                 "diskSize": {
+                    "minimum": 1,
                     "type": "integer"
                 },
                 "flavor": {
@@ -31,7 +36,11 @@
                 "image": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "flavor",
+                "image"
+            ]
         },
         "cloudConfig": {
             "type": "string"
@@ -60,12 +69,14 @@
             "type": "object",
             "properties": {
                 "availabilityZones": {
+                    "minItems": 1,
                     "type": "array"
                 },
                 "bootFromVolume": {
                     "type": "boolean"
                 },
                 "diskSize": {
+                    "minimum": 1,
                     "type": "integer"
                 },
                 "etcd": {
@@ -86,6 +97,8 @@
                     "type": "string"
                 },
                 "replicas": {
+                    "minimum": 1,
+                    "maximum": 7,
                     "type": "integer"
                 },
                 "resourceRatio" : {
@@ -100,6 +113,9 @@
             ]
         },
         "dnsNameservers": {
+            "items": {
+                "type": "string"
+            },
             "type": "array"
         },
         "externalNetworkID": {
@@ -111,7 +127,10 @@
                 "enable": {
                     "type": "boolean"
                 }
-            }
+            },
+            "required": [
+                "enable"
+            ]
         },
         "includeClusterResourceSet": {
             "type": "string"
@@ -158,7 +177,13 @@
                 "usernamePrefix": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "clientId",
+                "groupsClaim",
+                "issuerUrl",
+                "usernameClaim"
+            ]
         },
         "organization": {
             "type": "string"

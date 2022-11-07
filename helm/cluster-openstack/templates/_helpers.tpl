@@ -34,8 +34,8 @@ Common labels without version
 app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
-eschercloud.io/cluster: {{ include "resource.default.name" . | quote }}
-eschercloud.io/organization: {{ .Values.organization | quote }}
+eschercloud.ai/cluster: {{ include "resource.default.name" . | quote }}
+eschercloud.ai/organization: {{ .Values.organization | quote }}
 {{- end -}}
 
 {{/*

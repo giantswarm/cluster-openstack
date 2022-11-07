@@ -13,8 +13,8 @@
                 }
             },
             "required": [
-                "flavor",
-                "image"
+              "enableAdmissionPlugins",
+              "featureGates"
             ]
         },
         "baseDomain": {

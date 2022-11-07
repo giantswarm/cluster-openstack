@@ -53,13 +53,11 @@ nodeClasses: {}  # Class definitions for worker node pools. The "name" of the cl
   #   diskSize: 50
   #   flavor: n1.medium
   #   image: ubuntu-2004-kube-v1.22.9
-  #   name: default
 
 nodePools: {}  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above. Example:
-  # lon-3:
-  #   class: default
-  #   name: lon-3
-  #   failureDomain: gb-lon-3
+  # us-dc-1:
+  #   class: default # Node classes name (defined above)
+  #   failureDomain: us-east-1 # OpenStack availability zones
   #   replicas: 2
 
 # cluster-shared configuration

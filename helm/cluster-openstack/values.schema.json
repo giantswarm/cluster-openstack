@@ -151,52 +151,10 @@
             "type": "string"
         },
         "nodeClasses": {
-            "items": {
-                "properties": {
-                    "bootFromVolume": {
-                        "type": "boolean"
-                    },
-                    "diskSize": {
-                        "minimum": 1,
-                        "type": "integer"
-                    },
-                    "flavor": {
-                        "type": "string"
-                    },
-                    "image": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "flavor",
-                    "image"
-                ]
-            },
-            "minItems": 1,
-            "type": "array"
+            "type": "object"
         },
         "nodePools": {
-            "items": {
-                "properties": {
-                    "class": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "replicas": {
-                        "minimum": 1,
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "class",
-                    "name",
-                    "replicas"
-                ]
-            },
-            "minItems": 1,
-            "type": "array"
+            "type": "object"
         },
         "oidc": {
             "type": "object",
@@ -235,20 +193,20 @@
         }
     },
     "required": [
-        "apiServer",
-        "baseDomain",
-        "bastion",
-        "cloudConfig",
-        "cloudName",
-        "clusterDescription",
-        "clusterName",
-        "controllerManager",
-        "controlPlane",
-        "kubernetesVersion",
-        "managementCluster",
-        "nodeCIDR",
-        "nodeClasses",
-        "nodePools",
-        "organization"
+      "apiServer",
+      "baseDomain",
+      "bastion",
+      "cloudConfig",
+      "cloudName",
+      "clusterDescription",
+      "clusterName",
+      "controllerManager",
+      "controlPlane",
+      "kubernetesVersion",
+      "managementCluster",
+      "nodeCIDR",
+      "nodeClasses",
+      "nodePools",
+      "organization"
     ]
 }

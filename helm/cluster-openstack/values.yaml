@@ -47,9 +47,18 @@ controlPlane:
     imageTag: 3.5.4-0-k8s
   resourceRatio: 8  # Ratio between node resources and apiserver resource requests.
 
-nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
+nodeClasses: {}  # Class definitions for worker node pools. The "name" of the class is the key of the object. The properties may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above. Example:
+  # default:
+  #   bootFromVolume: true
+  #   diskSize: 50
+  #   flavor: n1.medium
+  #   image: ubuntu-2004-kube-v1.22.9
 
-nodePools: []  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above.
+nodePools: {}  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above. Example:
+  # us-dc-1:
+  #   class: default # Node classes name (defined above)
+  #   failureDomain: us-east-1 # OpenStack availability zones
+  #   replicas: 2
 
 # cluster-shared configuration
 includeClusterResourceSet: "true"  # must be a string

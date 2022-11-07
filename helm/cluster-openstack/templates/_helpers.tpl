@@ -156,24 +156,24 @@ Here we are generating a hash suffix to trigger upgrade when only it is necessar
 using only the parameters used in openstack_machine_template.yaml.
 */}}
 {{- define "osmtSpec" -}}
-cloudName: {{ $.Values.cloudName | quote }}
-flavor: {{ .flavor | quote }}
+cloudName: {{ $.cloudName | quote }}
+flavor: {{ .currentClass.flavor | quote }}
 identityRef:
-  name: {{ $.Values.cloudConfig }}
+  name: {{ $.cloudConfig }}
   kind: Secret
-{{- if not $.Values.nodeCIDR }}
+{{- if not $.nodeCIDR }}
 networks:
 - filter:
-    name: {{ $.Values.networkName }}
+    name: {{ $.networkName }}
   subnets:
   - filter:
-      name: {{ $.Values.subnetName }}
+      name: {{ $.subnetName }}
 {{- end }}
-{{- if .bootFromVolume }}
+{{- if .currentClass.bootFromVolume }}
 rootVolume:
-  diskSize: {{ .diskSize }}
+  diskSize: {{ .currentClass.diskSize }}
 {{- end }}
-image: {{ .image | quote }}
+image: {{ .currentClass.image | quote }}
 {{- end -}}
 
 {{- define "osmtRevision" -}}
@@ -185,14 +185,14 @@ image: {{ .image | quote }}
 
 {{- define "osmtRevisionByClass" -}}
 {{- $outerScope := . }}
-{{- range .Values.nodeClasses }}
-{{- if eq .name $outerScope.class }}
-{{- include "osmtRevision" . }}
+{{- range $name, $value := .currentValues.nodeClasses }}
+{{- if eq $name $outerScope.class }}
+{{- include "osmtRevision" (merge (dict "currentClass" $value) $outerScope.currentValues) }}
 {{- end }}
 {{- end }}
 {{- end -}}
 
-{{- define "osmtRevisionOfControlPlane" -}}
+{{- define "osmtRevisionByControlPlane" -}}
 {{- $outerScope := . }}
-{{- include "osmtRevision" (set (merge $outerScope .Values.controlPlane) "name" "control-plane") }}
+{{- include "osmtRevision" (merge (dict "currentClass" .Values.controlPlane) $outerScope.Values) }}
 {{- end -}}

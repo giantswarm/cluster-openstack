@@ -10,7 +10,7 @@ metadata:
   {{- if .annotations }} 
   annotations:
     {{- range $k, $v := .annotations }}
-    {{ $k }}: {{ $v }}
+    {{ $k | quote }}: {{ $v | quote }}
     {{- end }}
   {{- end }}
 spec:

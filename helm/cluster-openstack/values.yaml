@@ -4,6 +4,7 @@ apiServer:
 baseDomain: ""  # Customer base domain
 cloudConfig: ""  # Name of existing cloud-config secret in management cluster namespace.
 cloudName: ""  # Name of cloud in cloud-config secret "cloud.yaml" value.
+cloudCACert: "" # PEM-encoded CA certificate for target OpenStack API
 clusterDescription: ""  # Cluster description used in metadata.
 clusterName: ""  # Name of cluster. Used as base name for all cluster resources in the management cluster.
 clusterLabels: {} # Any additional labels for the cluster
@@ -18,16 +19,6 @@ nodeCIDR: ""  # The OpenStack Subnet to be created.
 externalNetworkID: ""  # UUID of external network (optional unless there are multiple external networks).
 networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
 subnetName: ""  # Existing subnet name. Ignored when nodeCIDR is set.
-
-oidc:
-  issuerUrl: ""
-  caFile: ""
-  clientId: ""
-  usernameClaim: ""
-  groupsClaim: ""
-
-ignition:
-  enable: false
 
 controlPlane:
   availabilityZones: []  # Unique availability zones for control plane nodes. If specified, should have one item or one for each replica (optional).

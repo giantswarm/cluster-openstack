@@ -140,7 +140,7 @@
                         "type": "string"
                     },
                     "replicas": {
-                        "minimum": 1,
+                        "minimum": 0,
                         "type": "integer"
                     }
                 },
@@ -152,43 +152,6 @@
             },
             "minItems": 1,
             "type": "array"
-        },
-        "oidc": {
-            "type": "object",
-            "properties": {
-                "caFile": {
-                    "type": "string"
-                },
-                "clientId": {
-                    "type": "string"
-                },
-                "groupsClaim": {
-                    "type": "string"
-                },
-                "issuerUrl": {
-                    "type": "string"
-                },
-                "usernameClaim": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "clientId",
-                "groupsClaim",
-                "issuerUrl",
-                "usernameClaim"
-            ]
-        },
-        "ignition": {
-            "type": "object",
-            "properties": {
-                "enable": {
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "enable"
-            ]
         },
         "organization": {
             "type": "string"

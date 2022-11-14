@@ -59,9 +59,6 @@ managementCluster: capi
 nodeCIDR: 10.6.0.0/24
 organization: escher_nick
 
-oidc:
-  enabled: false
-
 controlPlane:
   availabilityZones:
     - nova

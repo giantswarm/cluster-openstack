@@ -7,22 +7,6 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   kubeadmConfigSpec:
-    {{- if .Values.ignition.enable }}
-    format: ignition
-    ignition:
-      containerLinuxConfig:
-        additionalConfig: |
-          systemd:
-            units:
-            - name: kubeadm.service
-              enabled: true
-              dropins:
-              - name: 10-flatcar.conf
-                contents: |
-                  [Unit]
-                  Requires=containerd.service
-                  After=containerd.service
-    {{- end }}
     clusterConfiguration:
       apiServer:
         extraArgs:
@@ -33,17 +17,6 @@ spec:
           {{- end }}
           kubelet-preferred-address-types: "InternalIP"
           logtostderr: "true"
-          {{- if .Values.oidc.issuerUrl }}
-          {{- with .Values.oidc }}
-          oidc-issuer-url: {{ .issuerUrl }}
-          oidc-client-id: {{ .clientId }}
-          oidc-username-claim: {{ .usernameClaim }}
-          oidc-groups-claim: {{ .groupsClaim }}
-          {{- if .caFile }}
-          oidc-ca-file: {{ .caFile }}
-          {{- end }}
-          {{- end }}
-          {{- end }}
           profiling: "false"
           runtime-config: "api/all=true"
           tls-cipher-suites: "TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384"
@@ -73,13 +46,10 @@ spec:
         kubeletExtraArgs:
           {{- include "kubeletExtraArgs" . | nindent  10}}
         name: {{ include "nodeName" . }}
-    {{- if not .Values.ignition.enable }}
     useExperimentalRetryJoin: true
-    {{- end }}
     files:
       {{- include "kubeProxyFiles" . | nindent 6 }}
     preKubeadmCommands:
-      {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 6 }}
       {{- include "kubeProxyPreKubeadmCommands" . | nindent 6 }}
   machineTemplate:
     infrastructureRef:

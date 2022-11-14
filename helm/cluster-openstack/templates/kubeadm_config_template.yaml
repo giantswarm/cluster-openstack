@@ -16,6 +16,4 @@ spec:
             {{- include "kubeletExtraArgs" . | nindent  12}}
             node-labels: "eschercloud.ai/node-pool={{ .name }}"
           name: {{ include "nodeName" . }}
-      preKubeadmCommands:
-        {{- include "nodeNameReplacePreKubeadmCommands" . | nindent 8 }}
 {{- end }}

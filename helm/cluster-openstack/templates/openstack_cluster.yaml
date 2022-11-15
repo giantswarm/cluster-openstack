@@ -14,7 +14,7 @@ spec:
   {{- end }}
   {{- end }}
   identityRef:
-    name: {{ .Values.cloudConfig }}
+    name: {{ include "cluster-openstack.cloudCredentialsSecretName" . }}
     kind: Secret
   apiServerLoadBalancer:
     enabled: true

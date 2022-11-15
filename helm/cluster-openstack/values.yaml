@@ -2,7 +2,11 @@ apiServer:
   enableAdmissionPlugins: "NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,PersistentVolumeClaimResize,DefaultStorageClass,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook"
   featureGates: "TTLAfterFinished=true"
 baseDomain: ""  # Customer base domain
+
+clouds: # Content for the clouds.yaml file
+# OR
 cloudConfig: ""  # Name of existing cloud-config secret in management cluster namespace.
+
 cloudName: ""  # Name of cloud in cloud-config secret "cloud.yaml" value.
 cloudCACert: "" # PEM-encoded CA certificate for target OpenStack API
 clusterDescription: ""  # Cluster description used in metadata.

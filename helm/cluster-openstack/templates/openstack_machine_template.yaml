@@ -13,7 +13,7 @@ spec:
       cloudName: {{ $.Values.cloudName | quote }}
       flavor: {{ .flavor | quote }}
       identityRef:
-        name: {{ $.Values.cloudConfig }}
+        name: {{ include "cluster-openstack.cloudCredentialsSecretName" . }}
         kind: Secret
       {{- if not $.Values.nodeCIDR }}
       networks:

@@ -112,8 +112,27 @@ using only the parameters used in openstack_machine_template.yaml.
 {{- end }}
 {{- end -}}
 
-
 {{- define "osmtRevisionOfControlPlane" -}}
 {{- $outerScope := . }}
 {{- include "osmtRevision" (set (merge $outerScope .Values.controlPlane) "name" "control-plane") }}
+{{- end -}}
+
+{{/*
+Create a name for a cluster component.
+*/}}
+{{- define "openstack-cluster.componentName" -}}
+{{- $ctx := index . 0 -}}
+{{- $componentName := index . 1 -}}
+{{- printf "%s-%s" $ctx.Release.Name $componentName | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Name of the secret containing the cloud credentials.
+*/}}
+{{- define "cluster-openstack.cloudCredentialsSecretName" -}}
+{{- if .Values.cloudConfig -}}
+{{- .Values.cloudConfig -}}
+{{- else -}}
+{{ include "openstack-cluster.componentName" (list . "cloud-credentials") -}}
+{{- end -}}
 {{- end -}}

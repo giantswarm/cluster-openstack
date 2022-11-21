@@ -14,6 +14,11 @@ spec:
         nodeRegistration:
           kubeletExtraArgs:
             {{- include "kubeletExtraArgs" . | nindent  12}}
-            node-labels: "eschercloud.ai/node-pool={{ .name }}"
+            node-labels:
+              {{- if .nodeLabels }} 
+              "eschercloud.ai/node-pool={{ .name }}{{- range $k, $v := .nodeLabels }},{{ $k }}={{ $v }}{{- end }}"
+              {{- else }}
+              "eschercloud.ai/node-pool={{ .name }}"
+              {{- end }}
           name: {{ include "nodeName" . }}
 {{- end }}

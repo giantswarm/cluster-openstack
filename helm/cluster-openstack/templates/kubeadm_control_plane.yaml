@@ -9,6 +9,14 @@ spec:
   kubeadmConfigSpec:
     clusterConfiguration:
       apiServer:
+        certSANs:
+          - 127.0.0.1
+          - localhost
+          {{- if .Values.apiServer.certSANs }}
+          {{- range $v := .Values.apiServer.certSANs }}
+          - {{ $v }}
+          {{- end }}
+          {{- end }}
         extraArgs:
           cloud-provider: external
           enable-admission-plugins: {{ .Values.apiServer.enableAdmissionPlugins }}

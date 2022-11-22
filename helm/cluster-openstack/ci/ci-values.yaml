@@ -7,7 +7,12 @@ dnsNameservers:
 - 1.1.1.1
 - 8.8.8.8
 externalNetworkID: external-network-id
-kubernetesVersion: 1.20.9
+kubernetesVersion: v1.22.9
+kubernetesVersionImages:
+  v1.22.9: "ubuntu-2004-kube-v1.22.9"
+  v1.23.14: "ubuntu-2004-kube-v1.23.14"
+  v1.24.8: "ubuntu-2004-kube-v1.24.8"
+  v1.25.4: "ubuntu-2004-kube-v1.25.4"
 managementCluster: testmc
 nodeCIDR: 10.6.0.0/24
 organization: testorg
@@ -18,7 +23,6 @@ oidc:
 bastion:
   diskSize: 10
   flavor: bastion-flavor
-  image: bastion-image
   bootFromVolume: true
 
 controlPlane:
@@ -28,14 +32,12 @@ controlPlane:
   - az3
   diskSize: 20
   flavor: control-plane-flavor
-  image: control-plane-image
   replicas: 3
   bootFromVolume: true
 
 nodeClasses:
   default:
     diskSize: 30
-    image: worker-image
     flavor: worker-flavor
     bootFromVolume: true
 

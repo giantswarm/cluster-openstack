@@ -9,7 +9,13 @@ clusterName: ""  # Name of cluster. Used as base name for all cluster resources 
 controllerManager:
   featureGates: "ExpandPersistentVolumes=true,TTLAfterFinished=true"
 dnsNameservers: []  # IPs of DNS nameservers to be used by the cluster machines (optional, will use OS defaults if not specified).
-kubernetesVersion: ""  # Version of Kubernetes. If machine images are specified, this will only be used for metadata.
+kubernetesVersion: "v1.22.9"  # Default Kubernetes version. If machine images are specified, this will only be used for metadata.
+kubernetesVersionImages:
+  v1.22.9: "ubuntu-2004-kube-v1.22.9"
+  v1.23.14: "ubuntu-2004-kube-v1.23.14"
+  v1.24.8: "ubuntu-2004-kube-v1.24.8"
+  v1.25.4: "ubuntu-2004-kube-v1.25.4"
+
 managementCluster: ""  # Name of cluster which owns this workload cluster.
 organization: ""  # Organization which owns the cluster.
 
@@ -30,16 +36,14 @@ ignition:
   enable: false
 
 bastion:
-  diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
+  diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false.
   flavor: ""  # Project-dependent flavor of bastion machine.
-  image: ""  # Image name or root volume source UUID if bootFromVolume is true.
   bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
 
 controlPlane:
   availabilityZones: []  # Unique availability zones for control plane nodes. If specified, should have one item or one for each replica (optional).
   diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
   flavor: ""  # Project-dependent flavor of control plane machines.
-  image: ""  # Image name or root volume source UUID if bootFromVolume is true.
   replicas: 0  # Number of replicas in control plane. Should be an odd number.
   bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
   etcd:
@@ -47,12 +51,11 @@ controlPlane:
     imageTag: 3.5.4-0-k8s
   resourceRatio: 8  # Ratio between node resources and apiserver resource requests.
 
-nodeClasses: {}  # Class definitions for worker node pools. The "name" of the class is the key of the object. The properties may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above. Example:
+nodeClasses: {}  # Class definitions for worker node pools. The "name" of the class is the key of the object. The properties may include "diskSize", "flavor", and "bootFromVolume" as defined for control plane and bastion above. Example:
   # default:
   #   bootFromVolume: true
   #   diskSize: 50
   #   flavor: n1.medium
-  #   image: ubuntu-2004-kube-v1.22.9
 
 nodePools: {}  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above. Example:
   # us-dc-1:

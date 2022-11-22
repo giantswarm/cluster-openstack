@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add matrix with Kubernetes version per machine image.
+
 ## [0.17.0] - 2022-11-07
 
 ### Changed

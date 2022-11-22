@@ -57,4 +57,4 @@ spec:
       rootVolume:
         diskSize: {{ .Values.bastion.diskSize }}
       {{- end }}
-      image: {{ .Values.bastion.image | quote }}
+      image: {{ include "imageName" . }}

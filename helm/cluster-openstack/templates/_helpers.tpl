@@ -49,6 +49,15 @@ room for such suffix.
 {{ .Values.clusterName }}
 {{- end -}}
 
+
+{{/*
+Return the image for a specific Kubernetes version.
+The matrix is defined in Values yaml and here we parsed it and pass the corresponding image.
+*/}}
+{{- define "imageName" -}}
+{{ get .Values.kubernetesVersionImages .Values.kubernetesVersion }}
+{{- end -}}
+
 {{- define "sshFiles" -}}
 - path: /etc/ssh/trusted-user-ca-keys.pem
   permissions: "0600"
@@ -173,7 +182,7 @@ networks:
 rootVolume:
   diskSize: {{ .currentClass.diskSize }}
 {{- end }}
-image: {{ .currentClass.image | quote }}
+image: {{ include "imageName" (dict "Values" $) }}
 {{- end -}}
 
 {{- define "osmtRevision" -}}

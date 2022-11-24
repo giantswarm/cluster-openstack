@@ -38,8 +38,7 @@
                 }
             },
             "required": [
-                "flavor",
-                "image"
+                "flavor"
             ]
         },
         "cloudConfig": {
@@ -108,7 +107,6 @@
             },
             "required": [
                 "flavor",
-                "image",
                 "resourceRatio"
             ]
         },

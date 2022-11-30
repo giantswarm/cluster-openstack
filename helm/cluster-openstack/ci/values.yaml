@@ -1,0 +1,54 @@
+baseDomain: eschercloud.dev
+cloudConfig: cloud-config
+cloudName: escher_nick
+clusterDescription: test
+clusterName: test
+clusterLabels:
+  cni: cilium
+dnsNameservers:
+- 1.1.1.1
+- 8.8.8.8
+externalNetworkID: 70bb46a1-4d43-485d-9dbc-4aa979990327
+kubernetesVersion: 1.24.2
+managementCluster: capi
+nodeCIDR: 10.6.0.0/24
+organization: escher_nick
+
+oidc:
+  enabled: false
+
+controlPlane:
+  availabilityZones:
+    - nova
+  diskSize: 20
+  flavor: m1.large
+  image: ubuntu-2004-kube-v1.24.2
+  replicas: 1
+  bootFromVolume: true
+  sshKeyName: deadline
+
+nodeClasses:
+- diskSize: 30
+  image: ubuntu-2004-kube-v1.24.2
+  flavor: m1.large
+  name: worker
+  bootFromVolume: true
+  diskSize: 100
+  sshKeyName: deadline
+- diskSize: 100
+  image: ubuntu-2004-kube-v1.24.2
+  flavor: vgpu.time-sliced.10gb
+  name: gpu
+  bootFromVolume: true
+  diskSize: 100
+  sshKeyName: deadline
+
+nodePools:
+- class: worker
+  name: worker
+  replicas: 1
+  failureDomain: nova
+  annotations:
+    cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size: "1"
+    cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size: "4"
+

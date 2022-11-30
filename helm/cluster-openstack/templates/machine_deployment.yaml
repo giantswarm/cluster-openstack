@@ -5,6 +5,11 @@ kind: MachineDeployment
 metadata:
   labels:
     {{- include "labels.common" $ | nindent 4 }}
+  {{- if .labels }}
+    {{- range $k, $v := .labels }}
+    {{ $k }}: {{ $v | quote }}
+    {{- end }}
+  {{- end }}
   name: {{ include "resource.default.name" $ }}-{{ .name }}
   namespace: {{ $.Release.Namespace }}
   {{- if .annotations }} 

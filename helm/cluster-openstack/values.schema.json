@@ -127,7 +127,7 @@
                     "maximum": 7,
                     "type": "integer"
                 },
-                "resourceRatio" : {
+                "resourceRatio": {
                     "minimum": 2,
                     "type": "integer"
                 }
@@ -257,20 +257,20 @@
         }
     },
     "required": [
-      "apiServer",
-      "baseDomain",
-      "bastion",
-      "cloudConfig",
-      "cloudName",
-      "clusterDescription",
-      "clusterName",
-      "controllerManager",
-      "controlPlane",
-      "kubernetesVersion",
-      "managementCluster",
-      "nodeCIDR",
-      "nodeClasses",
-      "nodePools",
-      "organization"
+        "apiServer",
+        "baseDomain",
+        "bastion",
+        "cloudConfig",
+        "cloudName",
+        "clusterDescription",
+        "clusterName",
+        "controllerManager",
+        "controlPlane",
+        "kubernetesVersion",
+        "managementCluster",
+        "nodeCIDR",
+        "nodeClasses",
+        "nodePools",
+        "organization"
     ]
 }

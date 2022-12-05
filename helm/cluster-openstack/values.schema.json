@@ -1,5 +1,30 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "$defs": {
+        "bootFromVolume": {
+            "type": "boolean",
+            "title": "Boot from volume"
+        },
+        "diskSize": {
+            "type": "integer",
+            "title": "Disk size",
+            "minimum": 1
+        },
+        "flavor": {
+            "type": "string",
+            "title": "Flavor",
+            "examples": [
+                "n1.medium"
+            ]
+        },
+        "image": {
+            "type": "string",
+            "Title": "Image",
+            "examples": [
+                "ubuntu-2004-kube-v1.22.9"
+            ]
+        }
+    },
     "type": "object",
     "properties": {
         "apiServer": {
@@ -24,17 +49,16 @@
             "type": "object",
             "properties": {
                 "bootFromVolume": {
-                    "type": "boolean"
+                    "$ref": "#/$defs/bootFromVolume"
                 },
                 "diskSize": {
-                    "minimum": 1,
-                    "type": "integer"
+                    "$ref": "#/$defs/diskSize"
                 },
                 "flavor": {
-                    "type": "string"
+                    "$ref": "#/$defs/flavor"
                 },
                 "image": {
-                    "type": "string"
+                    "$ref": "#/$defs/image"
                 }
             },
             "required": [
@@ -76,11 +100,10 @@
                     "type": "array"
                 },
                 "bootFromVolume": {
-                    "type": "boolean"
+                    "$ref": "#/$defs/bootFromVolume"
                 },
                 "diskSize": {
-                    "minimum": 1,
-                    "type": "integer"
+                    "$ref": "#/$defs/diskSize"
                 },
                 "etcd": {
                     "type": "object",
@@ -97,7 +120,7 @@
                     "type": "string"
                 },
                 "image": {
-                    "type": "string"
+                    "$ref": "#/$defs/image"
                 },
                 "replicas": {
                     "minimum": 1,
@@ -154,10 +177,48 @@
             "type": "string"
         },
         "nodeClasses": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "bootFromVolume": {
+                        "$ref": "#/$defs/bootFromVolume"
+                    },
+                    "diskSize": {
+                        "$ref": "#/$defs/diskSize"
+                    },
+                    "flavor": {
+                        "$ref": "#/$defs/flavor"
+                    },
+                    "image": {
+                        "$ref": "#/$defs/image"
+                    }
+                }
+            }
         },
         "nodePools": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "class": {
+                        "type": "string",
+                        "title": "Node class"
+                    },
+                    "failureDomain": {
+                        "type": "string",
+                        "title": "Failure domain",
+                        "description": "OpenStack availability zone",
+                        "examples": [
+                            "az1"
+                        ]
+                    },
+                    "replicas": {
+                        "type": "integer",
+                        "title": "Number of nodes"
+                    }
+                }
+            }
         },
         "oidc": {
             "type": "object",

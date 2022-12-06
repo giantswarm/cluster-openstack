@@ -89,9 +89,8 @@ room for such suffix.
 endpoint = ["https://registry-1.docker.io", "giantswarm.azurecr.io"]
 
 [plugins."io.containerd.grpc.v1.cri".registry.configs]
-[plugins."io.containerd.grpc.v1.cri".registry.configs."registry-1.docker.io".auth]
-username = "{{ .Values.registry.username }}"
-password = "{{ .Values.registry.password }}"
+[plugins."io.containerd.grpc.v1.cri".registry.configs."https://index.docker.io/v1".auth]
+auth = "{{ tpl "{{ .Values.registry.username }}:{{ .Values.registry.password }}" . | b64enc }}"
 {{- end -}}
 
 {{- define "kubeletExtraArgs" -}}

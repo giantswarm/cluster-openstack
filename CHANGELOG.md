@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `items` schema for `.controlPlane.availabilityZones` in `values.schema.json`.
+- Add properties shema for `.nodePools` and `.nodeClasses`.
 
 ## [0.17.0] - 2022-11-07
 

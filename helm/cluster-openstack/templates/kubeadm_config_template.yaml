@@ -10,6 +10,14 @@ metadata:
 spec:
   template:
     spec:
+      {{- if .files }}
+      files:
+      {{- .files | nindent 8 }}
+      {{- end }}
+      {{- if .postKubeadmCommands }}
+      postKubeadmCommands:
+      {{- .postKubeadmCommands | nindent 8 }}
+      {{- end }}
       joinConfiguration:
         nodeRegistration:
           kubeletExtraArgs:

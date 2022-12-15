@@ -126,3 +126,71 @@ Finally, create your cluster with the values defined in `values.yaml` along with
 ```sh
 helm install test-cluster -f clouds.yaml -f values.yaml cluster-openstack/cluster-openstack
 ```
+
+## Additional examples
+
+### Annotations and node labels
+
+Annotations and node labels can be added on a per-nodepool basis.  The node labels will be applied by kubelet, so that they're set as soon as the node registers itself.  The below example includes annotations required by cluster-autoscaler for scale-from-zero support:
+
+```
+nodePools:
+  - class: worker
+    name: worker
+    replicas: 3
+    failureDomain: nova
+  - class: gpu
+    name: gpu
+    replicas: 0
+    failureDomain: nova
+    annotations:
+      cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size: "0"
+      cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size: "50"
+      capacity.cluster-autoscaler.kubernetes.io/memory: "32G"
+      capacity.cluster-autoscaler.kubernetes.io/cpu: "4"
+      capacity.cluster-autoscaler.kubernetes.io/gpu-type: "nvidia.com/gpu"
+      capacity.cluster-autoscaler.kubernetes.io/gpu-count: "1"
+    nodeLabels:
+      cluster-api/accelerator: a100_MIG_1g.10Gb
+  - class: gpu-large
+    name: gpu-large
+    replicas: 0
+    failureDomain: nova
+    annotations:
+      cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size: "0"
+      cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size: "10"
+      capacity.cluster-autoscaler.kubernetes.io/memory: "192G"
+      capacity.cluster-autoscaler.kubernetes.io/cpu: "24"
+      capacity.cluster-autoscaler.kubernetes.io/gpu-type: "nvidia.com/gpu"
+      capacity.cluster-autoscaler.kubernetes.io/gpu-count: "1"
+    nodeLabels:
+      cluster-api/accelerator: g.24.highmem.a100.1
+```
+
+### Node initialisation and cloud-init
+
+It's possible to hook into the cloud-init process that's used when bootstrapping a cluster and do things like create files with a particular contents or to run arbitrary commands.  Again, this is defined on a per-nodepool basis:
+
+```
+nodePools:
+  - class: worker
+    name: worker
+    replicas: 3
+    failureDomain: nova
+    sshKeyName: "deadline"
+    postKubeadmCommands: |
+      - "apt update"
+      - "apt install -y nfs-common"
+  - class: gpu
+    files: |
+      - path: "/etc/nvidia/gridd.conf"
+        content: "ServerAddress=192.168.199.246"
+    postKubeadmCommands: |
+      - "apt update"
+      - "apt install -y nfs-common"
+    name: gpu
+    replicas: 1
+    failureDomain: nova
+    sshKeyName: "deadline"
+```
+

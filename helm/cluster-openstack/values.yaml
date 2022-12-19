@@ -1,6 +1,7 @@
 apiServer:
   enableAdmissionPlugins: "NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,PersistentVolumeClaimResize,DefaultStorageClass,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook"
   featureGates: "TTLAfterFinished=true"
+  allowedCidrs: []
 baseDomain: ""  # Customer base domain
 
 clouds: # Content for the clouds.yaml file

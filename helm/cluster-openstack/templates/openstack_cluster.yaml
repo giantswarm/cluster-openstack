@@ -18,6 +18,12 @@ spec:
     kind: Secret
   apiServerLoadBalancer:
     enabled: true
+    {{- if .Values.apiServer.allowedCidrs }}
+    allowedCidrs:
+    {{- range .Values.apiServer.allowedCidrs  }}
+      - {{ . }}
+    {{- end }}
+    {{- end }}
   managedSecurityGroups: true
   {{- if .Values.nodeCIDR }}
   nodeCidr: {{ .Values.nodeCIDR | quote }}

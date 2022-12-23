@@ -46,7 +46,10 @@ clusterName: ""  # Name of cluster. Used as base name for all cluster resources 
 clusterLabels: {} # Any additional labels for the cluster
 controllerManager:
   featureGates: "ExpandPersistentVolumes=true,TTLAfterFinished=true"
-dnsNameservers: []  # IPs of DNS nameservers to be used by the cluster machines (optional, will use OS defaults if not specified).
+dnsNameservers:
+  - 1.1.1.1
+  - 1.0.0.1
+  - 8.8.8.8
 kubernetesVersion: ""  # Version of Kubernetes. If machine images are specified, this will only be used for metadata.
 managementCluster: ""  # Name of cluster which owns this workload cluster.
 organization: ""  # Organization which owns the cluster.

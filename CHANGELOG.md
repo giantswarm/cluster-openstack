@@ -11,6 +11,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `items` schema for `.controlPlane.availabilityZones` in `values.schema.json`.
 
+## [0.17.1] - 2023-02-10
+
+### Added
+
+- A stanza in values file for a list of trusted shh keys.
+
+### Changed
+
+- `sshFiles` helper to fetch values for trusted-user-ca-keys.pem from the values file.
+- Move the existing trusted key to values.yaml.
+
+### Deleted
+
+- trusted-user-ca-keys.pem (to be suuplied from values.yaml).
+
 ## [0.17.0] - 2022-11-07
 
 ### Changed

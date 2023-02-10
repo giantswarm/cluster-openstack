@@ -50,6 +50,12 @@ room for such suffix.
 {{- end -}}
 
 {{- define "sshFiles" -}}
+- path: /etc/ssh/trusted-user-ca-keys.pem
+  permissions: "0600"
+  content: |-
+  {{- range $key :=  .Values.ssh.keys }}
+  {{ $key | nindent 4 }}
+  {{- end }}
 - path: /etc/ssh/sshd_config
   permissions: "0600"
   content: |

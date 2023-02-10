@@ -97,6 +97,12 @@ spec:
     {{- end }}
     files:
       {{- include "sshFiles" . | nindent 6 }}
+      - path: /etc/ssh/trusted-user-ca-keys.pem
+        permissions: "0600"
+        content: |-
+          {{- range $key :=  .Values.ssh.keys }}
+          {{ nindent 6 $key }}
+          {{- end }}
       {{- include "kubeProxyFiles" . | nindent 6 }}
       - path: /etc/kubernetes/encryption/config.yaml
         permissions: "0600"

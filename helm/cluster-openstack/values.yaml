@@ -18,6 +18,9 @@ externalNetworkID: ""  # UUID of external network (optional unless there are mul
 networkName: ""  # Existing network name. Ignored when nodeCIDR is set.
 subnetName: ""  # Existing subnet name. Ignored when nodeCIDR is set.
 
+ssh:
+  keys: []
+
 oidc:
   issuerUrl: ""
   caFile: ""

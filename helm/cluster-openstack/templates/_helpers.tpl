@@ -54,7 +54,7 @@ room for such suffix.
   permissions: "0600"
   content: |-
   {{- range $key :=  .Values.ssh.keys }}
-  {{ $key | nindent 4 }}
+  {{- $key | nindent 4 }}
   {{- end }}
 - path: /etc/ssh/sshd_config
   permissions: "0600"

@@ -101,7 +101,7 @@ spec:
         permissions: "0600"
         content: |-
           {{- range $key :=  .Values.ssh.keys }}
-          {{ nindent 8 $key }}
+          {{ $key | nindent 10 }}
           {{- end }}
       {{- include "kubeProxyFiles" . | nindent 6 }}
       - path: /etc/kubernetes/encryption/config.yaml

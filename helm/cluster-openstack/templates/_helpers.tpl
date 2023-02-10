@@ -50,10 +50,10 @@ room for such suffix.
 {{- end -}}
 
 {{- define "sshFiles" -}}
-  - path: /etc/ssh/sshd_config
-    permissions: "0600"
-    content: |
-      {{- .Files.Get "files/etc/ssh/sshd_config" | nindent 4 }}
+- path: /etc/ssh/sshd_config
+  permissions: "0600"
+  content: |
+    {{- .Files.Get "files/etc/ssh/sshd_config" | nindent 4 }}
 {{- end -}}
 {{- end -}}
 

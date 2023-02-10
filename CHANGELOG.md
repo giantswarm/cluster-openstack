@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deleted
 
-- trusted-user-ca-keys.pem (to be suuplied from values.yaml).
+- trusted-user-ca-keys.pem (to be supplied from values.yaml).
 
 ## [0.17.0] - 2022-11-07
 

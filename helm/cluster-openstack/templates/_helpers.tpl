@@ -55,7 +55,6 @@ room for such suffix.
   content: |
     {{- .Files.Get "files/etc/ssh/sshd_config" | nindent 4 }}
 {{- end -}}
-{{- end -}}
 
 {{- define "sshPostKubeadmCommands" -}}
 - systemctl restart sshd

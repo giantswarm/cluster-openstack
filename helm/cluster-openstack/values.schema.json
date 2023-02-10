@@ -193,6 +193,21 @@
         },
         "subnetName": {
             "type": "string"
+        },
+        "ssh": {
+            "type": "object",
+            "properties": {
+                "keys": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                } 
+            },
+            "required": [
+                "keys"
+            ]
         }
     },
     "required": [
@@ -210,6 +225,7 @@
       "nodeCIDR",
       "nodeClasses",
       "nodePools",
-      "organization"
+      "organization",
+      "ssh"
     ]
 }

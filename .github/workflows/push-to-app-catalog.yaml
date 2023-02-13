@@ -1,0 +1,16 @@
+name: 'Push to ICE Cluster Catalog'
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  push_to_app_catalog:
+    uses: giantswarm/app-build-suite/.github/workflows/push-to-app-catalog.yaml@v1.1.2
+    with:
+      app_catalog: ice-cluster-catalog
+      chart: cluster-openstack
+      organization: THG-Ingenuity-Compute-Engine-(ICE)
+    secrets:
+      envPAT: ${{ secrets.WORKFLOW_WRITE }}

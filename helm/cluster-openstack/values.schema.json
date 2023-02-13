@@ -53,7 +53,7 @@
                     "type": "boolean"
                 },
                 "diskSize": {
-                    "minimum": 0,
+                    "minimum": 1,
                     "type": "integer"
                 },
                 "etcd": {
@@ -112,7 +112,7 @@
                         "type": "boolean"
                     },
                     "diskSize": {
-                        "minimum": 0,
+                        "minimum": 1,
                         "type": "integer"
                     },
                     "flavor": {

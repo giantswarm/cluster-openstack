@@ -218,7 +218,6 @@
       "nodeCIDR",
       "nodeClasses",
       "nodePools",
-      "organization",
-      "ssh"
+      "organization"
     ]
 }

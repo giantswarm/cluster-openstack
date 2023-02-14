@@ -15,7 +15,7 @@ spec:
       identityRef:
         name: {{ include "cluster-openstack.cloudCredentialsSecretName" . }}
         kind: Secret
-      {{- if not $.Values.nodeCIDR }}
+      {{- if or (not $.Values.nodeCIDR) (eq .baremetal true) }}
       networks:
       - filter:
           name: {{ $.Values.networkName }}

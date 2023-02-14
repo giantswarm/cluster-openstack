@@ -73,6 +73,9 @@
                 "image": {
                     "type": "string"
                 },
+                "baremetal": {
+                    "type": "boolean"
+                },
                 "replicas": {
                     "minimum": 1,
                     "maximum": 7,
@@ -120,6 +123,9 @@
                     },
                     "image": {
                         "type": "string"
+                    },
+                    "baremetal": {
+                        "type": "boolean"
                     }
                 },
                 "required": [

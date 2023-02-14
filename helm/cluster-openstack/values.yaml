@@ -68,6 +68,6 @@ controlPlane:
   bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
   sshKeyName: ""
 
-nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above.
+nodeClasses: []  # Class definitions for worker node pools. In addition to a required "name", may include "diskSize", "flavor", "image", and "bootFromVolume" as defined for control plane and bastion above. Also supports a "baremetal" value to ensure the network and subnet get added into the machine.
 
 nodePools: []  # Node pools that should exist for the cluster. Each node pool must refer to a class defined in nodeClasses above.

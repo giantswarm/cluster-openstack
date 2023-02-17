@@ -10,11 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `items` schema for `.controlPlane.availabilityZones` in `values.schema.json`.
-
-## [0.17.1] - 2023-02-10
-
-### Added
-
 - A stanza in values file for a list of trusted shh keys.
 
 ### Changed

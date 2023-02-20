@@ -50,15 +50,18 @@ room for such suffix.
 {{- end -}}
 
 {{- define "sshFiles" -}}
+{{- if $.Values.sshTrustedUserCAKeys -}}
 - path: /etc/ssh/trusted-user-ca-keys.pem
   permissions: "0600"
-  # Taken from https://vault.operations.giantswarm.io/v1/ssh/public_key
   content: |
-    {{- .Files.Get "files/etc/ssh/trusted-user-ca-keys.pem" | nindent 4 }}
+    {{- range $.Values.sshTrustedUserCAKeys}}
+    {{.}}
+    {{- end }}
 - path: /etc/ssh/sshd_config
   permissions: "0600"
   content: |
     {{- .Files.Get "files/etc/ssh/sshd_config" | nindent 4 }}
+{{- end -}}
 {{- end -}}
 
 {{- define "sshPostKubeadmCommands" -}}

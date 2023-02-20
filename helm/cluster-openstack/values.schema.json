@@ -193,6 +193,14 @@
         },
         "subnetName": {
             "type": "string"
+        },
+        "sshTrustedUserCAKeys": {
+            "type": "array",
+            "title": "Ssh trusted user CA keys",
+            "description": "Public keys of certificate authorities that are trusted to sign user certificates for authentication.",
+            "items": {
+                "type": "string"
+            }
         }
     },
     "required": [

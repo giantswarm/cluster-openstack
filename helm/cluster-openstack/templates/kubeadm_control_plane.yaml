@@ -24,6 +24,7 @@ spec:
                   After=containerd.service
     {{- end }}
     clusterConfiguration:
+      imageRepository: "registry.k8s.io"
       apiServer:
         certSANs:
           - 127.0.0.1

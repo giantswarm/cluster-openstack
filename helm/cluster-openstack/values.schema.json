@@ -99,6 +99,9 @@
                 "image": {
                     "type": "string"
                 },
+                "imageRepository": {
+                    "type": "string"
+                },
                 "replicas": {
                     "minimum": 1,
                     "maximum": 7,

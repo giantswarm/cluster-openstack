@@ -44,6 +44,7 @@ controlPlane:
   diskSize: 0  # Root volume disk size in GB. Ignored if bootFromVolume is false. Should be at least as large as the source image.
   flavor: ""  # Project-dependent flavor of control plane machines.
   image: ""  # Image name or root volume source UUID if bootFromVolume is true.
+  imageRepository: "registry.k8s.io"  # Image repository to pull control plane container images from.
   replicas: 0  # Number of replicas in control plane. Should be an odd number.
   bootFromVolume: false  # If true, machines will use a persistent root volume instead of an ephemeral volume.
   etcd:

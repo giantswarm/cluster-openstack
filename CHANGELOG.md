@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Removed FeatureGates that default to true in Kubernetes 1.24.
+- A stanza in values file for customizing image repository of control-plane containers.
+- Bump up `cluster-shared` to 0.6.4
+
 ## [0.17.1] - 2023-02-20
 
 ### Added

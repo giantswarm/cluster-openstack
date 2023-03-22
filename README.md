@@ -1,3 +1,7 @@
+# This repo is currently UNMAINTAINED.
+**If you want to work on it, please fork.**
+
+
 # cluster-openstack chart
 
 [![CircleCI](https://circleci.com/gh/giantswarm/cluster-openstack.svg?style=shield)](https://circleci.com/gh/giantswarm/cluster-openstack)

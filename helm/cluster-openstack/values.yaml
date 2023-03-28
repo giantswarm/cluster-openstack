@@ -1,6 +1,6 @@
 apiServer:
   enableAdmissionPlugins: "NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,PersistentVolumeClaimResize,DefaultStorageClass,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook"
-  featureGates: "TTLAfterFinished=true"
+  featureGates: ""
   allowedCidrs: []
 baseDomain: ""  # Customer base domain
 
@@ -45,7 +45,7 @@ clusterDescription: ""  # Cluster description used in metadata.
 clusterName: ""  # Name of cluster. Used as base name for all cluster resources in the management cluster.
 clusterLabels: {} # Any additional labels for the cluster
 controllerManager:
-  featureGates: "ExpandPersistentVolumes=true,TTLAfterFinished=true"
+  featureGates: "ExpandPersistentVolumes=true"
 dnsNameservers:
   - 1.1.1.1
   - 1.0.0.1
